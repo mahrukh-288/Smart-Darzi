@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import '../app_theme/constants.dart';
@@ -25,7 +26,7 @@ class _SizingState extends State<Sizing> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-      margin: const EdgeInsets.symmetric(horizontal: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 60),
       decoration: BoxDecoration(
           border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(5),
@@ -42,9 +43,42 @@ class _SizingState extends State<Sizing> {
           sizeTextField('Arm Round/بازو کی گولائی', _armRoundController),
           sizeTextField('Waist/Fitting/کمر', _waistController),
           sizeTextField('Lap/Daman/دامن/ گھیرا', _lapController),
-          sizeTextField('Length of Pant /پتلون یا شلوار کی لمبائی', _pantController),
+          sizeTextField(
+              'Length of Pant /پتلون یا شلوار کی لمبائی', _pantController),
           sizeTextField('Ankle Width/ پانچہ', _anckleController),
           sizeTextField('Hips/ کولہے', _hipController),
+
+          DropdownSearch(
+            
+            
+           dropdownButtonProps: DropdownButtonProps(
+            color: primaryColor
+           ),
+            items: [
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ],
+          )
 
           // Column(
           //   children: [
@@ -109,6 +143,7 @@ class _SizingState extends State<Sizing> {
           height: 40,
           width: 300,
           child: TextField(
+
             cursorColor: borderColor,
             style: Theme.of(context).textTheme.labelLarge,
             controller: controller,
