@@ -35,7 +35,33 @@ class SearchCustomerBar extends StatelessWidget {
                 hintText: 'Search Customer here...',
                 hintStyle: Theme.of(context).textTheme.labelLarge),
           ),
-        )
+        ),
+        const SizedBox(
+                        width: 15,
+                      ),
+                      Container(
+                        height: 40,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: borderColor),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/filterIcon.png',
+                              width: 30,
+                              height: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Filter By',
+                              style: Theme.of(context).textTheme.labelLarge,
+                            )
+                          ],
+                        ),
+                      ),
       ],
     );
   }

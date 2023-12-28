@@ -107,11 +107,11 @@ backgroundColor: primaryColor.withOpacity(0.3),
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ViewCustomers(),
+                  builder: (context) => const CustomerForm(),
                 ));
           },
             child: Text(
-              'Go to main page',
+              'Main Page',
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -126,7 +126,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const CustomerForm(),
+                  builder: (context) => const ViewCustomers(),
                 ));
           },
           style: ElevatedButton.styleFrom(fixedSize: const Size(150, 60), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),),
