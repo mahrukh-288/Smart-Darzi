@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smart_darzi/Common%20Widgets/app_drawer.dart';
+import 'package:smart_darzi/Common%20Widgets/customAppBar.dart';
 import 'package:smart_darzi/Common%20Widgets/notification_btn.dart';
 import 'package:smart_darzi/Common%20Widgets/search_customer_bar.dart';
 import 'package:smart_darzi/customer_form/add_order.dart';
@@ -33,27 +34,10 @@ class _CustomerFormState extends State<CustomerForm> {
             child: SingleChildScrollView(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 1),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(color: borderColor)),
-                            child: const Icon(
-                              Icons.menu,
-                              color: iconColor,
-                            )),
-                        const NotificationBtn(),
-                      ],
-                    ),
+                    CustomAppBar(),
                     const SizedBox(
                       height: 20,
                     ),

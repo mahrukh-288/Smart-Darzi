@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
         mainAxisAlignment:  ResponsiveBreakpoints.of(context).largerThan(TABLET) ?MainAxisAlignment.start: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BackButton(color: iconColor,),
+       
          const SizedBox(
           height: 20,
         ),
