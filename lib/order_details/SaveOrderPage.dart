@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:smart_darzi/Common%20Widgets/app_drawer.dart';
 import 'package:smart_darzi/Common%20Widgets/customAppBar.dart';
+import 'package:smart_darzi/customer_form/customer_form.dart';
 import 'package:smart_darzi/order_details/embroidoryForm.dart';
 import 'package:smart_darzi/order_details/order_details_form.dart';
 import 'package:smart_darzi/order_details/stylingForm.dart';
@@ -125,7 +126,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ViewCustomers(),
+                  builder: (context) => const CustomerForm(),
                 ));
           },
           style: ElevatedButton.styleFrom(fixedSize: const Size(150, 60), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),),
