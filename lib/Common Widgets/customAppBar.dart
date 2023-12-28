@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         BackButton(color: iconColor),
+         BackButton(color: primaryColor),
          SizedBox(height: 5,),
           Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

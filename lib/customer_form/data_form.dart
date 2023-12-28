@@ -29,7 +29,7 @@ class _DataFormState extends State<DataForm> {
             color: primaryColor.withOpacity(0.6)),
         child: Wrap(
           runSpacing: 20,
-          spacing: 20,
+          spacing: 60,
           children: [
             customerDataField(
                 context, 'Phone # /فون نمبر', _phoneController, true),
@@ -41,29 +41,6 @@ class _DataFormState extends State<DataForm> {
                 'Family Nme / Nick Name/ خاندان کا نام/ مشہور نام',
                 _familyController,
                 false),
-
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     Text(
-            //       'Id No.',
-            //       style: Theme.of(context).textTheme.labelLarge,
-            //     ),
-            //     const SizedBox(
-            //       height: 5,
-            //     ),
-            //     SizedBox(
-            //       height: 40,
-            //       width: 430,
-            //       child: TextField(
-            //         cursorColor: Colors.white,
-            //         decoration: InputDecoration(
-            //             hintText: 'Default',
-            //             hintStyle: Theme.of(context).textTheme.labelLarge),
-            //       ),
-            //     )
-            //   ],
-            // ),
           ],
         ));
   }
@@ -82,7 +59,7 @@ class _DataFormState extends State<DataForm> {
         ),
         SizedBox(
           height: 40,
-          width: 450,
+          width: 500,
           child: TextField(
             enabled: enabled,
             cursorColor: borderColor,
@@ -90,7 +67,7 @@ class _DataFormState extends State<DataForm> {
             controller: controller,
           ),
         ),
-        if (enabled) 
+        if (enabled)
           TextButton(
               onPressed: () {},
               child: Text(
@@ -100,7 +77,6 @@ class _DataFormState extends State<DataForm> {
                     .labelMedium
                     ?.copyWith(color: Colors.red[900]),
               ))
-        
       ],
     );
   }

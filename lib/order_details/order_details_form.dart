@@ -22,13 +22,13 @@ class OrderDetailsForm extends StatelessWidget {
           color: primaryColor.withOpacity(0.6)),
       child: Wrap(
         runSpacing: 20,
-        spacing: 20,
+        spacing: 60,
         children: [
           sizeTextField(context, 'Order Name', true, []),
           sizeTextField(context, 'Order Id', true, []),
           sizeTextField(context,'Order Category', 
-          false, ['    Male /مردانہ', '    Female /زنانہ']),
-          sizeTextField(context,'Order Type', false,['    Shalwar Qamees /شلوار قمیص', '    Shirt /شرٹ', '    Kurta Shalwar /کُرتا پاجامہ','    Waist Coat / ویس کوٹ','    Trouser / ٹراؤزر ']),         
+          false, ['Male /مردانہ', 'Female /زنانہ']),
+          sizeTextField(context,'Order Type', false,['Shalwar Qamees /شلوار قمیص', 'Shirt /شرٹ', 'Kurta Shalwar /کُرتا پاجامہ','Waist Coat / ویس کوٹ','Trouser / ٹراؤزر']),         
         ],
       ),
     );
@@ -46,7 +46,7 @@ class OrderDetailsForm extends StatelessWidget {
         ),
         SizedBox(
           height: 40,
-          width: 430,
+          width: 500,
           child: CustomDropdownSearch(dropdownItems: dropdownItems, isDefault: isDefault,)
         )
       ],

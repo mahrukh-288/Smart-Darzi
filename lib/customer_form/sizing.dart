@@ -1,27 +1,13 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:smart_darzi/customer_form/sizing_dropdown.dart';
+import '../Common Widgets/custom_dropdown_search.dart';
 import '../app_theme/constants.dart';
 
-class Sizing extends StatefulWidget {
+class Sizing extends StatelessWidget {
   const Sizing({super.key});
 
-  @override
-  State<Sizing> createState() => _SizingState();
-}
-
-class _SizingState extends State<Sizing> {
-  TextEditingController _shirtController = TextEditingController();
-  TextEditingController _shoulderController = TextEditingController();
-  TextEditingController _chestController = TextEditingController();
-  TextEditingController _neckController = TextEditingController();
-  TextEditingController _armLengthController = TextEditingController();
-  TextEditingController _armRoundController = TextEditingController();
-  TextEditingController _waistController = TextEditingController();
-  TextEditingController _lapController = TextEditingController();
-  TextEditingController _pantController = TextEditingController();
-  TextEditingController _anckleController = TextEditingController();
-  TextEditingController _hipController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,25 +21,25 @@ class _SizingState extends State<Sizing> {
         runSpacing: 20,
         spacing: 20,
         children: [
-          sizeTextField('Length of Shirt /قمیص کی لمبائی', _shirtController),
-          sizeTextField('Shoulder /کندھے/تیرا', _shoulderController),
-          sizeTextField('Chest /چھاتی', _chestController),
-          sizeTextField('Neck / گلا', _neckController),
-          sizeTextField('Arm Length /بازو کی لمبائی', _armLengthController),
-          sizeTextField('Arm Round/بازو کی گولائی', _armRoundController),
-          sizeTextField('Waist/Fitting/کمر', _waistController),
-          sizeTextField('Lap/Daman/دامن/ گھیرا', _lapController),
+          sizeTextField(context,'Length of Shirt /قمیص کی لمبائی',10,50),
+          sizeTextField(context,'Shoulder /کندھے/تیرا',10,23),
+          sizeTextField(context,'Chest /چھاتی',20,60),
+          sizeTextField(context,'Neck / گلا',10,20 ),
+          sizeTextField(context,'Arm Length /بازو کی لمبائی',10,30 ),
+          sizeTextField(context,'Arm Round/بازو کی گولائی',4,10 ),
+          sizeTextField(context,'Waist/Fitting/کمر', 15,60),
+          sizeTextField(context,'Lap/Daman/دامن/ گھیرا',20,60 ),
           sizeTextField(
-              'Length of Pant /پتلون یا شلوار کی لمبائی', _pantController),
-          sizeTextField('Ankle Width/ پانچہ', _anckleController),
-          sizeTextField('Hips/ کولہے', _hipController),
+             context, 'Length of Pant /پتلون یا شلوار کی لمبائی', 20,60),
+          sizeTextField(context,'Ankle Width/ پانچہ',4,20 ),
+          sizeTextField(context,'Hips/ کولہے',20,55 ),
 
         ],
       ),
     );
   }
 
-  Widget sizeTextField(String label, TextEditingController controller) {
+   Widget sizeTextField(BuildContext context, label, int startValue, int lastValue ){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,13 +52,8 @@ class _SizingState extends State<Sizing> {
         ),
         SizedBox(
           height: 40,
-          width: 300,
-          child: TextField(
-
-            cursorColor: borderColor,
-            style: Theme.of(context).textTheme.labelLarge,
-            controller: controller,
-          ),
+          width: 250,
+          child: SizingDropdown(startValue: startValue, lastValue: lastValue,)
         )
       ],
     );

@@ -8,6 +8,7 @@ import 'package:smart_darzi/order_details/stylingForm.dart';
 
 import '../Common Widgets/notification_btn.dart';
 import '../app_theme/constants.dart';
+import '../view_customers/view_customers.dart';
 
 class SaveOrderPage extends StatelessWidget {
   const SaveOrderPage({super.key});
@@ -69,9 +70,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          // setState(() {
-                          //   _addOrder = true;
-                          // });
+                          orderSavedDialog(context);
                         },
                         child: Text(
                           'Save Order',
@@ -86,5 +85,64 @@ backgroundColor: primaryColor.withOpacity(0.3),
       ),
     );
   }
-  
+   orderSavedDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
+      backgroundColor: Colors.white.withOpacity(0.8),
+      content: Text(
+        "Order Saved Successfully!",
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(color: primaryColor, fontWeight: FontWeight.w600),
+      ),
+      actions: [
+        OutlinedButton(
+            style: OutlinedButton.styleFrom(
+                fixedSize: const Size(150, 60), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                side: const BorderSide(color: primaryColor)),
+            onPressed: ()  {
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ViewCustomers(),
+                ));
+          },
+            child: Text(
+              'Go to main page',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: primaryColor),
+            )),
+        const SizedBox(
+          width: 30,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ViewCustomers(),
+                ));
+          },
+          style: ElevatedButton.styleFrom(fixedSize: const Size(150, 60), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),),
+          child: Text(
+            'Customer View',
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        )
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }

@@ -11,7 +11,7 @@ class NotificationBtn extends StatelessWidget {
                         smallSize: 20,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(200, 50),
+                                fixedSize: const Size(200, 50),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10))),
                             onPressed: () {},

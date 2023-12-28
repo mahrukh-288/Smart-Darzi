@@ -38,7 +38,7 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                sizeTextField(context, 'Embroidary Style', false, ['    Single Salai / سنگل سلائی', '    Double Salai /ڈبل سلائی   ', '    Raishmi   Single/ریشمی سنگل   ','    Raishmi   Double/ریشمی ڈبل   ']),
+                sizeTextField(context, 'Embroidary Style', false, ['Single Salai / سنگل سلائی', 'Double Salai /ڈبل سلائی', 'Raishmi   Single/ریشمی سنگل','Raishmi   Double/ریشمی ڈبل']),
                 SizedBox(
                   height: 20,
                 ),

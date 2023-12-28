@@ -13,27 +13,43 @@ class CustomDropdownSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownSearch(
       popupProps: PopupProps.menu(
-       
- title: Text('Please Select', style: Theme.of(context).textTheme.labelLarge,),
-        fit: FlexFit.loose,
-       menuProps: MenuProps(backgroundColor: primaryColor, )
-      ),
-      
+          title: Text(
+            'Please Select',
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          fit: FlexFit.loose,
+          itemBuilder: (context, item, isSelected) {
+            return Padding(
+                padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
+                child: Text(
+                  '$item',
+                  style: Theme.of(context).textTheme.labelLarge,
+                ));
+          },
+          menuProps: MenuProps(
+            backgroundColor: primaryColor,
+          )),
       enabled: !isDefault,
       selectedItem: _selectedItem,
       dropdownBuilder: (context, selectedItem) {
         if (isDefault) {
-          return Center(child: Text('Default', style: Theme.of(context).textTheme.labelLarge,));
+          return Center(
+              child: Text(
+            'Default',
+            style: Theme.of(context).textTheme.labelLarge,
+          ));
         }
         ;
-        return Text(_selectedItem, style: Theme.of(context).textTheme.labelLarge,);
+        return Text(
+          _selectedItem,
+          style: Theme.of(context).textTheme.labelLarge,
+        );
       },
       dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
       items: dropdownItems,
       onChanged: (value) {
-        _selectedItem = value!;
+        _selectedItem = '$value';
       },
-     
     );
   }
 }
