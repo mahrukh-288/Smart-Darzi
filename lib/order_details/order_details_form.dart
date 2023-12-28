@@ -27,8 +27,8 @@ class OrderDetailsForm extends StatelessWidget {
           sizeTextField(context, 'Order Name', true, []),
           sizeTextField(context, 'Order Id', true, []),
           sizeTextField(context,'Order Category', 
-          false, ['Please Select','    Male /مردانہ', '    Female /زنانہ']),
-          sizeTextField(context,'Order Type', false,['Please Select','    Shalwar Qamees /شلوار قمیص', '    Shirt /شرٹ', '    Kurta Shalwar /کُرتا پاجامہ','    Waist Coat / ویس کوٹ','    Trouser / ٹراؤزر ']),         
+          false, ['    Male /مردانہ', '    Female /زنانہ']),
+          sizeTextField(context,'Order Type', false,['    Shalwar Qamees /شلوار قمیص', '    Shirt /شرٹ', '    Kurta Shalwar /کُرتا پاجامہ','    Waist Coat / ویس کوٹ','    Trouser / ٹراؤزر ']),         
         ],
       ),
     );

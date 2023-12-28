@@ -25,11 +25,11 @@ class StylingForm extends StatelessWidget {
         children: [
           sizeTextField(context,'Cuff Styling/کف '
 , 
-          false, ['Please Select','    Cuff / کف والے بازو', '    Simple /سادہ بازو']),
-          sizeTextField(context,'Neck Styling/گلا',false,  ['Please Select','    Collar /کالر', '    Ban /بین ']),
-          sizeTextField(context,'Button Styling/ بٹن', false , ['Please Select','    Fancy /فینسی بٹن', '    Simple /سادہ بٹن ', '    Metallic /میٹل بٹن  ']),
-          sizeTextField(context,'Pocket Styling/جیب',false,  ['Please Select',' Front Pocket / سامنے والی جیب', ' 2 Side Pockets / سائڈ جیب   ']),
-          sizeTextField(context,'Elastic/لاسٹک', false, ['Please Select','    Elastic / لاسٹک', 'Simple/الاسٹک']),
+          false, ['    Cuff / کف والے بازو', '    Simple /سادہ بازو']),
+          sizeTextField(context,'Neck Styling/گلا',false,  ['    Collar /کالر', '    Ban /بین ']),
+          sizeTextField(context,'Button Styling/ بٹن', false , ['    Fancy /فینسی بٹن', '    Simple /سادہ بٹن ', '    Metallic /میٹل بٹن  ']),
+          sizeTextField(context,'Pocket Styling/جیب',false,  [' Front Pocket / سامنے والی جیب', ' 2 Side Pockets / سائڈ جیب   ']),
+          sizeTextField(context,'Elastic/لاسٹک', false, ['    Elastic / لاسٹک', 'Simple/الاسٹک']),
          
         ],
       ),

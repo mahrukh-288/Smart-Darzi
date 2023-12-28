@@ -13,9 +13,10 @@ class CustomDropdownSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownSearch(
       popupProps: PopupProps.menu(
- 
+       
+ title: Text('Please Select', style: Theme.of(context).textTheme.labelLarge,),
         fit: FlexFit.loose,
-       menuProps: MenuProps(backgroundColor: primaryColor.withOpacity(0.6), )
+       menuProps: MenuProps(backgroundColor: primaryColor, )
       ),
       
       enabled: !isDefault,
@@ -32,6 +33,7 @@ class CustomDropdownSearch extends StatelessWidget {
       onChanged: (value) {
         _selectedItem = value!;
       },
+     
     );
   }
 }
