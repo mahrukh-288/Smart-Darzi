@@ -37,7 +37,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
                       height: 20,
                     ),
                     Text(
-                      'Order Details',
+                      'Order Details/آرڈر کی تفصیلات',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(
@@ -48,7 +48,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
                       height: 20,
                     ),
                     Text(
-                      'Sizing / Maap',
+                      'Dress Styling / پرہیز',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(
@@ -59,7 +59,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
                       height: 20,
                     ),
                     Text(
-                      'Embroidary Details',
+                      'Embroidary Details/کڑہائی کی تفصیلات',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(
@@ -74,7 +74,7 @@ backgroundColor: primaryColor.withOpacity(0.3),
                           orderSavedDialog(context);
                         },
                         child: Text(
-                          'Save Order',
+                          'Save Order/ آرڈر کو محفوظ کریں',
                           style: Theme.of(context).textTheme.headlineSmall,
                         )),
                   ],

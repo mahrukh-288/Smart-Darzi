@@ -24,11 +24,11 @@ class OrderDetailsForm extends StatelessWidget {
         runSpacing: 20,
         spacing: 60,
         children: [
-          sizeTextField(context, 'Order Name', true, []),
-          sizeTextField(context, 'Order Id', true, []),
-          sizeTextField(context,'Order Category', 
+          sizeTextField(context, 'Customer Name/کسٹمر کا نام', true, []),
+          sizeTextField(context, 'Customer Id/کسٹمر آئی ڈی', true, []),
+          sizeTextField(context,'Order Category/ آرڈر کی کیٹگری', 
           false, ['Male /مردانہ', 'Female /زنانہ']),
-          sizeTextField(context,'Order Type', false,['Shalwar Qamees /شلوار قمیص', 'Shirt /شرٹ', 'Kurta Shalwar /کُرتا پاجامہ','Waist Coat / ویس کوٹ','Trouser / ٹراؤزر']),         
+          sizeTextField(context,'Order Type/ آرڈر کی قسم', false,['Shalwar Qamees /شلوار قمیص', 'Shirt /شرٹ', 'Kurta Shalwar /کُرتا پاجامہ','Waist Coat / ویس کوٹ','Trouser / ٹراؤزر']),         
         ],
       ),
     );

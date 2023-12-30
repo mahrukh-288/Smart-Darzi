@@ -38,11 +38,11 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                sizeTextField(context, 'Embroidary Style', false, ['Single Salai / سنگل سلائی', 'Double Salai /ڈبل سلائی', 'Raishmi   Single/ریشمی سنگل','Raishmi   Double/ریشمی ڈبل']),
+                sizeTextField(context, 'Embroidary Style/کڑہائی کا سٹائل', false, ['Single Salai / سنگل سلائی', 'Double Salai /ڈبل سلائی', 'Raishmi   Single/ریشمی سنگل','Raishmi   Double/ریشمی ڈبل']),
                 SizedBox(
                   height: 20,
                 ),
-                sizeTextField(context, 'Book Number', false, ['Book 1', 'Book 2', 'Book 3']),
+                sizeTextField(context, 'Book Number/کتاب کا نمبر ', false, ['Book 1', 'Book 2', 'Book 3']),
                 SizedBox(
                   height: 20,
                 ),
@@ -50,7 +50,7 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Book Design',
+                      'Design Number/ ڈیزائن نمبر',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                     const SizedBox(
