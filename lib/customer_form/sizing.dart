@@ -32,7 +32,7 @@ class Sizing extends StatelessWidget {
           sizeTextField(
              context, 'Length of Pant /پتلون یا شلوار کی لمبائی', 20,60),
           sizeTextField(context,'Ankle Width/ پانچہ',4,20 ),
-          sizeTextField(context,'Hips/ کولہے',20,55 ),
+          sizeTextField(context,'Hips/ کولہے',20,60 ),
 
         ],
       ),

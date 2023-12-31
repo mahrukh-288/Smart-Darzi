@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_darzi/add_size/add_size.dart';
 import 'package:smart_darzi/order_details/SaveOrderPage.dart';
 
 import '../app_theme/constants.dart';
@@ -75,6 +76,37 @@ class PopUpMenu extends StatelessWidget {
                     'Edit Size',
                     style: Theme.of(context).textTheme.labelLarge,
                   )
+                ],
+              ),
+              const Divider(
+                color: borderColor,
+              )
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          value: 1,
+          // row has two child icon and text.
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Image.asset('images/editSize.png'),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddSize(),
+                            ));
+                      },
+                      child: Text(
+                        'Add Size',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ))
                 ],
               ),
               const Divider(

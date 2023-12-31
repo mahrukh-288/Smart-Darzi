@@ -46,9 +46,9 @@ class SizingDropdown extends StatelessWidget {
     List<String> items = [];
     for (int i = startValue; i <= lastValue; i++) {
       items.add('$i');
-      items.add('$i  1 / 2');
-      items.add('$i  1 / 4');
-      items.add('$i  3 / 4');
+      items.add('$i  1 / 2 (آدھا)');
+      items.add('$i  1 / 4 (سوا)');
+      items.add('$i  3 / 4 (پونا)');
     }
     return items;
   }

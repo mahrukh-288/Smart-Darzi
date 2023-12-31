@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:smart_darzi/customer_form/customer_form.dart';
+import 'package:smart_darzi/view_customers/view_customers.dart';
 
 import '../app_theme/constants.dart';
 
@@ -59,7 +61,16 @@ class AppDrawer extends StatelessWidget {
           width: 15,
         ),
         InkWell(
-            onTap: () {},
+            onTap: () {
+              if(label == 'Home') {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => CustomerForm(),));
+              }
+              else if(label == 'Customers')
+              {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => ViewCustomers(),));
+              }
+
+            },
             child: Text(
               label,
               style: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
