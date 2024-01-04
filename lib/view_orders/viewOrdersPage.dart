@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:smart_darzi/Common%20Widgets/app_drawer.dart';
-import 'package:smart_darzi/Common%20Widgets/notification_btn.dart';
-import 'package:smart_darzi/Common%20Widgets/search_customer_bar.dart';
-import 'package:smart_darzi/view_customers/customer_list.dart';
-import 'package:smart_darzi/app_theme/constants.dart';
+import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
+import 'package:smart_darzi/view_orders/order_list.dart';
 
-class ViewCustomers extends StatefulWidget {
-  const ViewCustomers({super.key});
+import '../Common Widgets/app_drawer.dart';
+import '../Common Widgets/notification_btn.dart';
+import '../Common Widgets/search_customer_bar.dart';
+import '../app_theme/constants.dart';
+import '../models/order.dart';
+
+class ViewOrdersPage extends StatefulWidget {
+  const ViewOrdersPage({super.key});
 
   @override
-  State<ViewCustomers> createState() => _ViewCustomersState();
+  State<ViewOrdersPage> createState() => _ViewOrdersPageState();
 }
 
-class _ViewCustomersState extends State<ViewCustomers> {
+class _ViewOrdersPageState extends State<ViewOrdersPage> {
+  List<Order> orders = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    context.read<OrderCubit>().getAllOrders();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +44,6 @@ class _ViewCustomersState extends State<ViewCustomers> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: Column(
-                    
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
@@ -52,13 +59,20 @@ class _ViewCustomersState extends State<ViewCustomers> {
                         height: 20,
                       ),
                       Text(
-                        'Active Customer List',
+                        'Order List',
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                       CustomerList()
+                       BlocBuilder<OrderCubit, OrderState>(
+                        builder: (context, state) {
+                          if(state is AllOrdersFetched){
+                            orders = state.orders;
+                          }
+                          return OrderList(orders: orders,);
+                        },
+                      )
                     ],
                   ),
                 ),

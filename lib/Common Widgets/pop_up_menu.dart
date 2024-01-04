@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_darzi/add_size/add_size.dart';
-import 'package:smart_darzi/order_details/SaveOrderPage.dart';
-
+import '../add_order/SaveOrderPage.dart';
 import '../app_theme/constants.dart';
 
 class PopUpMenu extends StatelessWidget {

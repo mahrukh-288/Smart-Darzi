@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../Common Widgets/app_drawer.dart';
 import '../Common Widgets/customAppBar.dart';
+import '../add_customer/addCustomerPage.dart';
+import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
-import '../customer_form/sizing.dart';
+import '../view_customers/view_customers.dart';
+import 'sizing.dart';
 
 class AddSize extends StatefulWidget {
   const AddSize({super.key});
@@ -53,7 +57,9 @@ backgroundColor: primaryColor.withOpacity(0.3),
                       backgroundColor: sizeSaved ? primaryColor : Colors.white.withOpacity(0.5)
                     ),
                         onPressed: () {
-                          setState(() {sizeSaved=true;
+                          setState(() {
+                            sizeSaved=true;
+                            context.read<CustomerCubit>().saveSize();
                             
                           });
                         },
@@ -74,6 +80,72 @@ backgroundColor: primaryColor.withOpacity(0.3),
           )
         ],
       ),
+    );
+  }
+  sizeSavedDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
+      backgroundColor: Colors.white.withOpacity(0.8),
+      content: Text(
+        "Size Saved Successfully!",
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(color: primaryColor, fontWeight: FontWeight.w600),
+      ),
+      actions: [
+        OutlinedButton(
+            style: OutlinedButton.styleFrom(
+                fixedSize: const Size(150, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                side: const BorderSide(color: primaryColor)),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CustomerForm(),
+                  ));
+            },
+            child: Text(
+              'Main Page',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: primaryColor),
+            )),
+        const SizedBox(
+          width: 30,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ViewCustomers(),
+                ));
+          },
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(150, 60),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          ),
+          child: Text(
+            'Customer View',
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        )
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

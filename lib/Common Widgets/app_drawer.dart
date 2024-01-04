@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:smart_darzi/customer_form/customer_form.dart';
 import 'package:smart_darzi/view_customers/view_customers.dart';
+import 'package:smart_darzi/view_orders/viewOrdersPage.dart';
 
+import '../add_customer/addCustomerPage.dart';
 import '../app_theme/constants.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -40,6 +41,10 @@ class AppDrawer extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
+        drawerItem(context, 'images/workers.png', 'Orders'),
+        const SizedBox(
+          height: 20,
+        ),
         drawerItem(context, 'images/settings.png', 'Profile Settings'),
         const SizedBox(
           height: 20,
@@ -68,6 +73,9 @@ class AppDrawer extends StatelessWidget {
               else if(label == 'Customers')
               {
                 Navigator.push(context,MaterialPageRoute(builder: (context) => ViewCustomers(),));
+              }
+              else if(label == 'Orders'){
+                 Navigator.push(context,MaterialPageRoute(builder: (context) => ViewOrdersPage(),));
               }
 
             },

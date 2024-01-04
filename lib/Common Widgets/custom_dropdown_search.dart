@@ -4,14 +4,16 @@ import 'package:smart_darzi/app_theme/constants.dart';
 
 class CustomDropdownSearch extends StatelessWidget {
   CustomDropdownSearch(
-      {super.key, required this.dropdownItems, required this.isDefault});
+      {super.key, required this.dropdownItems, required this.isDefault, required this.onValueChanged});
   final bool isDefault;
   final List<String> dropdownItems;
+  final Function(String) onValueChanged;
 
   String _selectedItem = '';
   @override
   Widget build(BuildContext context) {
     return DropdownSearch(
+     
       popupProps: PopupProps.menu(
           title: Text(
             'Please Select',
@@ -47,9 +49,7 @@ class CustomDropdownSearch extends StatelessWidget {
       },
       dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
       items: dropdownItems,
-      onChanged: (value) {
-        _selectedItem = '$value';
-      },
+     // onChanged: onValueChanged,
     );
   }
 }

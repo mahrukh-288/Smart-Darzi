@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../Common Widgets/custom_dropdown_search.dart';
-import '../app_theme/constants.dart';
+import '../../Common Widgets/custom_dropdown_search.dart';
+import '../../app_theme/constants.dart';
 
 class StylingForm extends StatelessWidget {
    StylingForm({super.key});
- final TextEditingController _cuffController= TextEditingController();
-  final TextEditingController _neckController = TextEditingController();
-  final TextEditingController _pocketController = TextEditingController();
-  final TextEditingController _elasticController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +46,8 @@ class StylingForm extends StatelessWidget {
         SizedBox(
           height: 40,
           width: 250,
-          child: CustomDropdownSearch(dropdownItems: dropdownItems, isDefault: isDefault,)
+          child: Container()
+          //CustomDropdownSearch(dropdownItems: dropdownItems, isDefault: isDefault,)
         )
       ],
     );

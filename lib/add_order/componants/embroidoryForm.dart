@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../Common Widgets/custom_dropdown_search.dart';
-import '../app_theme/constants.dart';
+import '../../Common Widgets/custom_dropdown_search.dart';
+import '../../app_theme/constants.dart';
 
 class EmbroidaryFom extends StatefulWidget {
   const EmbroidaryFom({super.key});
@@ -77,6 +77,7 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
             InkWell(
                 onTap: () async {
                   image = await picker.pickImage(source: ImageSource.gallery);
+                  
                   setState(() {});
                 },
                 child: Container(
@@ -119,7 +120,8 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
         SizedBox(
           height: 40,
           width: 430,
-          child: CustomDropdownSearch(dropdownItems: dropdownItems, isDefault: isDefault,)
+          child: Container()
+          //CustomDropdownSearch(dropdownItems: dropdownItems, isDefault: isDefault,)
         )
       ],
     );

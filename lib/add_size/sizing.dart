@@ -1,7 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:smart_darzi/customer_form/sizing_dropdown.dart';
+import 'package:smart_darzi/add_size/sizing_dropdown.dart';
 import '../Common Widgets/custom_dropdown_search.dart';
 import '../app_theme/constants.dart';
 

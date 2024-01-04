@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:smart_darzi/Common%20Widgets/pop_up_menu.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 
-class CustomerList extends StatefulWidget {
-  const CustomerList({super.key});
+class CustomerList extends StatelessWidget {
+   CustomerList({super.key});
 
-  @override
-  State<CustomerList> createState() => _CustomerListState();
-}
+   String selectedValue = 'Home';
 
-class _CustomerListState extends State<CustomerList> {
-  String selectedValue = 'Home';
   var values = ['User', 'Edit'];
+
   @override
   Widget build(BuildContext context) {
     return Container(
