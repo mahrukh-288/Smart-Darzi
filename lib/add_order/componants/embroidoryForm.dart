@@ -38,11 +38,56 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                sizeTextField(context, 'Embroidary Style/کڑہائی کا سٹائل', false, ['Single Salai / سنگل سلائی', 'Double Salai /ڈبل سلائی', 'Raishmi   Single/ریشمی سنگل','Raishmi   Double/ریشمی ڈبل']),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Embroidary Style/کڑہائی کا سٹائل',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                        height: 40,
+                        width: 430,
+                        child: CustomDropdownSearch(
+                          dropdownItems: [
+                            'Single Salai / سنگل سلائی',
+                            'Double Salai /ڈبل سلائی',
+                            'Raishmi   Single/ریشمی سنگل',
+                            'Raishmi   Double/ریشمی ڈبل'
+                          ],
+                          isDefault: false,
+                          onValueChanged: (value) {},
+                        ))
+                  ],
+                ),
+                //   sizeTextField(context, 'Embroidary Style/کڑہائی کا سٹائل', false, ['Single Salai / سنگل سلائی', 'Double Salai /ڈبل سلائی', 'Raishmi   Single/ریشمی سنگل','Raishmi   Double/ریشمی ڈبل']),
                 SizedBox(
                   height: 20,
                 ),
-                sizeTextField(context, 'Book Number/کتاب کا نمبر ', false, ['Book 1', 'Book 2', 'Book 3']),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Book Number/کتاب کا نمبر ',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                        height: 40,
+                        width: 430,
+                        child: CustomDropdownSearch(
+                          dropdownItems: ['Book 1', 'Book 2', 'Book 3'],
+                          isDefault: false,
+                          onValueChanged: (value) {},
+                        ))
+                  ],
+                ),
+                // sizeTextField(context, 'Book Number/کتاب کا نمبر ', false, ['Book 1', 'Book 2', 'Book 3']),
                 SizedBox(
                   height: 20,
                 ),
@@ -77,7 +122,7 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
             InkWell(
                 onTap: () async {
                   image = await picker.pickImage(source: ImageSource.gallery);
-                  
+
                   setState(() {});
                 },
                 child: Container(
@@ -106,7 +151,8 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
         ));
   }
 
-  Widget sizeTextField(BuildContext context, label, bool isDefault, List<String> dropdownItems) {
+  Widget sizeTextField(
+      BuildContext context, label, bool isDefault, List<String> dropdownItems) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -118,11 +164,13 @@ class _EmbroidaryFomState extends State<EmbroidaryFom> {
           height: 5,
         ),
         SizedBox(
-          height: 40,
-          width: 430,
-          child: Container()
-          //CustomDropdownSearch(dropdownItems: dropdownItems, isDefault: isDefault,)
-        )
+            height: 40,
+            width: 430,
+            child: CustomDropdownSearch(
+              dropdownItems: dropdownItems,
+              isDefault: isDefault,
+              onValueChanged: (value) {},
+            ))
       ],
     );
   }

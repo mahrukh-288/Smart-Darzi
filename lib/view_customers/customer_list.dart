@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:smart_darzi/Common%20Widgets/pop_up_menu.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 
+import '../models/customer.dart';
+
 class CustomerList extends StatelessWidget {
-   CustomerList({super.key});
+   CustomerList({super.key, required this.customers});
+   final List<Customer> customers;
 
    String selectedValue = 'Home';
 
@@ -61,6 +64,7 @@ class CustomerList extends StatelessWidget {
             ),
           ],
           rows: [
+            for(int i=0; i<customers.length; i++)
             DataRow(cells: [
               DataCell(Container(
                 decoration: BoxDecoration(
@@ -75,19 +79,19 @@ class CustomerList extends StatelessWidget {
                 ),
               )),
               DataCell(Text(
-                '1',
+                customers[i].id,
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                'Ali',
+                customers[i].name,
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                '+923012345678',
+                '${customers[i].phoneNumber}',
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                'Hussain',
+                customers[i].familyName,
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Row(
@@ -99,94 +103,12 @@ class CustomerList extends StatelessWidget {
                       color: iconColor,
                     ),
                   ),
-                  const PopUpMenu()
+                   PopUpMenu(customerId: customers[i].id,)
                 ],
               )),
             ]),
-            DataRow(cells: [
-              DataCell(Container(
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: borderColor),
-                ),
-                child: const Icon(
-                  Icons.person,
-                  color: iconColor,
-                  size: 40,
-                ),
-              )),
-              DataCell(Text(
-                '2',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Text(
-                'Bashir',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Text(
-                '+923012345678',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Text(
-                'Jutt',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.edit,
-                      color: iconColor,
-                    ),
-                  ),
-                  const PopUpMenu()
-                ],
-              )),
-            ]),
-            DataRow(cells: [
-              DataCell(Container(
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: borderColor),
-                ),
-                child: const Icon(
-                  Icons.person,
-                  color: iconColor,
-                  size: 40,
-                ),
-              )),
-              DataCell(Text(
-                '3',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Text(
-                'Bilal',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Text(
-                '+923012345678',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Text(
-                'Ashraf',
-                style: Theme.of(context).textTheme.labelLarge,
-              )),
-              DataCell(Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.edit,
-                      color: iconColor,
-                    ),
-                  ),
-                  const PopUpMenu()
-                ],
-              )),
-            ])
+            
+        
           ],
         ));
   }

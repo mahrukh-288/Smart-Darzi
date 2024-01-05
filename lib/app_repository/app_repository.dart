@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:smart_darzi/models/api_response.dart';
+import 'package:smart_darzi/models/size.dart';
 
 import '../app_service/app_service.dart';
 import '../models/customer.dart';
@@ -28,6 +29,8 @@ class AppRepository {
     try {
       print('resoponse');
       final response = await _appService.addOrder(order);
+      print('my response');
+      print(response);
       apiResponse.isSuccess = true;
     } on DioException {
       apiResponse.isSuccess = false;
@@ -58,16 +61,19 @@ class AppRepository {
     return apiResponse;
   }
 
- Future<ApiResponse> getAllCustomers() async {
+  Future<ApiResponse> getAllCustomers() async {
     ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _appService.getAllCustomers();
 
-      final customers = List<Customer>.from(
-          response.data.map((e) => Customer.fromJson(e)).toList());
-
+      final customers = List<Customer>.from(response.data.map((e) {
+        Customer c = Customer.fromJson(e);
+print(c.name);
+        return c;
+      }).toList());
+print(customers);
       apiResponse.isSuccess = true;
-      apiResponse.data = customers;
+        apiResponse.data = customers;
     } on DioException {
       apiResponse.isSuccess = false;
     } catch (e) {
@@ -76,14 +82,31 @@ class AppRepository {
     return apiResponse;
   }
 
-   Future<ApiResponse> login(String name, String password) async {
+  Future<ApiResponse> login(String name, String password) async {
     ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _appService.login(name, password);
       apiResponse.isSuccess = true;
       apiResponse.successMessage = response.data['message'];
       print(response);
-  
+    } on DioException {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Something went wrong!';
+    } catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Something went wrong!';
+    }
+    return apiResponse;
+  }
+
+  Future<ApiResponse> saveSize(SizeModel size) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.saveSize(size);
+      print('repo');
+      apiResponse.isSuccess = true;
+      apiResponse.successMessage = response.data['message'];
+      print(response);
     } on DioException {
       apiResponse.isSuccess = false;
       apiResponse.error = 'Something went wrong!';

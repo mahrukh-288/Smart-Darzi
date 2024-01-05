@@ -21,3 +21,7 @@ class AllOrdersFetched extends OrderState {
   @override
   List<Object> get props => [orders];
 }
+class LoadingOrder extends OrderState {
+  @override
+  List<Object> get props => [];
+}

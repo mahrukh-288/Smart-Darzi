@@ -2,16 +2,15 @@ class Order{
 String customerId = '';
 String cuffStyle = '';
 String neckStyle = '';
-String buttonStyle;
-String pocketStyle;
-String elastic;
-String embroidery;
-String embroidaryStyle;
-int bookNumber;
-int designNumber;
+String buttonStyle = '';
+String pocketStyle = '';
+String elastic = '';
+String embroidery = '';
+String embroidaryStyle = '';
+int bookNumber = 0;
+int designNumber = 0;
 
-Order({required this.customerId , required this.cuffStyle, required this.neckStyle, required this.buttonStyle, required this.pocketStyle, required this.elastic,
-required this.embroidery, required this.embroidaryStyle, required this.bookNumber, required this.designNumber});
+Order();
 
 Order.fromJson(Map<String, dynamic> json)
       : customerId = json['customerId'] as String,

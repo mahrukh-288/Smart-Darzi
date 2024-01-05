@@ -67,7 +67,10 @@ class _ViewOrdersPageState extends State<ViewOrdersPage> {
                       ),
                        BlocBuilder<OrderCubit, OrderState>(
                         builder: (context, state) {
-                          if(state is AllOrdersFetched){
+                          if(state is LoadingOrder ){
+                            return CircularProgressIndicator(color: primaryColor,);
+                          }
+                          else if(state is AllOrdersFetched){
                             orders = state.orders;
                           }
                           return OrderList(orders: orders,);

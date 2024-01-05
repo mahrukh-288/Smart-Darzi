@@ -130,7 +130,7 @@ class CustomerForm extends StatelessWidget {
                       ),
                       BlocBuilder<CustomerCubit, CustomerState>(
                         builder: (context, state) {
-                          if(state is Loading){
+                          if(state is LoadingCustomer){
                             return CircularProgressIndicator();
                           }
                           return ElevatedButton(
@@ -138,7 +138,7 @@ class CustomerForm extends StatelessWidget {
                                 Customer customer = Customer(
                                     name: _nameController.text,
                                 
-                                    phoneNumber: _phoneController.text,
+                                    phoneNumber: int.parse(_phoneController.text),
                                     familyName: _familyController.text);
                                 context
                                     .read<CustomerCubit>()

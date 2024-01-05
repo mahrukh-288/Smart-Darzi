@@ -5,7 +5,8 @@ import '../app_theme/constants.dart';
 
 class SizingDropdown extends StatelessWidget {
   SizingDropdown(
-      {super.key, required this.startValue, required this.lastValue});
+      {super.key, required this.startValue, required this.lastValue, required this.onTapped});
+      final Function(String) onTapped;
   final int startValue;
   final int lastValue;
   String _selectedItem = '';
@@ -32,9 +33,10 @@ class SizingDropdown extends StatelessWidget {
 
       dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
       items: itemList(),
-      // onChanged: (value) {
-      //   _selectedItem = value!;
-      // },
+      onChanged: (value) {
+        _selectedItem = value!;
+        onTapped(_selectedItem);
+      },
 
       dropdownDecoratorProps: DropDownDecoratorProps(
         baseStyle: Theme.of(context).textTheme.labelLarge,

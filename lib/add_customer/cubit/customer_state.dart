@@ -31,7 +31,17 @@ class Failure extends CustomerState {
   @override
   List<Object> get props => [];
 }
-class Loading extends CustomerState {
+class LoadingCustomer extends CustomerState {
+  @override
+  List<Object> get props => [];
+}
+class AllCustomersFetched extends CustomerState {
+  final List<Customer> customers;
+  const AllCustomersFetched({required this.customers});
+  @override
+  List<Object> get props => [customers];
+}
+class SizeSaved extends CustomerState {
   @override
   List<Object> get props => [];
 }

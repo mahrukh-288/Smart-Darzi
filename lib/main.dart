@@ -14,6 +14,7 @@ import 'package:smart_darzi/view_customers/view_customers.dart';
 import 'package:smart_darzi/view_orders/viewOrdersPage.dart';
 
 import 'add_customer/cubit/customer_cubit.dart';
+import 'add_size/add_size.dart';
 
 
 
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
             const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
           ],
         ),
-        home: CustomerForm(),
+        home: Login(),
       ),
     );
   }

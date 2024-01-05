@@ -4,8 +4,8 @@ import '../add_order/SaveOrderPage.dart';
 import '../app_theme/constants.dart';
 
 class PopUpMenu extends StatelessWidget {
-  const PopUpMenu({super.key});
-
+  const PopUpMenu({super.key, required this.customerId});
+final String customerId;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
@@ -99,7 +99,7 @@ class PopUpMenu extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AddSize(),
+                              builder: (context) => AddSize(customerId: customerId,),
                             ));
                       },
                       child: Text(
@@ -130,7 +130,7 @@ class PopUpMenu extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SaveOrderPage(),
+                              builder: (context) => SaveOrderPage(customerId: customerId,),
                             ));
                       },
                       child: Text(

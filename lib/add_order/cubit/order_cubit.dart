@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:smart_darzi/add_customer/cubit/customer_cubit.dart';
 import 'package:smart_darzi/app_repository/app_repository.dart';
 import 'package:smart_darzi/app_service/app_service.dart';
 import 'package:equatable/equatable.dart';
@@ -14,16 +15,17 @@ class OrderCubit extends Cubit<OrderState> {
 
 
   addOrder(Order order)async {
-    print('cubit');
+   emit(LoadingOrder());
     ApiResponse response = await _appRepository.addOrder(order);
     if(response.isSuccess){
-      
     
       emit(OrderAdded());
     }
+    
   }
 
   getAllOrders() async {
+    emit(LoadingOrder());
 ApiResponse response = await _appRepository.getAllOrders();
 if(response.isSuccess){
     

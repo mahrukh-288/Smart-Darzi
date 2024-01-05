@@ -9,6 +9,7 @@ import 'package:smart_darzi/models/order.dart';
 import '../Common Widgets/custom_dropdown_search.dart';
 import '../Common Widgets/notification_btn.dart';
 import '../add_customer/addCustomerPage.dart';
+import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
 import '../view_customers/view_customers.dart';
 import 'componants/embroidoryForm.dart';
@@ -17,37 +18,29 @@ import 'componants/stylingForm.dart';
 import 'cubit/order_cubit.dart';
 
 class SaveOrderPage extends StatefulWidget {
-  SaveOrderPage({super.key});
-
+  SaveOrderPage({super.key, required this.customerId});
+final String customerId;
   @override
   State<SaveOrderPage> createState() => _SaveOrderPageState();
 }
 
 class _SaveOrderPageState extends State<SaveOrderPage> {
-  final TextEditingController _styleController = TextEditingController();
+  Order order = Order();
+
   ImagePicker picker = ImagePicker();
   XFile? image;
-  final TextEditingController _bookNoController = TextEditingController();
 
   final TextEditingController _bookDesignController = TextEditingController();
-  TextEditingController _customerNameController = TextEditingController();
-
-  TextEditingController _orderIdController = TextEditingController();
-  TextEditingController _orderCategoryController = TextEditingController();
-
-  TextEditingController _orderTypeController = TextEditingController();
-  final TextEditingController _cuffController = TextEditingController();
-  final TextEditingController _neckController = TextEditingController();
-  final TextEditingController _pocketController = TextEditingController();
-  final TextEditingController _elasticController = TextEditingController();
-  final TextEditingController _embroidaryController = TextEditingController();
-  final TextEditingController _buttonController = TextEditingController();
-
+@override
+  void initState() {
+    // TODO: implement initState
+    order.customerId = widget.customerId;
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<OrderCubit, OrderState>(
       listener: (context, state) {
-        if(state is OrderAdded){
+        if (state is OrderAdded) {
           orderSavedDialog(context);
         }
       },
@@ -90,28 +83,95 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                           runSpacing: 20,
                           spacing: 60,
                           children: [
-                            sizeTextField(context, 'Customer Name/کسٹمر کا نام',
-                                [], _customerNameController, false),
-                            sizeTextField(context, 'Customer Id/کسٹمر آئی ڈی',
-                                [], _orderIdController, false),
-                            sizeTextField(
-                                context,
-                                'Order Category/ آرڈر کی کیٹگری',
-                                ['Male /مردانہ', 'Female /زنانہ'],
-                                _orderCategoryController,
-                                true),
-                            sizeTextField(
-                                context,
-                                'Order Type/ آرڈر کی قسم',
-                                [
-                                  'Shalwar Qamees /شلوار قمیص',
-                                  'Shirt /شرٹ',
-                                  'Kurta Shalwar /کُرتا پاجامہ',
-                                  'Waist Coat / ویس کوٹ',
-                                  'Trouser / ٹراؤزر'
-                                ],
-                                _orderTypeController,
-                                true),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Customer Name/کسٹمر کا نام',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 500,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [],
+                                      isDefault: true,
+                                      onValueChanged: (String) {},
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Customer Id/کسٹمر آئی ڈی',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 500,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [],
+                                      isDefault: true,
+                                      onValueChanged: (val) {},
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Order Category/ آرڈر کی کیٹگری',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 500,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        'Male /مردانہ',
+                                        'Female /زنانہ'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (String) {},
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Order Type/ آرڈر کی قسم',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 500,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: const [
+                                        'Shalwar Qamees /شلوار قمیص',
+                                        'Shirt /شرٹ',
+                                        'Kurta Shalwar /کُرتا پاجامہ',
+                                        'Waist Coat / ویس کوٹ',
+                                        'Trouser / ٹراؤزر'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (String) {},
+                                    ))
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -137,56 +197,164 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                           runSpacing: 20,
                           spacing: 20,
                           children: [
-                            sizeTextField(
-                                context,
-                                'Cuff Styling/کف ',
-                                ['Cuff / کف والے بازو', 'Simple /سادہ بازو'],
-                                _cuffController,
-                                true),
-                            sizeTextField(
-                                context,
-                                'Neck Styling/گلا',
-                                ['Collar /کالر', 'Ban /بین '],
-                                _neckController,
-                                true),
-                            sizeTextField(
-                                context,
-                                'Button Styling/ بٹن',
-                                [
-                                  'Fancy /فینسی بٹن',
-                                  'Simple /سادہ بٹن ',
-                                  'Metallic /میٹل بٹن'
-                                ],
-                                _buttonController,
-                                true),
-                            sizeTextField(
-                                context,
-                                'Pocket Styling/جیب',
-                                [
-                                  'Front Pocket / سامنے والی جیب',
-                                  '2 Side Pockets / سائڈ جیب ',
-                                  'Trouser Pocket / ٹراؤزر جیب ',
-                                  ' 1 Front Pocket+2Side+1 Shalwar',
-                                  ' 0 Front Pocket+0 Side+0Shalwar',
-                                  ' 0 Front + 2 Side+ 1 Trouser Pocket',
-                                  ' 2 Front + 2 Side+ 1 Shalwar',
-                                  ' 0 Front + 1 Left Side+ 0 Shalwar',
-                                  ' 0 Front + 1 Right Side+ 0 Shalwar'
-                                ],
-                                _pocketController,
-                                true),
-                            sizeTextField(
-                                context,
-                                'Elastic/لاسٹک',
-                                ['Elastic / لاسٹک', 'Simple/نالا'],
-                                _elasticController,
-                                true),
-                            sizeTextField(
-                                context,
-                                'Embroidery / کڑھائی',
-                                ['No / کوئی نہیں', 'Yes / جی ہاں'],
-                                _embroidaryController,
-                                true),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Cuff Styling/کف ',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        'Cuff / کف والے بازو',
+                                        'Simple /سادہ بازو'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.cuffStyle = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Neck Styling/گلا',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        'Collar /کالر',
+                                        'Ban /بین '
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.neckStyle = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Button Styling/ بٹن',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        'Fancy /فینسی بٹن',
+                                        'Simple /سادہ بٹن ',
+                                        'Metallic /میٹل بٹن'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.buttonStyle = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Pocket Styling/جیب',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: const [
+                                        'Front Pocket / سامنے والی جیب',
+                                        '2 Side Pockets / سائڈ جیب ',
+                                        'Trouser Pocket / ٹراؤزر جیب ',
+                                        ' 1 Front Pocket+2Side+1 Shalwar',
+                                        ' 0 Front Pocket+0 Side+0Shalwar',
+                                        ' 0 Front + 2 Side+ 1 Trouser Pocket',
+                                        ' 2 Front + 2 Side+ 1 Shalwar',
+                                        ' 0 Front + 1 Left Side+ 0 Shalwar',
+                                        ' 0 Front + 1 Right Side+ 0 Shalwar'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.pocketStyle = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Elastic/لاسٹک',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        'Elastic / لاسٹک',
+                                        'Simple/نالا'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.elastic = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Embroidery / کڑھائی',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        'No / کوئی نہیں',
+                                        'Yes / جی ہاں'
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.embroidery = val;
+                                      },
+                                    ))
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -216,26 +384,64 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  sizeTextField(
-                                      context,
-                                      'Embroidary Style/کڑہائی کا سٹائل',
-                                      [
-                                        'Single Salai / سنگل سلائی',
-                                        'Double Salai /ڈبل سلائی',
-                                        'Raishmi   Single/ریشمی سنگل',
-                                        'Raishmi   Double/ریشمی ڈبل'
-                                      ],
-                                      _styleController,
-                                      true),
-                                  // SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // sizeTextField(
-                                  //     context,
-                                  //     'Book Number/کتاب کا نمبر ',
-                                  //     ['Book 1', 'Book 2', 'Book 3'],
-                                  //     _bookNoController,
-                                  //     true),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Embroidary Style/کڑہائی کا سٹائل',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      SizedBox(
+                                          height: 40,
+                                          width: 430,
+                                          child: CustomDropdownSearch(
+                                            dropdownItems: [
+                                              'Single Salai / سنگل سلائی',
+                                              'Double Salai /ڈبل سلائی',
+                                              'Raishmi   Single/ریشمی سنگل',
+                                              'Raishmi   Double/ریشمی ڈبل'
+                                            ],
+                                            isDefault: false,
+                                            onValueChanged: (val) {
+                                              order.embroidaryStyle = val;
+                                            },
+                                          ))
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Book Number/کتاب کا نمبر ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      SizedBox(
+                                          height: 40,
+                                          width: 430,
+                                          child: CustomDropdownSearch(
+                                            dropdownItems: ['1', '2', '3'],
+                                            isDefault: false,
+                                            onValueChanged: (val) {
+                                              order.bookNumber = int.parse(val);
+                                            },
+                                          ))
+                                    ],
+                                  ),
                                   SizedBox(
                                     height: 20,
                                   ),
@@ -253,8 +459,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         height: 5,
                                       ),
                                       SizedBox(
-                                        height: 50,
-                                        width: 500,
+                                        height: 40,
+                                        width: 430,
                                         child: TextField(
                                           cursorColor: borderColor,
                                           style: Theme.of(context)
@@ -272,63 +478,65 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                   )
                                 ],
                               ),
-                              // InkWell(
-                              //     onTap: () async {
-                              //       image = await picker.pickImage(
-                              //           source: ImageSource.gallery);
+                              InkWell(
+                                  onTap: () async {
+                                    image = await picker.pickImage(
+                                        source: ImageSource.gallery);
 
-                              //       setState(() {});
-                              //     },
-                              //     child: Container(
-                              //       width: 500,
-                              //       height: 275,
-                              //       child: image == null
-                              //           ? Image.asset('images/pickImage.png')
-                              //           : Stack(
-                              //               alignment: Alignment.topRight,
-                              //               children: [
-                              //                   Image.network(
-                              //                     image!.path,
-                              //                     width: double.infinity,
-                              //                     height: double.infinity,
-                              //                     fit: BoxFit.fill,
-                              //                   ),
-                              //                   IconButton(
-                              //                     icon: Icon(Icons.delete,
-                              //                         color: iconColor),
-                              //                     onPressed: () {
-                              //                       setState(() {
-                              //                         image = null;
-                              //                       });
-                              //                     },
-                              //                   )
-                              //                 ]),
-                              //     ))
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    width: 500,
+                                    height: 275,
+                                    child: image == null
+                                        ? Image.asset('images/pickImage.png')
+                                        : Stack(
+                                            alignment: Alignment.topRight,
+                                            children: [
+                                                Image.network(
+                                                  image!.path,
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(Icons.delete,
+                                                      color: iconColor),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      image = null;
+                                                    });
+                                                  },
+                                                )
+                                              ]),
+                                  ))
                             ],
                           )),
+
+                      //
                       const SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            Order order = Order(
-                                customerId: 'test',
-                                cuffStyle: _cuffController.text,
-                                neckStyle: _neckController.text,
-                                buttonStyle: _buttonController.text,
-                                pocketStyle: _pocketController.text,
-                                elastic: _elasticController.text,
-                                embroidery: _embroidaryController.text,
-                                embroidaryStyle: _styleController.text,
-                                bookNumber: int.parse(_bookNoController.text),
-                                designNumber:
-                                    int.parse(_bookDesignController.text));
-                            context.read<OrderCubit>().addOrder(order);
-                          },
-                          child: Text(
-                            'Save Order/ آرڈر کو محفوظ کریں',
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          )),
+                      BlocBuilder<OrderCubit, OrderState>(
+                        builder: (context, state) {
+                          if(state is LoadingOrder){
+                            return CircularProgressIndicator(color: primaryColor,);
+
+                          }
+                          return ElevatedButton(
+                              onPressed: () {
+                                order.designNumber =
+                                    int.parse(_bookDesignController.text);
+                               
+                                context.read<OrderCubit>().addOrder(order);
+                              },
+                              child: Text(
+                                'Save Order/ آرڈر کو محفوظ کریں',
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ));
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -404,46 +612,6 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
       builder: (BuildContext context) {
         return alert;
       },
-    );
-  }
-
-  Widget sizeTextField(BuildContext context, label, List<String> dropdownItems,
-      TextEditingController controller, bool enabled) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        SizedBox(
-            height: 50,
-            width: 500,
-            child: TextField(
-              enabled: enabled,
-              controller: controller,
-              decoration: InputDecoration(
-                  suffix: DropdownButton(
-              
-                iconEnabledColor: primaryColor,
-                style: Theme.of(context).textTheme.labelLarge,
-                dropdownColor: primaryColor,
-                items: dropdownItems.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  controller.text = value!;
-                  print(controller.text);
-                },
-              )),
-            ))
-      ],
     );
   }
 }

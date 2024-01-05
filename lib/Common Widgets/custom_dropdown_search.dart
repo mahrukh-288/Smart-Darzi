@@ -13,7 +13,7 @@ class CustomDropdownSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownSearch(
-     
+    
       popupProps: PopupProps.menu(
           title: Text(
             'Please Select',
@@ -49,7 +49,10 @@ class CustomDropdownSearch extends StatelessWidget {
       },
       dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
       items: dropdownItems,
-     // onChanged: onValueChanged,
+      onChanged: (value) {
+        _selectedItem = value as String ;
+        onValueChanged(value);
+      },
     );
   }
 }
