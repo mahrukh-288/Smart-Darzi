@@ -32,4 +32,14 @@ if(response.isSuccess){
       emit(AllOrdersFetched(orders: response.data ));
     }
   }
+
+  
+  getOrdersByCustomerId(String customerId) async {
+    emit(LoadingOrder());
+ApiResponse response = await _appRepository.getOrdersByCustomerId(customerId);
+if(response.isSuccess){
+    
+      emit(OrdersByCustomerIdFetched(orders: response.data ));
+    }
+  }
 }

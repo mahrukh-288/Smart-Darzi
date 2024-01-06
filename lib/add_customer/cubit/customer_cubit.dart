@@ -56,4 +56,17 @@ print(size.toJson());
       emit(Failure());
     }
   }
+
+    getCustomerByPhone(String phoneNo) async {
+
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getCustomerByPhone(phoneNo);
+    if(response.isSuccess) {
+      print(state);
+      emit(CustomerFetchedByPhone(customer: response.data));
+    } 
+    else{
+      emit(Failure());
+    }
+  }
 }

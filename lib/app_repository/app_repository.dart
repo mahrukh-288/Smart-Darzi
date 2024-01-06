@@ -68,12 +68,12 @@ class AppRepository {
 
       final customers = List<Customer>.from(response.data.map((e) {
         Customer c = Customer.fromJson(e);
-print(c.name);
+
         return c;
       }).toList());
-print(customers);
+      print(customers);
       apiResponse.isSuccess = true;
-        apiResponse.data = customers;
+      apiResponse.data = customers;
     } on DioException {
       apiResponse.isSuccess = false;
     } catch (e) {
@@ -116,4 +116,44 @@ print(customers);
     }
     return apiResponse;
   }
+
+  Future<ApiResponse> getCustomerByPhone(String phoneNo) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.getCustomerByPhone(phoneNo);
+      print(response);
+      apiResponse.isSuccess = true;
+      Customer customer = Customer.fromJson(response.data);
+      apiResponse.data = customer;
+    } on DioException {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Something went wrong!';
+    } catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Something went wrong!';
+    }
+    return apiResponse;
+  }
+
+ Future<ApiResponse> getOrdersByCustomerId(String customerId) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.getOrdersByCustomerId(customerId);
+
+      // final parsed = json.decode(response.data).cast<Map<String, dynamic>>();
+      // List<Order> orders = parsed.map<Order>((json) => Order.fromJson(json)).toList();
+
+      final orders = List<Order>.from(
+          response.data.map((e) => Order.fromJson(e)).toList());
+
+      apiResponse.isSuccess = true;
+      apiResponse.data = orders;
+    } on DioException {
+      apiResponse.isSuccess = false;
+    } catch (e) {
+      apiResponse.isSuccess = false;
+    }
+    return apiResponse;
+  }
+
 }

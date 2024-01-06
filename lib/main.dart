@@ -6,6 +6,7 @@ import 'package:smart_darzi/add_order/SaveOrderPage.dart';
 import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
 import 'package:smart_darzi/app_theme/app_theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:smart_darzi/customer_profile/customer_profile.dart';
 
 import 'package:smart_darzi/firebase_options.dart';
 import 'package:smart_darzi/login/login.dart';
@@ -19,8 +20,8 @@ import 'add_size/add_size.dart';
 
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
             const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
           ],
         ),
-        home: Login(),
+        home: CustomerProfile(phoneNo: '3041234567'),
       ),
     );
   }

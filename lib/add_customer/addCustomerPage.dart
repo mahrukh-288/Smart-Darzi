@@ -7,6 +7,7 @@ import 'package:smart_darzi/Common%20Widgets/notification_btn.dart';
 import 'package:smart_darzi/Common%20Widgets/search_customer_bar.dart';
 
 import 'package:smart_darzi/app_theme/constants.dart';
+import 'package:smart_darzi/customer_profile/customer_profile.dart';
 
 
 import '../models/customer.dart';
@@ -204,7 +205,7 @@ class CustomerForm extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ViewCustomers(),
+                  builder: (context) =>  CustomerProfile(phoneNo: _phoneController.text,),
                 ));
           },
           style: ElevatedButton.styleFrom(
@@ -213,7 +214,7 @@ class CustomerForm extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ),
           child: Text(
-            'Customer View',
+            'Customer Profile',
             style: Theme.of(context).textTheme.labelLarge,
           ),
         )

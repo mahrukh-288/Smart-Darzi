@@ -45,3 +45,10 @@ class SizeSaved extends CustomerState {
   @override
   List<Object> get props => [];
 }
+
+class CustomerFetchedByPhone extends CustomerState {
+  final Customer customer;
+  const CustomerFetchedByPhone({required this.customer});
+  @override
+  List<Object> get props => [customer];
+}
