@@ -52,3 +52,10 @@ class CustomerFetchedByPhone extends CustomerState {
   @override
   List<Object> get props => [customer];
 }
+
+class CustomerNotAvailable extends CustomerState {
+  final bool available;
+  const CustomerNotAvailable({required this.available});
+  @override
+  List<Object> get props => [available];
+}

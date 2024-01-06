@@ -123,8 +123,13 @@ class AppRepository {
       final response = await _appService.getCustomerByPhone(phoneNo);
       print(response);
       apiResponse.isSuccess = true;
+      if(response.data == "Data Not Found"){
+        apiResponse.data = false;
+      }
+      {
       Customer customer = Customer.fromJson(response.data);
       apiResponse.data = customer;
+      }
     } on DioException {
       apiResponse.isSuccess = false;
       apiResponse.error = 'Something went wrong!';

@@ -9,7 +9,6 @@ import 'package:smart_darzi/Common%20Widgets/search_customer_bar.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
 
-
 import '../models/customer.dart';
 import '../view_customers/view_customers.dart';
 import '../add_size/sizing.dart';
@@ -25,9 +24,7 @@ class CustomerForm extends StatelessWidget {
 
   final TextEditingController _familyController = TextEditingController();
 
-
-
-  bool sizeSaved = false;
+  bool available = true;
 
   bool _addOrder = false;
 
@@ -37,9 +34,10 @@ class CustomerForm extends StatelessWidget {
       listener: (ctx, state) {
         if (state is CustomerRegistered) {
           customerSavedDialog(context);
-        }
-        else if(state is Failure){
-             showDialog(
+        } else if (state is CustomerFetchedByPhone) {
+          customerSavedDialog(context);
+        } else if (state is Failure) {
+          showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
@@ -70,89 +68,118 @@ class CustomerForm extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Column(
-                    children: [
-                      CustomAppBar(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Customer Data/ کسٹمر ڈیٹا',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 60, vertical: 40),
-                          margin: const EdgeInsets.symmetric(horizontal: 60),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: borderColor),
-                              borderRadius: BorderRadius.circular(5),
-                              color: primaryColor.withOpacity(0.6)),
-                          child: Column(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                  child: BlocBuilder<CustomerCubit, CustomerState>(
+                    builder: (context, state) {
+                      if(state is CustomerNotAvailable){
+                        available = false;
+                      }
+                      return Column(
+                        children: [
+                          CustomAppBar(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Customer Data/ کسٹمر ڈیٹا',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 60, vertical: 40),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 60),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: borderColor),
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: primaryColor.withOpacity(0.6)),
+                              child: Column(
                                 children: [
-                                  CustomerFormField(
-                                      label: 'Phone # /فون نمبر',
-                                      controller: _phoneController),
-                                  TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Check Availability',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.red[900]),
-                                      )),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomerFormField(
+                                          label: 'Phone # /فون نمبر',
+                                          controller: _phoneController),
+                                      TextButton(
+                                          onPressed: () {
+                                            context
+                                                .read<CustomerCubit>()
+                                                .getCustomerByPhone(
+                                                    _phoneController.text);
+                                          },
+                                          child: Text(
+                                            !available
+                                                ? ''
+                                                : 'Check Availability',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium
+                                                ?.copyWith(
+                                                    color: Colors.red[900]),
+                                          ))
+                                    ],
+                                  ),
+                                  if (available)
+                                    Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        CustomerFormField(
+                                            label: ' Name / نام',
+                                            controller: _nameController),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        CustomerFormField(
+                                          label:
+                                              'Family Nme / Nick Name/ خاندان کا نام/ مشہور نام',
+                                          controller: _familyController,
+                                        ),
+                                      ],
+                                    ),
                                 ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              CustomerFormField(
-                                  label: ' Name / نام',
-                                  controller: _nameController),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              CustomerFormField(
-                                label:
-                                    'Family Nme / Nick Name/ خاندان کا نام/ مشہور نام',
-                                controller: _familyController,
-                              ),
-                            ],
-                          )),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      BlocBuilder<CustomerCubit, CustomerState>(
-                        builder: (context, state) {
-                          if(state is LoadingCustomer){
-                            return CircularProgressIndicator();
-                          }
-                          return ElevatedButton(
-                              onPressed: () {
-                                Customer customer = Customer(
-                                    name: _nameController.text,
-                                
-                                    phoneNumber: int.parse(_phoneController.text),
-                                    familyName: _familyController.text);
-                                context
-                                    .read<CustomerCubit>()
-                                    .registerCustomer(customer);
-                              },
-                              child: Text(
-                                'Add Customer/ کسٹمر کا اندراج کريں',
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ));
-                        },
-                      )
-                    ],
+                              )),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          BlocBuilder<CustomerCubit, CustomerState>(
+                            builder: (context, state) {
+                              if (state is LoadingCustomer) {
+                                return CircularProgressIndicator();
+                              }
+
+                              if (available) {
+                                return ElevatedButton(
+                                    onPressed: () {
+                                      Customer customer = Customer(
+                                          );
+                                          customer.name = _nameController.text;
+                                         customer.phoneNumber=
+                                              int.parse(_phoneController.text);
+                                          customer.familyName = _familyController.text;
+                                      context
+                                          .read<CustomerCubit>()
+                                          .registerCustomer(customer);
+                                    },
+                                    child: Text(
+                                      'Add Customer/ کسٹمر کا اندراج کريں',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
+                                    ));
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            },
+                          )
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -205,7 +232,9 @@ class CustomerForm extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  CustomerProfile(phoneNo: _phoneController.text,),
+                  builder: (context) => CustomerProfile(
+                    phoneNo: _phoneController.text,
+                  ),
                 ));
           },
           style: ElevatedButton.styleFrom(

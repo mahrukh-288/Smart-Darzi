@@ -7,65 +7,65 @@ import '../../models/customer.dart';
 import '../../models/size.dart';
 
 part 'customer_state.dart';
+
 AppRepository _appRepository = AppRepository();
+
 class CustomerCubit extends Cubit<CustomerState> {
   CustomerCubit() : super(CustomerInitial());
 
   registerCustomer(Customer customer) async {
     emit(LoadingCustomer());
- ApiResponse response   = await _appRepository.registerCustomer(customer);
- if(response.isSuccess){
-emit(CustomerRegistered());
- }else{
-  emit(Failure());
- }
-    
-  }
-  getAllCustomers() async {
-    emit(LoadingCustomer());
- ApiResponse response   = await _appRepository.getAllCustomers();
- if(response.isSuccess){
-  print('response in state');
-emit(AllCustomersFetched(customers: response.data));
- }else{
-  emit(Failure());
- }
-    
+    ApiResponse response = await _appRepository.registerCustomer(customer);
+    if (response.isSuccess) {
+      emit(CustomerRegistered());
+    } else {
+      emit(Failure());
+    }
   }
 
-  login(String name, String password)async {
-emit(LoadingCustomer());
-    ApiResponse response = await _appRepository.login(name,password);
-    if(response.isSuccess) {
+  getAllCustomers() async {
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getAllCustomers();
+    if (response.isSuccess) {
+      print('response in state');
+      emit(AllCustomersFetched(customers: response.data));
+    } else {
+      emit(Failure());
+    }
+  }
+
+  login(String name, String password) async {
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.login(name, password);
+    if (response.isSuccess) {
       emit(LoggedIn());
-    } 
-    else{
+    } else {
       emit(Failure());
     }
   }
 
   saveSize(SizeModel size) async {
-print(size.toJson());
+    print(size.toJson());
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.saveSize(size);
-    if(response.isSuccess) {
+    if (response.isSuccess) {
       print(state);
       emit(SizeSaved());
-    } 
-    else{
+    } else {
       emit(Failure());
     }
   }
 
-    getCustomerByPhone(String phoneNo) async {
-
+  getCustomerByPhone(String phoneNo) async {
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.getCustomerByPhone(phoneNo);
-    if(response.isSuccess) {
-      print(state);
-      emit(CustomerFetchedByPhone(customer: response.data));
-    } 
-    else{
+    if (response.isSuccess) {
+      if (response.data == "Data Not Found") {
+        emit(const CustomerNotAvailable(available: false));
+      } else {
+        emit(CustomerFetchedByPhone(customer: response.data));
+      }
+    } else {
       emit(Failure());
     }
   }

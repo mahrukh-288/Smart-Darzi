@@ -1,24 +1,22 @@
 class Customer {
-  String name;
-  int phoneNumber;
-  String familyName;
-  String id = '';
-  String length = '';
-  String shoulder = '';
-  String chest = '';
-  String neck = '';
-  String armLength = '';
-  String armRound = '';
-  String waist = '';
-  String lap = '';
-  String lengthOfTrouser = '';
-  String ankleWidth = '';
-  String hips = '';
+  String name = '0';
+  int phoneNumber = 0;
+  String familyName = '0';
+  String id = '0';
+  String length = '0';
+  String shoulder = '0';
+  String chest = '0';
+  String neck = '0';
+  String armLength = '0';
+  String armRound = '0';
+  String waist = '0';
+  String lap = '0';
+  String lengthOfTrouser = '0';
+  String ankleWidth = '0';
+  String hips = '0';
 
   Customer(
-      {required this.name,
-      required this.phoneNumber,
-      required this.familyName});
+      );
 
   Customer.fromJson(Map<String, dynamic> json)
       : name = json['name'] as String,

@@ -15,7 +15,7 @@ static const orderBaseUrl = 'localhost:3000/v1/order';
 
 
 Future<Response> registerCustomer(Customer customer) async {
-  
+  print(customer.toJson());
   Response response = await dio.post('http://localhost:3000/v1/user/addCustomer', data: customer.toJson());
   print(response);
   return response;
