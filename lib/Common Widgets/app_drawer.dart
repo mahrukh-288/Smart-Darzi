@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import 'package:smart_darzi/view_customers/view_customers.dart';
 import 'package:smart_darzi/view_orders/viewOrdersPage.dart';
 
@@ -76,6 +77,9 @@ class AppDrawer extends StatelessWidget {
               }
               else if(label == 'Orders'){
                  Navigator.push(context,MaterialPageRoute(builder: (context) => ViewOrdersPage(),));
+              }
+              else if(label == 'Profile Settings'){
+                 Navigator.push(context,MaterialPageRoute(builder: (context) => CustomerProfile(phoneNo: '',),));
               }
 
             },

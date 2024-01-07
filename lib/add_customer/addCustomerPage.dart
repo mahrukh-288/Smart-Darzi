@@ -123,7 +123,7 @@ class CustomerForm extends StatelessWidget {
                                           ))
                                     ],
                                   ),
-                                  if (available)
+                                  if (!available)
                                     Column(
                                       children: [
                                         SizedBox(
@@ -153,7 +153,7 @@ class CustomerForm extends StatelessWidget {
                                 return CircularProgressIndicator();
                               }
 
-                              if (available) {
+                              if (!available) {
                                 return ElevatedButton(
                                     onPressed: () {
                                       Customer customer = Customer(

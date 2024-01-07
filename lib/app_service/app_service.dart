@@ -7,8 +7,9 @@ import '../models/order.dart';
 class AppService{
 final dio = Dio();
 
-static const customerBaseUrl = 'customer';
-static const orderBaseUrl = 'localhost:3000/v1/order';
+static const customerBaseUrl = 'http://35.153.55.88:3000/v1/user';
+static const orderBaseUrl = 'http://35.153.55.88:3000/v1/order';
+static const adminBaseUrl = 'http://35.153.55.88:3000/v1/admin';
  static const String   getAllCustomersUrl = '/allCustomers';
 
 
@@ -16,35 +17,35 @@ static const orderBaseUrl = 'localhost:3000/v1/order';
 
 Future<Response> registerCustomer(Customer customer) async {
   print(customer.toJson());
-  Response response = await dio.post('http://localhost:3000/v1/user/addCustomer', data: customer.toJson());
+  Response response = await dio.post('$customerBaseUrl/addCustomer', data: customer.toJson());
   print(response);
   return response;
 }
 
 Future<Response> addOrder(Order order) async {
   print(order.toJson());
-  Response response = await dio.post('http://localhost:3000/v1/order/addOrder', data: order.toJson());
+  Response response = await dio.post('$orderBaseUrl/addOrder', data: order.toJson());
   print(response);
   return response;
 }
 
 Future<Response> getAllOrders()async {
 
-Response response = await dio.get('http://localhost:3000/v1/order/allOrders');
+Response response = await dio.get('$orderBaseUrl/allOrders');
 
 print(response.data);
 return response;
 }
 Future<Response> getAllCustomers()async {
 
-Response response = await dio.get('http://localhost:3000/v1/user/allCustomers');
+Response response = await dio.get('$customerBaseUrl/allCustomers');
 print(response);
 return response;
 }
 
 Future<Response> login(String name, String password)async {
 
-Response response = await dio.post('http://localhost:3000/v1/admin/login', data: {'email':name, 'password':password});
+Response response = await dio.post('$adminBaseUrl/login', data: {'email':name, 'password':password});
 print(response);
 return response;
 }
@@ -52,7 +53,7 @@ return response;
 Future<Response> saveSize(SizeModel size)async {
   print(size.toJson());
 
-Response response = await dio.patch('http://localhost:3000/v1/user/addSize', data: size.toJson());
+Response response = await dio.patch('$customerBaseUrl/addSize', data: size.toJson());
 print(response);
 return response;
 }
@@ -60,15 +61,15 @@ return response;
 Future<Response> getCustomerByPhone(String phoneNo )async {
   
 print(phoneNo);
-Response response = await dio.get('http://localhost:3000/v1/user/oneCustomer', data: {"phoneNumber" : 3041234567});
-print(response.data);
+Response response = await dio.get('$customerBaseUrl/oneCustomer');
+print(response);
 return response;
 }
 
 Future<Response> getOrdersByCustomerId(String customerId )async {
 print('order by cid service');
-Response response = await dio.get('http://localhost:3000/v1/order/oneOrder', data: {"customerId" : customerId});
-print(response.data);
+Response response = await dio.get('$orderBaseUrl/oneOrder', data: {"customerId" : customerId});
+print(response);
 return response;
 }
 

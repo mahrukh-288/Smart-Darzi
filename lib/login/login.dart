@@ -156,7 +156,7 @@ class Login extends StatelessWidget {
                       BlocBuilder<CustomerCubit, CustomerState>(
                         builder: (context, state) {
                           if (state is LoadingCustomer) {
-                            return CircularProgressIndicator(color: primaryColor,);
+                            return Center(child: CircularProgressIndicator(color: primaryColor,));
                           }
                           return Center(
                             child: ElevatedButton(
