@@ -12,12 +12,13 @@ import '../models/customer.dart';
 
 class CustomerProfile extends StatefulWidget {
   const CustomerProfile({super.key, required this.phoneNo});
-  final String phoneNo;
+  final int phoneNo;
   @override
   State<CustomerProfile> createState() => _CustomerProfileState();
 }
 
 class _CustomerProfileState extends State<CustomerProfile> {
+  Customer customer = Customer();
   @override
   void initState() {
     context.read<CustomerCubit>().getCustomerByPhone(widget.phoneNo);
@@ -43,15 +44,17 @@ class _CustomerProfileState extends State<CustomerProfile> {
                   child: BlocBuilder<CustomerCubit, CustomerState>(
                     builder: (context, state) {
                       if (state is CustomerFetchedByPhone) {
-                        Customer customer = state.customer;
-                        return Column(
+                         customer = state.customer;
+                        
+                      }
+                      return  Column(
                         children: [
-                          UserDetails(customer: customer,),
+                         // UserDetails(customer: customer,),
                           SizedBox(height: 30,),
 
-                          SizeTable(),
+                          SizeTable(customerId: customer.id,),
                           SizedBox(height: 30,),
-                          OrderHistory(customerId: customer.id,),
+                         // OrderHistory(customerId: customer.id,),
                           SizedBox(height: 30,),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -61,8 +64,6 @@ class _CustomerProfileState extends State<CustomerProfile> {
                             onPressed: (){}, child: Text('Delete Customer', style: Theme.of(context).textTheme.headlineSmall,))
                         ],
                       );
-                      }
-                      return Center(child: Text('Nothing Found'));
                       
                     },
                   ),

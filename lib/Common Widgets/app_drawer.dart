@@ -78,9 +78,7 @@ class AppDrawer extends StatelessWidget {
               else if(label == 'Orders'){
                  Navigator.push(context,MaterialPageRoute(builder: (context) => ViewOrdersPage(),));
               }
-              else if(label == 'Profile Settings'){
-                 Navigator.push(context,MaterialPageRoute(builder: (context) => CustomerProfile(phoneNo: '',),));
-              }
+             
 
             },
             child: Text(

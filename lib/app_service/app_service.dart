@@ -58,21 +58,38 @@ print(response);
 return response;
 }
 
-Future<Response> getCustomerByPhone(String phoneNo )async {
+Future<Response> getCustomerByPhone(int phoneNo )async {
   
 print(phoneNo);
-Response response = await dio.get('$customerBaseUrl/oneCustomer', queryParameters: {'phoneNumber' : 1234567800});
-print(response);
+Response response = await dio.get('$customerBaseUrl/oneCustomer', queryParameters: {'phoneNumber' : phoneNo});
+
+if(response.statusCode == 404) {
+  print('Phone does not Exists');
+}
+else if(response.statusCode == 200){
+  print('Phone Exists');
+
+}
+print('Response data : $response');
+
 return response;
 }
 
 Future<Response> getOrdersByCustomerId(String customerId )async {
-print('order by cid service');
-Response response = await dio.get('$orderBaseUrl/oneOrder', queryParameters: {'customerId':'65a140538528e97c45213632'});
-print(response.data);
+//print('order by cid service');
+
+
+Response response = await dio.get('$orderBaseUrl/allOrdersBySingleUser', queryParameters: {'customerId': customerId});
+
 return response;
 }
 
+Future<Response> getCustomerSize(String customerId )async {
+print('customer size');
+Response response = await dio.get('$customerBaseUrl/getSize', queryParameters: {'customerId': customerId});
+
+return response;
+}
 }
 
 

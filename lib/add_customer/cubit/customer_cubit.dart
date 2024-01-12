@@ -19,7 +19,7 @@ class CustomerCubit extends Cubit<CustomerState> {
     if (response.isSuccess) {
       emit(CustomerRegistered());
     } else {
-      emit(Failure());
+      emit(Failure(error: ''));
     }
   }
 
@@ -30,7 +30,7 @@ class CustomerCubit extends Cubit<CustomerState> {
       print('response in state');
       emit(AllCustomersFetched(customers: response.data));
     } else {
-      emit(Failure());
+      emit(Failure(error: ''));
     }
   }
 
@@ -40,7 +40,7 @@ class CustomerCubit extends Cubit<CustomerState> {
     if (response.isSuccess) {
       emit(LoggedIn());
     } else {
-      emit(Failure());
+      emit(Failure(error: ''));
     }
   }
 
@@ -52,11 +52,11 @@ class CustomerCubit extends Cubit<CustomerState> {
       print(state);
       emit(SizeSaved());
     } else {
-      emit(Failure());
+      emit(Failure(error: ''));
     }
   }
 
-  getCustomerByPhone(String phoneNo) async {
+  getCustomerByPhone(int phoneNo) async {
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.getCustomerByPhone(phoneNo);
     if (response.isSuccess) {
@@ -66,7 +66,35 @@ class CustomerCubit extends Cubit<CustomerState> {
         emit(CustomerFetchedByPhone(customer: response.data));
       }
     } else {
-      emit(Failure());
+      emit(Failure(error: response.error!));
+    }
+  }
+
+  getCustomerSize(String customerId) async {
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getCustomerSize(customerId);
+    if (response.isSuccess) {
+      print(response.data);
+     emit(CustomerSizeFetched(size: response.data));
+    } else {
+      emit(Failure(error: ''));
+    }
+  }
+
+  getProfile(int phoneNo) async {
+     emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getCustomerByPhone(phoneNo);
+    if (response.isSuccess) {
+      
+      if (response.data == "Data Not Found") {
+        emit(const CustomerNotAvailable(available: false));
+      } else {
+        Customer  customer = response.data;
+        response = await _appRepository.getCustomerSize(customer.id);
+        emit(CustomerFetchedByPhone(customer: response.data));
+      }
+    } else {
+      emit(Failure(error: ''));
     }
   }
 }

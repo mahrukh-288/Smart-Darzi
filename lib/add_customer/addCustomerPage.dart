@@ -45,7 +45,7 @@ class CustomerForm extends StatelessWidget {
                     EdgeInsets.only(bottom: 30, left: 20, right: 20),
                 backgroundColor: Colors.white.withOpacity(0.8),
                 content: Text(
-                  "Something went wrong!",
+                  state.error,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: primaryColor, fontWeight: FontWeight.w600),
                 ),
@@ -109,7 +109,7 @@ class CustomerForm extends StatelessWidget {
                                             context
                                                 .read<CustomerCubit>()
                                                 .getCustomerByPhone(
-                                                    _phoneController.text);
+                                                    int.parse(_phoneController.text));
                                           },
                                           child: Text(
                                             !available
@@ -195,7 +195,7 @@ class CustomerForm extends StatelessWidget {
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-        "Customer Saved Successfully!",
+        "Customer Already Exists!",
         style: Theme.of(context)
             .textTheme
             .labelLarge
@@ -233,7 +233,7 @@ class CustomerForm extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CustomerProfile(
-                    phoneNo: _phoneController.text,
+                    phoneNo: int.parse(_phoneController.text),
                   ),
                 ));
           },

@@ -28,8 +28,10 @@ class LoggedIn extends CustomerState {
 }
 
 class Failure extends CustomerState {
+  final String error;
+  const Failure({required this.error});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [error];
 }
 class LoadingCustomer extends CustomerState {
   @override
@@ -53,6 +55,12 @@ class CustomerFetchedByPhone extends CustomerState {
   List<Object> get props => [customer];
 }
 
+class CustomerSizeFetched extends CustomerState {
+  final SizeModel size;
+  const CustomerSizeFetched({required this.size});
+  @override
+  List<Object> get props => [size];
+}
 class CustomerNotAvailable extends CustomerState {
   final bool available;
   const CustomerNotAvailable({required this.available});

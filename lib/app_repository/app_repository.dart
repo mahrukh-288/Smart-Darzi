@@ -117,7 +117,7 @@ class AppRepository {
     return apiResponse;
   }
 
-  Future<ApiResponse> getCustomerByPhone(String phoneNo) async {
+  Future<ApiResponse> getCustomerByPhone(int phoneNo) async {
     ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _appService.getCustomerByPhone(phoneNo);
@@ -132,10 +132,10 @@ class AppRepository {
       }
     } on DioException {
       apiResponse.isSuccess = false;
-      apiResponse.error = 'Something went wrong!';
+      apiResponse.error = 'Server Error while getting customer by phone!';
     } catch (e) {
       apiResponse.isSuccess = false;
-      apiResponse.error = 'Something went wrong!';
+      apiResponse.error = 'Client Error while getting customer by phone!';
     }
     return apiResponse;
   }
@@ -161,4 +161,21 @@ class AppRepository {
     return apiResponse;
   }
 
+Future<ApiResponse> getCustomerSize(String customerId) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.getCustomerSize(customerId);
+
+
+     SizeModel size = SizeModel.fromJson(response.data);
+print(size.toJson());
+      apiResponse.isSuccess = true;
+      apiResponse.data = size;
+    } on DioException {
+      apiResponse.isSuccess = false;
+    } catch (e) {
+      apiResponse.isSuccess = false;
+    }
+    return apiResponse;
+  }
 }

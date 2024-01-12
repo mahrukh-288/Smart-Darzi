@@ -45,14 +45,14 @@ final Customer customer;
                       width: 10,
                     ),
                     Text(
-                      'Name',
+                      '${customer.phoneNumber}',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
-                      'Name',
+                      customer.familyName,
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                   ],
@@ -64,7 +64,7 @@ final Customer customer;
                       width: 10,
                     ),
                     Text(
-                      'Name',
+                      'Last Order at Monday',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                   ],
@@ -80,7 +80,7 @@ final Customer customer;
                       width: 10,
                     ),
                     Text(
-                      'Name',
+                      'Customer since 2018',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                   ],
