@@ -67,17 +67,9 @@ class OrderList extends StatelessWidget {
           rows: [
             for(int i=0; i<orders.length; i++)
             DataRow(cells: [
-              DataCell(Container(
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: borderColor),
-                ),
-                child: const Icon(
-                  Icons.person,
-                  color: iconColor,
-                  size: 40,
-                ),
+              DataCell(Text(
+                orders[i].id,
+                style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
                 orders[i].customerId,
@@ -88,11 +80,11 @@ class OrderList extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                '${orders[i].designNumber}',
+                '${orders[i].orderCategory}',
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                orders[i].embroidery,
+                orders[i].orderType,
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Badge(

@@ -44,16 +44,14 @@ class _CustomerProfileState extends State<CustomerProfile> {
                     builder: (context, state) {
                       if (state is CustomerFetchedByPhone) {
                         Customer customer = state.customer;
-                        print(customer.toJson());
-                      }
-                      return Column(
+                        return Column(
                         children: [
-                          UserDetails(),
+                          UserDetails(customer: customer,),
                           SizedBox(height: 30,),
 
                           SizeTable(),
                           SizedBox(height: 30,),
-                          OrderHistory(customerId: '6596e58bd32cc31ec31becac',),
+                          OrderHistory(customerId: customer.id,),
                           SizedBox(height: 30,),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -63,6 +61,9 @@ class _CustomerProfileState extends State<CustomerProfile> {
                             onPressed: (){}, child: Text('Delete Customer', style: Theme.of(context).textTheme.headlineSmall,))
                         ],
                       );
+                      }
+                      return Center(child: Text('Nothing Found'));
+                      
                     },
                   ),
                 ),

@@ -9,13 +9,19 @@ String embroidery = '';
 String embroidaryStyle = '';
 int bookNumber = 0;
 int designNumber = 0;
+String orderCategory = '';
+String orderType = '';
+String id = '';
 
 Order();
 
 Order.fromJson(Map<String, dynamic> json)
       : customerId = json['customerId'] as String,
+      id = json['_id'] as String,
         cuffStyle = json['cuffStyle'] as String,
         neckStyle = json['neckStyle'] as String,
+         orderCategory = json['orderCategory'] as String,
+        orderType = json['orderType'] as String,
         buttonStyle = json['buttonStyle'] as String,
         pocketStyle = json['pocketStyle'] as String,
         elastic = json['elastic'] as String,
@@ -24,9 +30,13 @@ Order.fromJson(Map<String, dynamic> json)
         bookNumber = json['bookNumber'] as int,
         designNumber = json['designNumber'] as int;
 
+        
+
   Map<String, dynamic> toJson() => {
         'customerId': customerId,
         'cuffStyle': cuffStyle,
+        'orderType' : orderType,
+        'orderCategory' : orderCategory,
         'neckStyle' : neckStyle,
         'buttonStyle' : buttonStyle,
         'pocketStyle' : pocketStyle,

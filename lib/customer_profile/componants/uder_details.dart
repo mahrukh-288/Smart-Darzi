@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 
-class UserDetails extends StatelessWidget {
-  const UserDetails({super.key});
+import '../../models/customer.dart';
 
+class UserDetails extends StatelessWidget {
+  const UserDetails({super.key, required this.customer});
+final Customer customer;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -29,7 +31,7 @@ class UserDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Name',
+                  '${customer.name} ${customer.familyName}',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Row(

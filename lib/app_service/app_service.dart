@@ -61,15 +61,15 @@ return response;
 Future<Response> getCustomerByPhone(String phoneNo )async {
   
 print(phoneNo);
-Response response = await dio.get('$customerBaseUrl/oneCustomer');
+Response response = await dio.get('$customerBaseUrl/oneCustomer', queryParameters: {'phoneNumber' : 1234567800});
 print(response);
 return response;
 }
 
 Future<Response> getOrdersByCustomerId(String customerId )async {
 print('order by cid service');
-Response response = await dio.get('$orderBaseUrl/oneOrder', data: {"customerId" : customerId});
-print(response);
+Response response = await dio.get('$orderBaseUrl/oneOrder', queryParameters: {'customerId':'65a140538528e97c45213632'});
+print(response.data);
 return response;
 }
 
