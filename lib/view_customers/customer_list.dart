@@ -103,7 +103,7 @@ class CustomerList extends StatelessWidget {
                       color: iconColor,
                     ),
                   ),
-                   PopUpMenu(customerId: customers[i].id, customerPhone: customers[i].phoneNumber,)
+                   PopUpMenu(customer: customers[i])
                 ],
               )),
             ]),

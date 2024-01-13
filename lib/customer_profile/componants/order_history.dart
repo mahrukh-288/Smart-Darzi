@@ -5,20 +5,11 @@ import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
 import '../../app_theme/constants.dart';
 import '../../models/order.dart';
 
-class OrderHistory extends StatefulWidget {
-  const OrderHistory({super.key, required this.customerId});
-  final String customerId;
-  @override
-  State<OrderHistory> createState() => _OrderHistoryState();
-}
+class OrderHistory extends StatelessWidget {
+  const OrderHistory({super.key, required this.orders});
+  
+  final List<Order> orders;
 
-class _OrderHistoryState extends State<OrderHistory> {
-  List<Order> orders = [];
-  @override
-  void initState() {
-    print('created');
-    context.read<OrderCubit>().getOrdersByCustomerId(widget.customerId);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +28,7 @@ class _OrderHistoryState extends State<OrderHistory> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-            child: BlocBuilder<OrderCubit, OrderState>(
-              builder: (context, state) {
-                if (state is OrdersByCustomerIdFetched) {
-                  orders = state.orders;
-                }
-                return DataTable(
+            child: DataTable(
                   border: const TableBorder(
                       horizontalInside: BorderSide(color: borderColor)),
                   columnSpacing: 30,
@@ -103,30 +89,28 @@ class _OrderHistoryState extends State<OrderHistory> {
                           ),
                         )),
                         DataCell(Text(
-                          orders[i].customerId,
+                          orders[i].id.substring(1,6),
                           style: Theme.of(context).textTheme.labelLarge,
                         )),
                         DataCell(Text(
-                          '${orders[i].bookNumber}',
+                          '${orders[i].orderType}',
                           style: Theme.of(context).textTheme.labelLarge,
                         )),
                         DataCell(Text(
-                          '${orders[i].designNumber}',
+                          '${orders[i].orderCategory}',
                           style: Theme.of(context).textTheme.labelLarge,
                         )),
                         DataCell(Text(
-                          orders[i].embroidery,
+                          'Placed on Monday',
                           style: Theme.of(context).textTheme.labelLarge,
                         )),
                         DataCell(Text(
-                          orders[i].embroidery,
+                          'Completed on Friday',
                           style: Theme.of(context).textTheme.labelLarge,
                         )),
                       ]),
                   ],
-                );
-              },
-            ),
+                )
           )
         ]));
   }

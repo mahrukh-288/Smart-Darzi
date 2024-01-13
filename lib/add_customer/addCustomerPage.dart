@@ -33,9 +33,10 @@ class CustomerForm extends StatelessWidget {
     return BlocListener<CustomerCubit, CustomerState>(
       listener: (ctx, state) {
         if (state is CustomerRegistered) {
-          customerSavedDialog(context);
+          
+          context.read<CustomerCubit>().getCustomerByPhone(int.parse(_phoneController.text));
         } else if (state is CustomerFetchedByPhone) {
-          customerSavedDialog(context);
+          customerSavedDialog(context, state.customer );
         } else if (state is Failure) {
           showDialog(
             context: context,
@@ -190,12 +191,12 @@ class CustomerForm extends StatelessWidget {
     );
   }
 
-  customerSavedDialog(BuildContext context) {
+  customerSavedDialog(BuildContext context, Customer customer) {
     AlertDialog alert = AlertDialog(
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-        "Customer Already Exists!",
+        "Success!",
         style: Theme.of(context)
             .textTheme
             .labelLarge
@@ -209,8 +210,8 @@ class CustomerForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5)),
                 side: const BorderSide(color: primaryColor)),
             onPressed: () {
-              Navigator.pop(context);
-              Navigator.push(
+             // Navigator.pop(context);
+              Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => CustomerForm(),
@@ -228,12 +229,12 @@ class CustomerForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CustomerProfile(
-                    phoneNo: int.parse(_phoneController.text),
+                    customer: customer,
                   ),
                 ));
           },

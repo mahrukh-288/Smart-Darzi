@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
 import 'package:smart_darzi/app_repository/app_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import '../../models/api_response.dart';
 import '../../models/customer.dart';
 import '../../models/size.dart';
@@ -27,7 +29,6 @@ class CustomerCubit extends Cubit<CustomerState> {
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.getAllCustomers();
     if (response.isSuccess) {
-      print('response in state');
       emit(AllCustomersFetched(customers: response.data));
     } else {
       emit(Failure(error: response.error!));
@@ -45,11 +46,9 @@ class CustomerCubit extends Cubit<CustomerState> {
   }
 
   saveSize(SizeModel size) async {
-    print(size.toJson());
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.saveSize(size);
     if (response.isSuccess) {
-      print(state);
       emit(SizeSaved());
     } else {
       emit(Failure(error: response.error!));
@@ -60,40 +59,32 @@ class CustomerCubit extends Cubit<CustomerState> {
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.getCustomerByPhone(phoneNo);
     if (response.isSuccess) {
-      if(response.data != null){
-      emit(CustomerFetchedByPhone(available: true, customer: response.data));}
-      else{
-        emit(CustomerNotAvailable(available: false));
+      if (response.data != null) {
+        emit(CustomerFetchedByPhone(customer: response.data));
+      } else {
+        emit(const CustomerNotAvailable(available: false));
       }
-     
     } else {
       emit(Failure(error: response.error!));
     }
   }
 
   getCustomerSize(String customerId) async {
-    emit(LoadingCustomer());
+    //emit(LoadingCustomer());
     ApiResponse response = await _appRepository.getCustomerSize(customerId);
     if (response.isSuccess) {
-      print(response.data);
-     emit(CustomerSizeFetched(size: response.data));
-    } else {
+      emit(CustomerSizeFetched(size: response.data));
+    }
+    else {
       emit(Failure(error: response.error!));
     }
   }
 
-  getProfile(int phoneNo) async {
-     emit(LoadingCustomer());
-    ApiResponse response = await _appRepository.getCustomerByPhone(phoneNo);
+   deleteCustomer(int phoneNo) async {
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.deleteCustomer(phoneNo);
     if (response.isSuccess) {
-      
-      if (response.data == "Data Not Found") {
-        emit(const CustomerNotAvailable(available: false));
-      } else {
-        Customer  customer = response.data;
-        response = await _appRepository.getCustomerSize(customer.id);
-        //emit(CustomerFetchedByPhone(customer: response.data));
-      }
+      emit(CustomerDeleted());
     } else {
       emit(Failure(error: response.error!));
     }

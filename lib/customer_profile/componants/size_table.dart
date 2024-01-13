@@ -5,20 +5,10 @@ import 'package:smart_darzi/models/size.dart';
 import '../../add_customer/cubit/customer_cubit.dart';
 import '../../app_theme/constants.dart';
 
-class SizeTable extends StatefulWidget {
-  const SizeTable({super.key, required this.customerId});
-  final String customerId;
-  @override
-  State<SizeTable> createState() => _SizeTableState();
-}
-
-class _SizeTableState extends State<SizeTable> {
-  SizeModel  sizeModel = SizeModel();
-  @override
-  void initState() {
-    context.read<CustomerCubit>().getCustomerSize(widget.customerId);
-    super.initState();
-  }
+class SizeTable extends StatelessWidget {
+  const SizeTable({super.key, required this.size});
+  
+ final  SizeModel  size ;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +27,7 @@ class _SizeTableState extends State<SizeTable> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-          child: BlocBuilder<CustomerCubit, CustomerState>(
-            builder: (context, state) {
-              if(state is CustomerSizeFetched)
-              {
-                sizeModel = state.size;
-              }
-              return Column(
+          child: Column(
                 children: [
                   IntrinsicHeight(
                     child: Row(
@@ -53,26 +37,26 @@ class _SizeTableState extends State<SizeTable> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Shir length : ${sizeModel.length}',
+                              'Shir length : ${size.length}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(height: 5),
                             Text(
-                              'Neck : ${sizeModel.neck}',
+                              'Neck : ${size.neck}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Shoulder : ${sizeModel.shoulder}',
+                              'Shoulder : ${size.shoulder}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Waist : ${sizeModel.waist}',
+                              'Waist : ${size.waist}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -83,28 +67,28 @@ class _SizeTableState extends State<SizeTable> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Chest : ${sizeModel.chest}',
+                              'Chest : ${size.chest}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Daman : ${sizeModel.lap}',
+                              'Daman : ${size.lap}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Arm Length : ${sizeModel.armLength}',
+                              'Arm Length : ${size.armLength}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Arm Round : ${sizeModel.armRound}',
+                              'Arm Round : ${size.armRound}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -117,21 +101,21 @@ class _SizeTableState extends State<SizeTable> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Pent Length : ${sizeModel.lengthOfTrouser}',
+                              'Pent Length : ${size.lengthOfTrouser}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Ankle Width : ${sizeModel.ankleWidth}',
+                              'Ankle Width : ${size.ankleWidth}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Hips : ${sizeModel.hips}',
+                              'Hips : ${size.hips}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -148,9 +132,7 @@ class _SizeTableState extends State<SizeTable> {
                         style: Theme.of(context).textTheme.labelLarge,
                       )),
                 ],
-              );
-            },
-          ),
+              )
         ),
       ]),
     );

@@ -3,13 +3,14 @@ import 'package:smart_darzi/add_size/add_size.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import '../add_order/SaveOrderPage.dart';
 import '../app_theme/constants.dart';
+import '../models/customer.dart';
 
 class PopUpMenu extends StatelessWidget {
-  const PopUpMenu({super.key, required this.customerId, required this.customerPhone});
-final String customerId;
-final int customerPhone;
+  const PopUpMenu({super.key, required this.customer});
+final Customer customer;
   @override
   Widget build(BuildContext context) {
+    
     return PopupMenuButton<int>(
       icon: const Icon(
         Icons.menu,
@@ -28,7 +29,7 @@ final int customerPhone;
                     width: 8,
                   ),
                   TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerProfile(phoneNo: customerPhone),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerProfile(customer: customer,),));
                   }, child:  Text(
                     'Customer Profile',
                     style: Theme.of(context).textTheme.labelLarge,
@@ -104,7 +105,7 @@ final int customerPhone;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AddSize(customerId: customerId,),
+                              builder: (context) => AddSize(customerId: customer.id,),
                             ));
                       },
                       child: Text(
@@ -135,7 +136,7 @@ final int customerPhone;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SaveOrderPage(customerId: customerId,),
+                              builder: (context) => SaveOrderPage(customerId: customer.id,),
                             ));
                       },
                       child: Text(

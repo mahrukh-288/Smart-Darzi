@@ -72,7 +72,7 @@ class OrderList extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                orders[i].customerId,
+                orders[i].customerId.substring(1,6),
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(

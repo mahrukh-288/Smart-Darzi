@@ -26,6 +26,10 @@ class LoadingOrder extends OrderState {
   List<Object> get props => [];
 }
 
+class OrderFailure extends OrderState {
+  @override
+  List<Object> get props => [];
+}
 class OrdersByCustomerIdFetched extends OrderState {
   final List<Order> orders;
   const OrdersByCustomerIdFetched({required this.orders});

@@ -35,11 +35,14 @@ if(response.isSuccess){
 
   
   getOrdersByCustomerId(String customerId) async {
-    emit(LoadingOrder());
+    //emit(LoadingOrder());
 ApiResponse response = await _appRepository.getOrdersByCustomerId(customerId);
 if(response.isSuccess){
     
       emit(OrdersByCustomerIdFetched(orders: response.data ));
+    }
+    else{
+      emit(OrderFailure());
     }
   }
 }
