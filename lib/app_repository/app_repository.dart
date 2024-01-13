@@ -15,10 +15,12 @@ class AppRepository {
     try {
       final response = await _appService.registerCustomer(customer);
       apiResponse.isSuccess = true;
-    } on DioException {
+    } on DioException catch(e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = e.response?.statusMessage;
     } catch (e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -32,10 +34,12 @@ class AppRepository {
       print('my response');
       print(response);
       apiResponse.isSuccess = true;
-    } on DioException {
+    } on DioException catch(e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = e.response?.statusMessage;
     } catch (e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -53,10 +57,12 @@ class AppRepository {
 
       apiResponse.isSuccess = true;
       apiResponse.data = orders;
-    } on DioException {
+    } on DioException catch(e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = e.response?.statusMessage;
     } catch (e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -74,10 +80,12 @@ class AppRepository {
       print(customers);
       apiResponse.isSuccess = true;
       apiResponse.data = customers;
-    } on DioException {
+    } on DioException catch(e){
       apiResponse.isSuccess = false;
+      apiResponse.error = e.response?.statusMessage;
     } catch (e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -89,12 +97,15 @@ class AppRepository {
       apiResponse.isSuccess = true;
       apiResponse.successMessage = response.data['message'];
       print(response);
-    } on DioException {
+    } on DioException catch(e) {
       apiResponse.isSuccess = false;
-      apiResponse.error = 'Something went wrong!';
+     if(e.response!.statusCode == 400){
+      apiResponse.error = 'Invalid Username or Password';
+     }
+      
     } catch (e) {
       apiResponse.isSuccess = false;
-      apiResponse.error = 'Something went wrong!';
+     apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -107,12 +118,12 @@ class AppRepository {
       apiResponse.isSuccess = true;
       apiResponse.successMessage = response.data['message'];
       print(response);
-    } on DioException {
+    } on DioException catch (e){
       apiResponse.isSuccess = false;
-      apiResponse.error = 'Something went wrong!';
+      apiResponse.error = e.response?.statusMessage;
     } catch (e) {
       apiResponse.isSuccess = false;
-      apiResponse.error = 'Something went wrong!';
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -130,10 +141,14 @@ class AppRepository {
       Customer customer = Customer.fromJson(response.data);
       apiResponse.data = customer;
       }
-    } on DioException {
-      apiResponse.isSuccess = false;
-      apiResponse.error = 'Server Error while getting customer by phone!';
-    } catch (e) {
+    } on DioException catch (e){
+      
+      if(e.response?.statusCode == 404){
+        apiResponse.isSuccess = true;
+        apiResponse.error = 'User Not Found';
+      }
+      
+    }catch (e) {
       apiResponse.isSuccess = false;
       apiResponse.error = 'Client Error while getting customer by phone!';
     }
@@ -153,10 +168,12 @@ class AppRepository {
 
       apiResponse.isSuccess = true;
       apiResponse.data = orders;
-    } on DioException {
+    } on DioException catch(e) {
+      apiResponse.error = e.response?.statusMessage;
       apiResponse.isSuccess = false;
     } catch (e) {
       apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }
@@ -171,10 +188,13 @@ Future<ApiResponse> getCustomerSize(String customerId) async {
 print(size.toJson());
       apiResponse.isSuccess = true;
       apiResponse.data = size;
-    } on DioException {
+    } on DioException catch(e){
+      apiResponse.error = e.response?.statusMessage;
       apiResponse.isSuccess = false;
     } catch (e) {
+
       apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
     }
     return apiResponse;
   }

@@ -34,7 +34,7 @@ class Login extends StatelessWidget {
                     EdgeInsets.only(bottom: 30, left: 20, right: 20),
                 backgroundColor: Colors.white.withOpacity(0.8),
                 content: Text(
-                  "Something went wrong!",
+                  state.error,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: primaryColor, fontWeight: FontWeight.w600),
                 ),

@@ -142,7 +142,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         'Female /زنانہ'
                                       ],
                                       isDefault: false,
-                                      onValueChanged: (String) {},
+                                      onValueChanged: (Value) {
+                                        order.orderCategory = Value;
+                                      },
                                     ))
                               ],
                             ),
@@ -168,7 +170,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         'Trouser / ٹراؤزر'
                                       ],
                                       isDefault: false,
-                                      onValueChanged: (String) {},
+                                      onValueChanged: (Value) {
+                                        order.orderType = Value;
+                                      },
                                     ))
                               ],
                             ),

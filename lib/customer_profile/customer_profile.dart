@@ -44,7 +44,10 @@ class _CustomerProfileState extends State<CustomerProfile> {
                   child: BlocBuilder<CustomerCubit, CustomerState>(
                     builder: (context, state) {
                       if (state is CustomerFetchedByPhone) {
-                         customer = state.customer;
+                        if(state.available) {
+                          customer = state.customer!;
+                        }
+                        
                         
                       }
                       return  Column(

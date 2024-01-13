@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:smart_darzi/add_size/add_size.dart';
+import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import '../add_order/SaveOrderPage.dart';
 import '../app_theme/constants.dart';
 
 class PopUpMenu extends StatelessWidget {
-  const PopUpMenu({super.key, required this.customerId});
+  const PopUpMenu({super.key, required this.customerId, required this.customerPhone});
 final String customerId;
+final int customerPhone;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
@@ -25,10 +27,13 @@ final String customerId;
                   const SizedBox(
                     width: 8,
                   ),
-                  Text(
+                  TextButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerProfile(phoneNo: customerPhone),));
+                  }, child:  Text(
                     'Customer Profile',
                     style: Theme.of(context).textTheme.labelLarge,
-                  )
+                  ))
+                 
                 ],
               ),
               const Divider(

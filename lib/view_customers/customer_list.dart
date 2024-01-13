@@ -79,7 +79,7 @@ class CustomerList extends StatelessWidget {
                 ),
               )),
               DataCell(Text(
-                customers[i].id,
+                customers[i].id.substring(1,6),
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
@@ -103,7 +103,7 @@ class CustomerList extends StatelessWidget {
                       color: iconColor,
                     ),
                   ),
-                   PopUpMenu(customerId: customers[i].id,)
+                   PopUpMenu(customerId: customers[i].id, customerPhone: customers[i].phoneNumber,)
                 ],
               )),
             ]),

@@ -46,6 +46,10 @@ return response;
 Future<Response> login(String name, String password)async {
 
 Response response = await dio.post('$adminBaseUrl/login', data: {'email':name, 'password':password});
+if(response.statusCode == 400){
+  print('Invalid credentials');
+}
+
 print(response);
 return response;
 }
@@ -53,7 +57,7 @@ return response;
 Future<Response> saveSize(SizeModel size)async {
   print(size.toJson());
 
-Response response = await dio.patch('$customerBaseUrl/addSize', data: size.toJson());
+Response response = await dio.post('$customerBaseUrl/addSize', data: size.toJson());
 print(response);
 return response;
 }

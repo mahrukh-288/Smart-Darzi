@@ -27,6 +27,7 @@ class _AddSizeState extends State<AddSize> {
   @override
   void initState() {
     // TODO: implement initState
+    print(widget.customerId);
     sizeModel.customerId = widget.customerId;
   }
 

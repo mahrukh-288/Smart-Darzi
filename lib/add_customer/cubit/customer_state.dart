@@ -49,10 +49,11 @@ class SizeSaved extends CustomerState {
 }
 
 class CustomerFetchedByPhone extends CustomerState {
-  final Customer customer;
-  const CustomerFetchedByPhone({required this.customer});
+final bool available;
+   Customer? customer;
+   CustomerFetchedByPhone({required this.available, this.customer});
   @override
-  List<Object> get props => [customer];
+  List<Object> get props => [customer!];
 }
 
 class CustomerSizeFetched extends CustomerState {

@@ -68,7 +68,7 @@ class OrderList extends StatelessWidget {
             for(int i=0; i<orders.length; i++)
             DataRow(cells: [
               DataCell(Text(
-                orders[i].id,
+                orders[i].id.substring(1,6),
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
