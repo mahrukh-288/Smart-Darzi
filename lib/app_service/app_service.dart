@@ -9,7 +9,7 @@ class AppService {
 
   static const customerBaseUrl = 'http://35.153.55.88:3000/v1/user';
   static const orderBaseUrl = 'http://35.153.55.88:3000/v1/order';
-  static const adminBaseUrl = 'http://35.153.55.88:3000/v1/admin';
+  static const adminBaseUrl = 'http://tech.shahbaznawaz.com:3000/v1/admin';
   static const String getAllCustomersUrl = '/allCustomers';
 
   Future<Response> registerCustomer(Customer customer) async {
@@ -39,8 +39,9 @@ class AppService {
   }
 
   Future<Response> login(String name, String password) async {
-    Response response = await dio.post('$adminBaseUrl/login',
-        data: {'email': name, 'password': password});
+   
+    Response response = await dio.post('$adminBaseUrl/login', 
+        data: {'email': name, 'password': password}, );
 
     return response;
   }
