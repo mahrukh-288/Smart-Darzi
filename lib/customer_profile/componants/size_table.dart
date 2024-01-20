@@ -26,7 +26,8 @@ class SizeTable extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+          
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: size == null ? Text('Size not found', style: Theme.of(context).textTheme.headlineSmall,) : Column(
                 children: [
                   IntrinsicHeight(

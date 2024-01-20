@@ -75,57 +75,67 @@ class _CustomerProfileState extends State<CustomerProfile> {
                 child: SingleChildScrollView(
                   child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.sizeOf(context).width * 0.1,
+                          horizontal: MediaQuery.sizeOf(context).width*0.1,
                           vertical: 30),
-                      child: BlocBuilder<CustomerCubit, CustomerState>(
-                        builder: (context, state) {
-                          if(state is CustomerProfileFetched){
-                            profile = state.profile;
-                            return Column(
-                            children: [
-                              UserDetails(
-                                customer: profile.customer!,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              SizeTable(
-                                size: profile.size,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              OrderHistory(
-                                orders: profile.orders,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      fixedSize: const Size(350, 50),
-                                      backgroundColor: Colors.red[900]),
-                                  onPressed: () {
-                                    context
-                                        .read<CustomerCubit>()
-                                        .deleteCustomer(
-                                            widget.customer.phoneNumber);
-                                  },
-                                  child: Text(
-                                    'Delete Customer',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall,
-                                  ))
-                            ],
-                          );
-                          }
-                          return Container(
-                            alignment: Alignment.center,
-                            height: 100,
-                            width: 100,
-                            child: CircularProgressIndicator(color: primaryColor,));
-                        },
+                      child: Column(
+                        children: [
+                          Align(
+                          alignment: Alignment.topLeft,
+                          child: BackButton(
+                            color: primaryColor,
+                          ),
+                        ),
+                          BlocBuilder<CustomerCubit, CustomerState>(
+                            builder: (context, state) {
+                              if(state is CustomerProfileFetched){
+                                profile = state.profile;
+                                return Column(
+                                children: [
+                                  UserDetails(
+                                    customer: profile.customer!,
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  SizeTable(
+                                    size: profile.size,
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  OrderHistory(
+                                    orders: profile.orders,
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          fixedSize: const Size(350, 50),
+                                          backgroundColor: Colors.red[900]),
+                                      onPressed: () {
+                                        context
+                                            .read<CustomerCubit>()
+                                            .deleteCustomer(
+                                                widget.customer.phoneNumber);
+                                      },
+                                      child: Text(
+                                        'Delete Customer',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
+                                      ))
+                                ],
+                              );
+                              }
+                              return Container(
+                                alignment: Alignment.center,
+                                height: 100,
+                                width: 100,
+                                child: CircularProgressIndicator(color: primaryColor,));
+                            },
+                          ),
+                        ],
                       )),
                 ),
               ),

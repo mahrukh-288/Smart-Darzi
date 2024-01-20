@@ -30,7 +30,7 @@ class OrderHistory extends StatelessWidget {
             ),
           ),
          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child:orders.length == 0 ? Text('No orders yet', style: Theme.of(context).textTheme.headlineSmall,) : DataTable(
                   border: const TableBorder(
                       horizontalInside: BorderSide(color: borderColor)),
