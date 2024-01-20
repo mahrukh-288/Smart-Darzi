@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_darzi/add_size/add_size.dart';
 import 'package:smart_darzi/models/size.dart';
 
 import '../../add_customer/cubit/customer_cubit.dart';
 import '../../app_theme/constants.dart';
 
 class SizeTable extends StatelessWidget {
-  const SizeTable({super.key, required this.size});
-  
+  const SizeTable({super.key, required this.size, required this.customerId});
+  final String customerId;
  final  SizeModel?  size ;
 
   @override
@@ -124,17 +125,21 @@ class SizeTable extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 30,),
+                  
+                ],
+              )
+        ),
+        SizedBox(height: 30,),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(fixedSize: Size(150, 30)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customerId: customerId),));
+                      },
                       child: Text(
                         'Edit Size',
                         style: Theme.of(context).textTheme.labelLarge,
                       )),
-                ],
-              )
-        ),
+                      SizedBox(height: 30,),
       ]),
     );
   }
