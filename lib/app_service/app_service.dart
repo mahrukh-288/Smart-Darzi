@@ -7,9 +7,9 @@ import '../models/order.dart';
 class AppService {
   final dio = Dio();
 
-  static const customerBaseUrl = 'http://tech.shahbaznawaz.com/v1/user';
-  static const orderBaseUrl = 'http://tech.shahbaznawaz.com/v1/order';
-  static const adminBaseUrl = 'http://tech.shahbaznawaz.com/v1/admin';
+  static const customerBaseUrl = 'https://tech.shahbaznawaz.com/v1/user';
+  static const orderBaseUrl = 'https://tech.shahbaznawaz.com/v1/order';
+  static const adminBaseUrl = 'https://tech.shahbaznawaz.com/v1/admin';
   static const String getAllCustomersUrl = '/allCustomers';
 
   Future<Response> registerCustomer(Customer customer) async {
