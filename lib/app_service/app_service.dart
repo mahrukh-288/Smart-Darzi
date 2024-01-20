@@ -80,4 +80,11 @@ class AppService {
 
     return response;
   }
+
+   Future<Response> getCustomerProfile(String customerId) async {
+    Response response = await dio.get('$customerBaseUrl/customerProfile',
+        queryParameters: {'customerId': customerId});
+
+    return response;
+  }
 }

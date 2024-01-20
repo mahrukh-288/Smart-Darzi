@@ -32,6 +32,12 @@ class Failure extends CustomerState {
   List<Object> get props => [error];
 }
 
+class FailureInDeletingCustomer extends CustomerState {
+  final String error;
+  const FailureInDeletingCustomer({required this.error});
+  @override
+  List<Object> get props => [error];
+}
 class LoadingCustomer extends CustomerState {
   @override
   List<Object> get props => [];
@@ -73,4 +79,11 @@ class CustomerNotAvailable extends CustomerState {
 class CustomerDeleted extends CustomerState {
   @override
   List<Object> get props => [];
+}
+
+class CustomerProfileFetched extends CustomerState {
+  final CustomerProfileModel profile;
+  const CustomerProfileFetched({required this.profile});
+  @override
+  List<Object> get props => [profile];
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_darzi/add_customer/cubit/customer_cubit.dart';
 import 'package:smart_darzi/add_size/add_size.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import '../add_order/SaveOrderPage.dart';
@@ -7,10 +9,9 @@ import '../models/customer.dart';
 
 class PopUpMenu extends StatelessWidget {
   const PopUpMenu({super.key, required this.customer});
-final Customer customer;
+  final Customer customer;
   @override
   Widget build(BuildContext context) {
-    
     return PopupMenuButton<int>(
       icon: const Icon(
         Icons.menu,
@@ -28,13 +29,21 @@ final Customer customer;
                   const SizedBox(
                     width: 8,
                   ),
-                  TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerProfile(customer: customer,),));
-                  }, child:  Text(
-                    'Customer Profile',
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ))
-                 
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomerProfile(
+                                customer: customer,
+                              ),
+                            ));
+                      },
+                      child: Text(
+                        'Customer Profile',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ))
                 ],
               ),
               const Divider(
@@ -102,10 +111,13 @@ final Customer customer;
                   ),
                   TextButton(
                       onPressed: () {
+                        Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AddSize(customerId: customer.id,),
+                              builder: (context) => AddSize(
+                                customerId: customer.id,
+                              ),
                             ));
                       },
                       child: Text(
@@ -133,10 +145,13 @@ final Customer customer;
                   ),
                   TextButton(
                       onPressed: () {
+                        Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SaveOrderPage(customerId: customer.id,),
+                              builder: (context) => SaveOrderPage(
+                                customerId: customer.id,
+                              ),
                             ));
                       },
                       child: Text(
@@ -160,10 +175,17 @@ final Customer customer;
               const SizedBox(
                 width: 8,
               ),
-              Text(
-                'Delete Customer',
-                style: Theme.of(context).textTheme.labelLarge,
-              )
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    context
+                        .read<CustomerCubit>()
+                        .deleteCustomer(customer.phoneNumber);
+                  },
+                  child: Text(
+                    'Delete Customer',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ))
             ],
           ),
         ),

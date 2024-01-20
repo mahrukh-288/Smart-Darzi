@@ -8,11 +8,11 @@ import '../../app_theme/constants.dart';
 class SizeTable extends StatelessWidget {
   const SizeTable({super.key, required this.size});
   
- final  SizeModel  size ;
+ final  SizeModel?  size ;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Container(
       decoration: BoxDecoration(border: Border.all(color: borderColor)),
       child: Column(children: [
         Container(
@@ -27,7 +27,7 @@ class SizeTable extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-          child: Column(
+          child: size == null ? Text('Size not found', style: Theme.of(context).textTheme.headlineSmall,) : Column(
                 children: [
                   IntrinsicHeight(
                     child: Row(
@@ -37,26 +37,26 @@ class SizeTable extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Shir length : ${size.length}',
+                              'Shirt length : ${size?.length}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(height: 5),
                             Text(
-                              'Neck : ${size.neck}',
+                              'Neck : ${size?.neck}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Shoulder : ${size.shoulder}',
+                              'Shoulder : ${size?.shoulder}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Waist : ${size.waist}',
+                              'Waist : ${size?.waist}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -67,28 +67,28 @@ class SizeTable extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Chest : ${size.chest}',
+                              'Chest : ${size?.chest}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Daman : ${size.lap}',
+                              'Daman : ${size?.lap}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Arm Length : ${size.armLength}',
+                              'Arm Length : ${size?.armLength}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Arm Round : ${size.armRound}',
+                              'Arm Round : ${size?.armRound}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -101,21 +101,21 @@ class SizeTable extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Pent Length : ${size.lengthOfTrouser}',
+                              'Pent Length : ${size?.lengthOfTrouser}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Ankle Width : ${size.ankleWidth}',
+                              'Ankle Width : ${size?.ankleWidth}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Hips : ${size.hips}',
+                              'Hips : ${size?.hips}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],

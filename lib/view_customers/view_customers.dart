@@ -28,65 +28,89 @@ class _ViewCustomersState extends State<ViewCustomers> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: primaryColor.withOpacity(0.3),
-      body: Flex(
-          direction: ResponsiveBreakpoints.of(context).largerThan(TABLET)
-              ? Axis.horizontal
-              : Axis.vertical,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const AppDrawer(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: BackButton(
-                          color: primaryColor,
+    return BlocListener<CustomerCubit, CustomerState>(
+      listener: (context, state) {
+        if(state is CustomerDeleted){
+          context.read<CustomerCubit>().getAllCustomers();
+        }
+        if(state is FailureInDeletingCustomer){
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                actionsPadding:
+                    EdgeInsets.only(bottom: 30, left: 20, right: 20),
+                backgroundColor: Colors.white.withOpacity(0.8),
+                content: Text(
+                  state.error,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: primaryColor, fontWeight: FontWeight.w600),
+                ),
+              );
+            },
+          );
+        
+        }
+      },
+      child: Scaffold(
+        backgroundColor: primaryColor.withOpacity(0.3),
+        body: Flex(
+            direction: ResponsiveBreakpoints.of(context).largerThan(TABLET)
+                ? Axis.horizontal
+                : Axis.vertical,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const AppDrawer(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 30),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: BackButton(
+                            color: primaryColor,
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [SearchCustomerBar(), NotificationBtn()],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Active Customer List',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      BlocBuilder<CustomerCubit, CustomerState>(
-                        builder: (context, state) {
-                          if(state is LoadingCustomer){
-                            return CircularProgressIndicator(color: primaryColor,);
-                          }
-                          else if(state is AllCustomersFetched){
-                          customers = state.customers;
-                          print('cubit ');
-                            print(customers);
-                          }
-                          return CustomerList(
-                            customers: customers,
-                            
-                          );
-                          
-                        },
-                      )
-                    ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [SearchCustomerBar(), NotificationBtn()],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Active Customer List',
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        BlocBuilder<CustomerCubit, CustomerState>(
+                          builder: (context, state) {
+                            if (state is LoadingCustomer) {
+                              return CircularProgressIndicator(
+                                color: primaryColor,
+                              );
+                            } else if (state is AllCustomersFetched) {
+                              customers = state.customers;
+                              print('cubit ');
+                              print(customers);
+                            }
+                            return CustomerList(
+                              customers: customers,
+                            );
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ]),
+            ]),
+      ),
     );
   }
 }

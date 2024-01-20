@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import 'package:smart_darzi/models/api_response.dart';
 import 'package:smart_darzi/models/size.dart';
 
 import '../app_service/app_service.dart';
 import '../models/customer.dart';
+import '../models/customer_profile.dart';
 import '../models/order.dart';
 
 class AppRepository {
@@ -125,13 +127,10 @@ class AppRepository {
       final response = await _appService.getCustomerByPhone(phoneNo);
 
       apiResponse.isSuccess = true;
-      if (response.data == "Data Not Found") {
-        apiResponse.data = false;
-      }
-      {
+      
         Customer customer = Customer.fromJson(response.data);
         apiResponse.data = customer;
-      }
+      
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
         apiResponse.isSuccess = true;
@@ -192,6 +191,44 @@ class AppRepository {
     } on DioException catch (e) {
       apiResponse.isSuccess = false;
       apiResponse.error = e.response?.statusMessage;
+    } catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
+    }
+    return apiResponse;
+  }
+
+  Future<ApiResponse> getCustomerProfile(String customerId) async {
+    ApiResponse apiResponse = ApiResponse();
+   
+    try {
+      SizeModel? size;
+      List<Order> orders = [];
+      final response = await _appService.getCustomerProfile(customerId);
+      print(response);
+       print(response.data['personalDetails']);
+      Customer customer = Customer.fromJson(response.data['personalDetails']);
+      print(' customer r${customer.name}');
+        print(response.data['sizeDetails']);
+        if(response.data['sizeDetails'] != null) {
+           size = SizeModel.fromJson(response.data['sizeDetails'] ) ;
+        }
+        else{size = null;}
+     
+        if(response.data['orderDetails'] != []) {
+           orders = List<Order>.from(
+          response.data['ordersDetails'].map((e) => Order.fromJson(e)).toList());
+        }
+        
+CustomerProfileModel  profile = CustomerProfileModel();
+profile.customer = customer;
+profile.size = size;
+profile.orders =  orders;
+      apiResponse.isSuccess = true;
+      apiResponse.data = profile;
+    } on DioException catch (e) {
+      apiResponse.error = e.response?.statusMessage;
+      apiResponse.isSuccess = false;
     } catch (e) {
       apiResponse.isSuccess = false;
       apiResponse.error = 'Client error!';

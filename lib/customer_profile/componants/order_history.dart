@@ -8,12 +8,15 @@ import '../../models/order.dart';
 class OrderHistory extends StatelessWidget {
   const OrderHistory({super.key, required this.orders});
   
-  final List<Order> orders;
+  final List<Order> orders ;
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    
+  
+    return  
+    Container(
         decoration: BoxDecoration(border: Border.all(color: borderColor)),
         child: Column(children: [
           Container(
@@ -26,9 +29,9 @@ class OrderHistory extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-          Padding(
+         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-            child: DataTable(
+            child:orders.length == 0 ? Text('No orders yet', style: Theme.of(context).textTheme.headlineSmall,) : DataTable(
                   border: const TableBorder(
                       horizontalInside: BorderSide(color: borderColor)),
                   columnSpacing: 30,

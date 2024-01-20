@@ -4,6 +4,7 @@ import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
 import 'package:smart_darzi/app_repository/app_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
+import 'package:smart_darzi/models/customer_profile.dart';
 import '../../models/api_response.dart';
 import '../../models/customer.dart';
 import '../../models/size.dart';
@@ -86,6 +87,19 @@ class CustomerCubit extends Cubit<CustomerState> {
     if (response.isSuccess) {
       emit(CustomerDeleted());
     } else {
+      emit(FailureInDeletingCustomer(error: response.error!));
+    }
+  }
+
+    getCustomerProfile(String customerId) async {
+      print('customer id : $customerId');
+    //emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getCustomerProfile(customerId);
+    print('response is ${response.data}');
+    if (response.isSuccess) {
+      emit(CustomerProfileFetched(profile: response.data));
+    }
+    else {
       emit(Failure(error: response.error!));
     }
   }

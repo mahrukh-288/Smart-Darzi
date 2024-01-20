@@ -113,9 +113,7 @@ class CustomerForm extends StatelessWidget {
                                                     int.parse(_phoneController.text));
                                           },
                                           child: Text(
-                                            !available
-                                                ? ''
-                                                : 'Check Availability',
+                                           'Check Availability',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelMedium
