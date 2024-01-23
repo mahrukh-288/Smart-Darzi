@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,14 +52,14 @@ class Login extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Lets get started',
+                context.tr('Lets get started'),
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               SizedBox(
                 height: 5,
               ),
               Text(
-                'Sign up or login to become Smart',
+                context.tr('Sign up or login to become Smart'),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Colors.white.withOpacity(0.5),
                     ),
@@ -72,7 +73,7 @@ class Login extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Username',
+                        context.tr('Username'),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       SizedBox(
@@ -82,7 +83,7 @@ class Login extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'This field is required!';
+                            return context.tr('This field is required!');
                           }
                           return null;
                         },
@@ -92,7 +93,7 @@ class Login extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Password',
+                        context.tr('Password'),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       SizedBox(
@@ -102,7 +103,7 @@ class Login extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'This field is required!';
+                            return context.tr('This field is required!');
                           }
                           return null;
                         },
@@ -131,7 +132,7 @@ class Login extends StatelessWidget {
                                 width: 3,
                               ),
                               Text(
-                                'Remember',
+                                context.tr('Remember'),
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ],
@@ -140,7 +141,7 @@ class Login extends StatelessWidget {
                               style: TextButton.styleFrom(),
                               onPressed: () {},
                               child: Text(
-                                'Forgot Password',
+                                context.tr('Forgot Password'),
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -167,7 +168,7 @@ class Login extends StatelessWidget {
                                   }
                                 },
                                 child: Text(
-                                  'Login',
+                                  context.tr('Login'),
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                 )),
@@ -192,7 +193,7 @@ class Login extends StatelessWidget {
           actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
           backgroundColor: Colors.white.withOpacity(0.8),
           content: Text(
-            "Logged In Successfully!",
+            context.tr("Logged In Successfully!"),
             style: Theme.of(context)
                 .textTheme
                 .labelLarge
