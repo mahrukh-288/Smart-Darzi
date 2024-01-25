@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class NotificationBtn extends StatelessWidget {
@@ -16,7 +17,7 @@ class NotificationBtn extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10))),
                             onPressed: () {},
                             child: Text(
-                              'Notifications',
+                              context.tr('Notifications'),
                               style: Theme.of(context).textTheme.labelLarge,
                             )),
                       );

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,7 @@ import '../Common Widgets/notification_btn.dart';
 import '../add_customer/addCustomerPage.dart';
 import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 import '../view_customers/view_customers.dart';
 import 'componants/embroidoryForm.dart';
 import 'componants/order_details_form.dart';
@@ -65,9 +67,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
                       Text(
-                        'Order Details/آرڈر کی تفصیلات',
+                      LocaleKeys.OrderDetails,
                         style: Theme.of(context).textTheme.headlineLarge,
-                      ),
+                      ).tr(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -87,9 +89,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Customer Name/کسٹمر کا نام',
+                                 LocaleKeys.CustomerName,
                                   style: Theme.of(context).textTheme.labelLarge,
-                                ),
+                                ).tr(),
                                 const SizedBox(
                                   height: 5,
                                 ),
@@ -107,7 +109,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Customer Id/کسٹمر آئی ڈی',
+                                  LocaleKeys.CustomerId.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -127,7 +129,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Order Category/ آرڈر کی کیٹگری',
+                                     LocaleKeys.OrderCategory.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -138,8 +140,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 500,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                        'Male /مردانہ',
-                                        'Female /زنانہ'
+                                           LocaleKeys.Male.tr(),
+                                           LocaleKeys.Female.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (Value) {
@@ -152,7 +154,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Order Type/ آرڈر کی قسم',
+                                     LocaleKeys.OrderType.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -162,12 +164,12 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     height: 40,
                                     width: 500,
                                     child: CustomDropdownSearch(
-                                      dropdownItems: const [
-                                        'Shalwar Qamees /شلوار قمیص',
-                                        'Shirt /شرٹ',
-                                        'Kurta Shalwar /کُرتا پاجامہ',
-                                        'Waist Coat / ویس کوٹ',
-                                        'Trouser / ٹراؤزر'
+                                      dropdownItems:  [
+                                          LocaleKeys.ShalwarQamees.tr(),
+                                           LocaleKeys.Shirt.tr(),
+                                         LocaleKeys.KurtaShalwar.tr(),
+                                          LocaleKeys.WaistCoat.tr(),
+                                          LocaleKeys.Trouser.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (Value) {
@@ -183,7 +185,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
                       Text(
-                        'Dress Styling / پرہیز',
+                          LocaleKeys.DressStyling.tr(),
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
@@ -205,7 +207,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Cuff Styling/کف ',
+                                    LocaleKeys.CuffStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -216,8 +218,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                        'Cuff / کف والے بازو',
-                                        'Simple /سادہ بازو'
+                                           LocaleKeys.Cuff.tr(),
+                                          LocaleKeys.Simple.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -230,7 +232,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Neck Styling/گلا',
+                                    LocaleKeys.NeckStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -241,8 +243,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                        'Collar /کالر',
-                                        'Ban /بین '
+                                           LocaleKeys.Collar.tr(),
+                                              LocaleKeys.Ban.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -255,7 +257,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Button Styling/ بٹن',
+                                 LocaleKeys.ButtonStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -266,9 +268,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                        'Fancy /فینسی بٹن',
-                                        'Simple /سادہ بٹن ',
-                                        'Metallic /میٹل بٹن'
+                                          LocaleKeys.Fancy.tr(),
+                                             LocaleKeys.Simple.tr(),
+                                                LocaleKeys.Metallic.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -281,7 +283,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Pocket Styling/جیب',
+                                  LocaleKeys.PocketStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -292,9 +294,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: const [
-                                        'Front Pocket / سامنے والی جیب',
-                                        '2 Side Pockets / سائڈ جیب ',
-                                        'Trouser Pocket / ٹراؤزر جیب ',
+                                        'FrontPocket / سامنے والی جیب',
+                                        '2 SidePockets / سائڈ جیب ',
+                                        'TrouserPocket / ٹراؤزر جیب ',
                                         ' 1 Front Pocket+2Side+1 Shalwar',
                                         ' 0 Front Pocket+0 Side+0Shalwar',
                                         ' 0 Front + 2 Side+ 1 Trouser Pocket',
@@ -313,7 +315,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Elastic/لاسٹک',
+                                  LocaleKeys.Elastic.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -324,8 +326,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                        'Elastic / لاسٹک',
-                                        'Simple/نالا'
+                                           LocaleKeys.Elastic.tr(),
+                                              LocaleKeys.Simple.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -338,7 +340,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Embroidery / کڑھائی',
+                                    LocaleKeys.Embroidery.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -349,8 +351,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                        'No / کوئی نہیں',
-                                        'Yes / جی ہاں'
+                                          LocaleKeys.Yes.tr(),
+                                             LocaleKeys.No.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -366,7 +368,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
                       Text(
-                        'Embroidary Details/کڑہائی کی تفصیلات',
+                           LocaleKeys.EmbroidaryDetails.tr(),
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
@@ -393,7 +395,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Embroidary Style/کڑہائی کا سٹائل',
+                                           LocaleKeys.EmbroidaryStyle.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -406,10 +408,12 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                           width: 430,
                                           child: CustomDropdownSearch(
                                             dropdownItems: [
-                                              'Single Salai / سنگل سلائی',
-                                              'Double Salai /ڈبل سلائی',
-                                              'Raishmi   Single/ریشمی سنگل',
-                                              'Raishmi   Double/ریشمی ڈبل'
+                                              
+                                                 LocaleKeys.SingleSalai.tr(),
+                                                    LocaleKeys.DoubleSalai.tr()
+                                                    ,
+                                                       LocaleKeys.RaishmiSingle.tr(),
+                                                          LocaleKeys.RaishmiDouble.tr()
                                             ],
                                             isDefault: false,
                                             onValueChanged: (val) {
@@ -426,7 +430,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Book Number/کتاب کا نمبر ',
+                                         LocaleKeys.BookNumber.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -454,7 +458,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Design Number/ ڈیزائن نمبر',
+                                          LocaleKeys.DesignNumber.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -535,7 +539,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                 context.read<OrderCubit>().addOrder(order);
                               },
                               child: Text(
-                                'Save Order/ آرڈر کو محفوظ کریں',
+                                   LocaleKeys.saveOrder.tr(),
                                 style:
                                     Theme.of(context).textTheme.headlineSmall,
                               ));
@@ -557,7 +561,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-        "Order Saved Successfully!",
+           LocaleKeys.savedSuccessfully.tr(),
         style: Theme.of(context)
             .textTheme
             .labelLarge
@@ -579,7 +583,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                   ));
             },
             child: Text(
-              'Main Page',
+                 LocaleKeys.goToHome.tr(),
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -603,7 +607,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ),
           child: Text(
-            'Customer View',
+               LocaleKeys.CustomerView.tr(),
             style: Theme.of(context).textTheme.labelLarge,
           ),
         )

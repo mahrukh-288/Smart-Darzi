@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -9,6 +10,7 @@ import 'package:smart_darzi/Common%20Widgets/search_customer_bar.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
 
+import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 import '../view_customers/view_customers.dart';
 import '../add_size/sizing.dart';
@@ -81,9 +83,9 @@ class CustomerForm extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            'Customer Data/ کسٹمر ڈیٹا',
+                            LocaleKeys.CustomerData,
                             style: Theme.of(context).textTheme.headlineLarge,
-                          ),
+                          ).tr(),
                           const SizedBox(
                             height: 20,
                           ),
@@ -103,7 +105,7 @@ class CustomerForm extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomerFormField(
-                                          label: 'Phone # /فون نمبر',
+                                          label: LocaleKeys.Phone.tr(),
                                           controller: _phoneController),
                                       TextButton(
                                           onPressed: () {
@@ -113,13 +115,13 @@ class CustomerForm extends StatelessWidget {
                                                     int.parse(_phoneController.text));
                                           },
                                           child: Text(
-                                           'Check Availability',
+                                           LocaleKeys.CheckAvailability,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelMedium
                                                 ?.copyWith(
                                                     color: Colors.red[900]),
-                                          ))
+                                          ).tr())
                                     ],
                                   ),
                                   if (!available)
@@ -129,14 +131,14 @@ class CustomerForm extends StatelessWidget {
                                           height: 20,
                                         ),
                                         CustomerFormField(
-                                            label: ' Name / نام',
+                                            label: LocaleKeys.Name.tr(),
                                             controller: _nameController),
                                         SizedBox(
                                           height: 20,
                                         ),
                                         CustomerFormField(
                                           label:
-                                              'Family Nme / Nick Name/ خاندان کا نام/ مشہور نام',
+                                              LocaleKeys.FamilyName.tr(),
                                           controller: _familyController,
                                         ),
                                       ],
@@ -166,11 +168,11 @@ class CustomerForm extends StatelessWidget {
                                           .registerCustomer(customer);
                                     },
                                     child: Text(
-                                      'Add Customer/ کسٹمر کا اندراج کريں',
+                                    LocaleKeys.AddCustomer,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall,
-                                    ));
+                                    ).tr());
                               } else {
                                 return SizedBox.shrink();
                               }
@@ -242,7 +244,7 @@ class CustomerForm extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ),
           child: Text(
-            'Customer Profile',
+            'CustomerProfile',
             style: Theme.of(context).textTheme.labelLarge,
           ),
         )

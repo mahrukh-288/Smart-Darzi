@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
@@ -6,6 +7,7 @@ import 'package:smart_darzi/view_orders/viewOrdersPage.dart';
 
 import '../add_customer/addCustomerPage.dart';
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -30,32 +32,32 @@ class AppDrawer extends StatelessWidget {
          const SizedBox(
           height: 20,
         ),
-        drawerItem(context, 'images/home.png', 'Home'),
+        drawerItem(context, 'images/home.png', LocaleKeys.Home.tr()),
         const SizedBox(
           height: 20,
         ),
-        drawerItem(context, 'images/customers.png', 'Customers'),
+        drawerItem(context, 'images/customers.png', LocaleKeys.CustomerView.tr()),
         const SizedBox(
           height: 20,
         ),
-        drawerItem(context, 'images/workers.png', 'Workers'),
+        drawerItem(context, 'images/workers.png', LocaleKeys.Workers.tr()),
         const SizedBox(
           height: 20,
         ),
-        drawerItem(context, 'images/workers.png', 'Orders'),
+        drawerItem(context, 'images/workers.png', LocaleKeys.Orders.tr()),
         const SizedBox(
           height: 20,
         ),
-        drawerItem(context, 'images/settings.png', 'Profile Settings'),
+        drawerItem(context, 'images/settings.png', LocaleKeys.ProfileSettings.tr()),
         const SizedBox(
           height: 20,
         ),
-        drawerItem(context, 'images/logout.png', 'Logout')
+        drawerItem(context, 'images/logout.png', LocaleKeys.Logout.tr())
       ]),
     );
   }
 
-  Widget drawerItem(BuildContext context, icon, String label) {
+  Widget drawerItem(BuildContext context, icon, String drawerItemText) {
     return Row(
       children: [
         Image.asset(
@@ -68,21 +70,21 @@ class AppDrawer extends StatelessWidget {
         ),
         InkWell(
             onTap: () {
-              if(label == 'Home') {
+              if(drawerItemText == LocaleKeys.Home.tr()) {
                 Navigator.push(context,MaterialPageRoute(builder: (context) => CustomerForm(),));
               }
-              else if(label == 'Customers')
+              else if(drawerItemText == LocaleKeys.CustomerView.tr())
               {
                 Navigator.push(context,MaterialPageRoute(builder: (context) => ViewCustomers(),));
               }
-              else if(label == 'Orders'){
+              else if(drawerItemText == LocaleKeys.Orders.tr()){
                  Navigator.push(context,MaterialPageRoute(builder: (context) => ViewOrdersPage(),));
               }
              
 
             },
             child: Text(
-              label,
+              drawerItemText,
               style: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
                   ? Theme.of(context).textTheme.labelLarge
                   : Theme.of(context).textTheme.labelSmall,
