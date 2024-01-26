@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -8,6 +9,7 @@ import 'package:smart_darzi/add_customer/cubit/customer_cubit.dart';
 import 'package:smart_darzi/view_customers/customer_list.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 
+import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 
 class ViewCustomers extends StatefulWidget {
@@ -39,7 +41,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
             builder: (BuildContext context) {
               return AlertDialog(
                 actionsPadding:
-                    EdgeInsets.only(bottom: 30, left: 20, right: 20),
+                    const EdgeInsets.only(bottom: 30, left: 20, right: 20),
                 backgroundColor: Colors.white.withOpacity(0.8),
                 content: Text(
                   state.error,
@@ -68,13 +70,13 @@ class _ViewCustomersState extends State<ViewCustomers> {
                         horizontal: 20, vertical: 30),
                     child: Column(
                       children: [
-                        Align(
+                        const Align(
                           alignment: Alignment.topLeft,
                           child: BackButton(
                             color: primaryColor,
                           ),
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [SearchCustomerBar(), NotificationBtn()],
                         ),
@@ -82,7 +84,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
                           height: 20,
                         ),
                         Text(
-                          'Active Customer List',
+                          LocaleKeys.customerList.tr(),
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         const SizedBox(
@@ -91,7 +93,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
                         BlocBuilder<CustomerCubit, CustomerState>(
                           builder: (context, state) {
                             if (state is LoadingCustomer) {
-                              return CircularProgressIndicator(
+                              return const CircularProgressIndicator(
                                 color: primaryColor,
                               );
                             } else if (state is AllCustomersFetched) {
@@ -99,7 +101,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
                               print('cubit ');
                               print(customers);
                             }
-                            return CustomerList(
+                            return   CustomerList(
                               customers: customers,
                             );
                           },

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -8,13 +9,15 @@ import '../Common Widgets/customAppBar.dart';
 import '../add_customer/addCustomerPage.dart';
 import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 import '../view_customers/view_customers.dart';
 import 'sizing.dart';
 import 'sizing_dropdown.dart';
 
 class AddSize extends StatefulWidget {
-   AddSize({super.key, required this.customerId});
+   AddSize({super.key, required this.customerId, required this.phoneNo});
 final String customerId;
+final int phoneNo;
 
   @override
   State<AddSize> createState() => _AddSizeState();
@@ -29,6 +32,7 @@ class _AddSizeState extends State<AddSize> {
     // TODO: implement initState
     print(widget.customerId);
     sizeModel.customerId = widget.customerId;
+    context.read<CustomerCubit>().getCustomerByPhone(widget.phoneNo);
   }
 
   @override
@@ -60,7 +64,7 @@ class _AddSizeState extends State<AddSize> {
                         height: 20,
                       ),
                       Text(
-                        'Sizing / ماپ',
+                        LocaleKeys.Sizing.tr(),
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
@@ -81,7 +85,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Length of Shirt /قمیص کی لمبائی',
+          LocaleKeys.LengthofShirt.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -100,7 +104,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Shoulder /کندھے/تیرا',
+          LocaleKeys.Shoulder.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -119,7 +123,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Chest /چھاتی',
+          LocaleKeys.Chest.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -138,7 +142,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Neck / گلا',
+         LocaleKeys.Neck.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -157,7 +161,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Arm Length /بازو کی لمبائی',
+          LocaleKeys.ArmLength.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -176,7 +180,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Arm Round/بازو کی گولائی',
+          LocaleKeys.ArmRound.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -195,7 +199,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Waist/Fitting/کمر',
+          LocaleKeys.Waist.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -214,7 +218,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Lap/Daman/دامن/ گھیرا',
+          LocaleKeys.Daman.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -233,7 +237,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-         'Length of Pant /پتلون یا شلوار کی لمبائی',
+         LocaleKeys.LengthofPant.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -252,7 +256,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Ankle Width/ پانچہ',
+          LocaleKeys.AnkleWidth.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -271,7 +275,7 @@ class _AddSizeState extends State<AddSize> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Hips/ کولہے',
+          LocaleKeys.Hips.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(
@@ -354,7 +358,7 @@ class _AddSizeState extends State<AddSize> {
                               //       )
                               //     : 
                                   Text(
-                                      'Save Size/ ماپ محفوظ کریں',
+                                      LocaleKeys.SaveSize.tr(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall

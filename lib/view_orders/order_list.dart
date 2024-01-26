@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 import '../models/order.dart';
 
 class OrderList extends StatelessWidget {
@@ -15,7 +17,7 @@ class OrderList extends StatelessWidget {
             border: Border.all(color: borderColor),
             borderRadius: BorderRadius.circular(5),
             color: primaryColor.withOpacity(0.6)),
-        child: DataTable(
+        child:orders.length == 0 ? Text(LocaleKeys.noDataFound.tr(), style: Theme.of(context).textTheme.headlineSmall,): DataTable(
           border: const TableBorder(
               horizontalInside: BorderSide(color: borderColor)),
           columnSpacing: 80,
@@ -23,43 +25,43 @@ class OrderList extends StatelessWidget {
           columns: [
             DataColumn(
               label: Text(
-                'Order Id',
+                LocaleKeys.OrderId.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Customer Name',
+                LocaleKeys.CustomerName.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Phone No',
+                LocaleKeys.Phone.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Order Category',
+                LocaleKeys.OrderCategory.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Order Type',
+                LocaleKeys.OrderType.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Status',
+                LocaleKeys.Status.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Action',
+                LocaleKeys.Action.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),

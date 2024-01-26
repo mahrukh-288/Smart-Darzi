@@ -25,8 +25,10 @@ class CustomerForm extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _familyController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
 
   bool available = true;
+  final _formKey = GlobalKey<FormState>();
 
   bool _addOrder = false;
 
@@ -36,9 +38,12 @@ class CustomerForm extends StatelessWidget {
       listener: (ctx, state) {
         if (state is CustomerRegistered) {
           
-          context.read<CustomerCubit>().getCustomerByPhone(int.parse(_phoneController.text));
+          context
+              .read<CustomerCubit>()
+              .getCustomerByPhone(int.parse(_phoneController.text));
+              
         } else if (state is CustomerFetchedByPhone) {
-          customerSavedDialog(context, state.customer );
+          customerSavedDialog(context, state.customer);
         } else if (state is Failure) {
           showDialog(
             context: context,
@@ -73,7 +78,7 @@ class CustomerForm extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: BlocBuilder<CustomerCubit, CustomerState>(
                     builder: (context, state) {
-                      if(state is CustomerNotAvailable){
+                      if (state is CustomerNotAvailable) {
                         available = false;
                       }
                       return Column(
@@ -98,52 +103,157 @@ class CustomerForm extends StatelessWidget {
                                   border: Border.all(color: borderColor),
                                   borderRadius: BorderRadius.circular(5),
                                   color: primaryColor.withOpacity(0.6)),
-                              child: Column(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomerFormField(
-                                          label: LocaleKeys.Phone.tr(),
-                                          controller: _phoneController),
-                                      TextButton(
-                                          onPressed: () {
-                                            context
-                                                .read<CustomerCubit>()
-                                                .getCustomerByPhone(
-                                                    int.parse(_phoneController.text));
-                                          },
-                                          child: Text(
-                                           LocaleKeys.CheckAvailability,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium
-                                                ?.copyWith(
-                                                    color: Colors.red[900]),
-                                          ).tr())
-                                    ],
-                                  ),
-                                  if (!available)
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(
-                                          height: 20,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              LocaleKeys.Phone.tr(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge,
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            SizedBox(
+                                              height: 40,
+                                              width: 500,
+                                              child: TextFormField(
+                                                validator: (value) =>
+                                                    _validate(value),
+                                                cursorColor: borderColor,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                                controller: _phoneController,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        CustomerFormField(
-                                            label: LocaleKeys.Name.tr(),
-                                            controller: _nameController),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        CustomerFormField(
-                                          label:
-                                              LocaleKeys.FamilyName.tr(),
-                                          controller: _familyController,
-                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              context
+                                                  .read<CustomerCubit>()
+                                                  .getCustomerByPhone(int.parse(
+                                                      _phoneController.text));
+                                            },
+                                            child: Text(
+                                              LocaleKeys.CheckAvailability,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      color: Colors.red[900]),
+                                            ).tr())
                                       ],
                                     ),
-                                ],
+                                    if (!available)
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                LocaleKeys.Name.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 500,
+                                                child: TextFormField(
+                                                  validator: (value) =>
+                                                      _validate(value),
+                                                  cursorColor: borderColor,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                  controller: _nameController,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                LocaleKeys.CustomerId.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 500,
+                                                child: TextFormField(
+                                                  validator: (value) =>
+                                                      _validate(value),
+                                                  cursorColor: borderColor,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                  controller: _idController,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                LocaleKeys.FamilyName.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 500,
+                                                child: TextFormField(
+                                                  cursorColor: borderColor,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                  controller: _familyController,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                  ],
+                                ),
                               )),
                           const SizedBox(
                             height: 20,
@@ -157,18 +267,23 @@ class CustomerForm extends StatelessWidget {
                               if (!available) {
                                 return ElevatedButton(
                                     onPressed: () {
-                                      Customer customer = Customer(
-                                          );
-                                          customer.name = _nameController.text;
-                                         customer.phoneNumber=
-                                              int.parse(_phoneController.text);
-                                          customer.familyName = _familyController.text;
+                                      if (_formKey.currentState!.validate()) {
+                                      Customer customer = Customer();
+                                      customer.cid =
+                                          int.parse(_idController.text);
+                                      customer.name = _nameController.text;
+                                      customer.phoneNumber =
+                                          int.parse(_phoneController.text);
+                                          if(_familyController.text.isNotEmpty) {
+                                            customer.familyName =
+                                          _familyController.text;
+                                          }
                                       context
                                           .read<CustomerCubit>()
                                           .registerCustomer(customer);
-                                    },
+                                     } },
                                     child: Text(
-                                    LocaleKeys.AddCustomer,
+                                      LocaleKeys.AddCustomer,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall,
@@ -196,7 +311,7 @@ class CustomerForm extends StatelessWidget {
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-        "Success!",
+        LocaleKeys.savedSuccessfully.tr(),
         style: Theme.of(context)
             .textTheme
             .labelLarge
@@ -210,15 +325,15 @@ class CustomerForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5)),
                 side: const BorderSide(color: primaryColor)),
             onPressed: () {
-             // Navigator.pop(context);
+              // Navigator.pop(context);
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CustomerForm(),
+                    builder: (context) => ViewCustomers(),
                   ));
             },
             child: Text(
-              'Main Page',
+              LocaleKeys.CustomerView.tr(),
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -244,7 +359,7 @@ class CustomerForm extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ),
           child: Text(
-            'CustomerProfile',
+            LocaleKeys.CustomerProfile.tr(),
             style: Theme.of(context).textTheme.labelLarge,
           ),
         )
@@ -258,5 +373,12 @@ class CustomerForm extends StatelessWidget {
         return alert;
       },
     );
+  }
+
+  _validate(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.fieldRequired.tr();
+    }
+    return null;
   }
 }

@@ -34,7 +34,7 @@ class AppService {
 
   Future<Response> getAllCustomers() async {
     Response response = await dio.get('$customerBaseUrl/allCustomers');
-
+print(response);
     return response;
   }
 

@@ -15,10 +15,7 @@ class CustomDropdownSearch extends StatelessWidget {
     return DropdownSearch(
     
       popupProps: PopupProps.menu(
-          title: Text(
-            'Please Select',
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
+        
           fit: FlexFit.loose,
           itemBuilder: (context, item, isSelected) {
             return Padding(

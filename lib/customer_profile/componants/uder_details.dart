@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
 
+import '../../generated/locale_keys.g.dart';
 import '../../models/customer.dart';
 
 class UserDetails extends StatelessWidget {
@@ -52,7 +54,7 @@ final Customer customer;
                       width: 10,
                     ),
                     Text(
-                      customer.familyName,
+                      customer.familyName == null ? 'family name not found' : customer.familyName!,
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                   ],
@@ -93,7 +95,7 @@ final Customer customer;
             style: ElevatedButton.styleFrom(fixedSize: Size(150, 40)),
             onPressed: () {},
             child: Text(
-              'Edit',
+              LocaleKeys.EditCustomer.tr(),
               style: Theme.of(context).textTheme.labelLarge,
             ))
       ],

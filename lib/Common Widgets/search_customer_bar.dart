@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 
 class SearchCustomerBar extends StatelessWidget {
   const SearchCustomerBar({super.key});
@@ -32,7 +34,7 @@ class SearchCustomerBar extends StatelessWidget {
                   Icons.search,
                   color: iconColor,
                 ),
-                hintText: 'Search Customer here...',
+                hintText: LocaleKeys.search.tr(),
                 hintStyle: Theme.of(context).textTheme.labelLarge),
           ),
         ),
@@ -56,7 +58,7 @@ class SearchCustomerBar extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              'Filter By',
+                              LocaleKeys.FilterBy.tr(),
                               style: Theme.of(context).textTheme.labelLarge,
                             )
                           ],

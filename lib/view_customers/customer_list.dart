@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_darzi/Common%20Widgets/pop_up_menu.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
+import 'package:smart_darzi/generated/locale_keys.g.dart';
 
 import '../models/customer.dart';
 
@@ -20,7 +22,7 @@ class CustomerList extends StatelessWidget {
             border: Border.all(color: borderColor),
             borderRadius: BorderRadius.circular(5),
             color: primaryColor.withOpacity(0.6)),
-        child: DataTable(
+        child:customers.length == 0 ? Text(LocaleKeys.noDataFound.tr(), style: Theme.of(context).textTheme.headlineSmall,): DataTable(
           border: const TableBorder(
               horizontalInside: BorderSide(color: borderColor)),
           columnSpacing: 100,
@@ -28,37 +30,37 @@ class CustomerList extends StatelessWidget {
           columns: [
             DataColumn(
               label: Text(
-                'Picture',
+                LocaleKeys.Picture.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'ID #',
+                LocaleKeys.CustomerId.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Name',
+                LocaleKeys.Name.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Phone No.',
+                LocaleKeys.Phone.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Family Name',
+               LocaleKeys.FamilyName.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             DataColumn(
               label: Text(
-                'Action',
+                LocaleKeys.Action.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
@@ -79,7 +81,7 @@ class CustomerList extends StatelessWidget {
                 ),
               )),
               DataCell(Text(
-                customers[i].id.substring(1,6),
+               ' ${customers[i].cid}',
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
@@ -91,7 +93,7 @@ class CustomerList extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Text(
-                customers[i].familyName,
+                customers[i].familyName == null ? 'family name not found': customers[i].familyName!,
                 style: Theme.of(context).textTheme.labelLarge,
               )),
               DataCell(Row(

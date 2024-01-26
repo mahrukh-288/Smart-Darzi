@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/locale_keys.g.dart';
+
 class NotificationBtn extends StatelessWidget {
   const NotificationBtn({super.key});
 
@@ -17,7 +19,7 @@ class NotificationBtn extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10))),
                             onPressed: () {},
                             child: Text(
-                              context.tr('Notifications'),
+                              LocaleKeys.Notifications.tr(),
                               style: Theme.of(context).textTheme.labelLarge,
                             )),
                       );

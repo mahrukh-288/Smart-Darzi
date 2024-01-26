@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../add_customer/addCustomerPage.dart';
 import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -52,14 +53,14 @@ class Login extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                context.tr('Lets get started'),
+                LocaleKeys.LetsStart.tr(),
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               SizedBox(
                 height: 5,
               ),
               Text(
-                context.tr('Sign up or login to become Smart'),
+                LocaleKeys.getSmart.tr(),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Colors.white.withOpacity(0.5),
                     ),
@@ -73,7 +74,7 @@ class Login extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        context.tr('Username'),
+                        LocaleKeys.Username.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       SizedBox(
@@ -83,7 +84,7 @@ class Login extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return context.tr('This field is required!');
+                            return LocaleKeys.fieldRequired.tr();
                           }
                           return null;
                         },
@@ -93,7 +94,7 @@ class Login extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        context.tr('Password'),
+                        LocaleKeys.Password.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       SizedBox(
@@ -103,7 +104,7 @@ class Login extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return context.tr('This field is required!');
+                            return LocaleKeys.fieldRequired.tr();
                           }
                           return null;
                         },
@@ -132,7 +133,7 @@ class Login extends StatelessWidget {
                                 width: 3,
                               ),
                               Text(
-                                context.tr('Remember'),
+                               LocaleKeys.Remember.tr(),
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ],
@@ -141,7 +142,7 @@ class Login extends StatelessWidget {
                               style: TextButton.styleFrom(),
                               onPressed: () {},
                               child: Text(
-                                context.tr('Forgot Password'),
+                                LocaleKeys.ForgotPassword.tr(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -168,7 +169,7 @@ class Login extends StatelessWidget {
                                   }
                                 },
                                 child: Text(
-                                  context.tr('Login'),
+                                  LocaleKeys.Login.tr(),
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                 )),
@@ -193,7 +194,7 @@ class Login extends StatelessWidget {
           actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
           backgroundColor: Colors.white.withOpacity(0.8),
           content: Text(
-            context.tr("Logged In Successfully!"),
+            LocaleKeys.loginSuccessful.tr(),
             style: Theme.of(context)
                 .textTheme
                 .labelLarge

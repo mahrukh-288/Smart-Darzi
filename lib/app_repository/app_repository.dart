@@ -73,7 +73,7 @@ class AppRepository {
 
         return c;
       }).toList());
-
+print(customers);
       apiResponse.isSuccess = true;
       apiResponse.data = customers;
     } on DioException catch (e) {
@@ -132,10 +132,10 @@ class AppRepository {
         apiResponse.data = customer;
       
     } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        apiResponse.isSuccess = true;
-        apiResponse.error = 'User Not Found';
-      }
+      
+        apiResponse.isSuccess = false;
+        apiResponse.error = e.response?.statusMessage;
+      
     } catch (e) {
       apiResponse.isSuccess = false;
       apiResponse.error = 'Client Error while getting customer by phone!';

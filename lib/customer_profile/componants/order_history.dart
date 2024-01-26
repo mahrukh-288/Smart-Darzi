@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
 
 import '../../app_theme/constants.dart';
+import '../../generated/locale_keys.g.dart';
 import '../../models/order.dart';
 
 class OrderHistory extends StatelessWidget {
@@ -25,13 +27,13 @@ class OrderHistory extends StatelessWidget {
             height: 50,
             color: primaryColor,
             child: Text(
-              'Order History',
+              LocaleKeys.OrderHistory.tr(),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-            child:orders.length == 0 ? Text('No orders yet', style: Theme.of(context).textTheme.headlineSmall,) : DataTable(
+            child:orders.length == 0 ? Text(LocaleKeys.noOrders.tr(), style: Theme.of(context).textTheme.headlineSmall,) : DataTable(
                   border: const TableBorder(
                       horizontalInside: BorderSide(color: borderColor)),
                   columnSpacing: 30,
@@ -39,37 +41,37 @@ class OrderHistory extends StatelessWidget {
                   columns: [
                     DataColumn(
                       label: Text(
-                        'Status',
+                        LocaleKeys.Status.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
                     DataColumn(
                       label: Text(
-                        'Order Id',
+                       LocaleKeys.OrderId.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
                     DataColumn(
                       label: Text(
-                        'Order Type',
+                        LocaleKeys.OrderType.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
                     DataColumn(
                       label: Text(
-                        'Order Category',
+                        LocaleKeys.OrderCategory.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
                     DataColumn(
                       label: Text(
-                        'Order Placed On',
+                     LocaleKeys.OrderPlacedOn.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
                     DataColumn(
                       label: Text(
-                        'Order Completed On',
+                        LocaleKeys.OrderCompletedOn.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),

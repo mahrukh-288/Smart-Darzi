@@ -20,7 +20,8 @@ class CustomerCubit extends Cubit<CustomerState> {
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.registerCustomer(customer);
     if (response.isSuccess) {
-      emit(CustomerRegistered());
+      getCustomerByPhone(customer.phoneNumber);
+     // emit(CustomerRegistered());
     } else {
       emit(Failure(error: response.error!));
     }

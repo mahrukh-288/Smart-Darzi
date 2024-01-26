@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_darzi/add_customer/cubit/customer_cubit.dart';
@@ -5,6 +6,7 @@ import 'package:smart_darzi/add_size/add_size.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import '../add_order/SaveOrderPage.dart';
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 
 class PopUpMenu extends StatelessWidget {
@@ -41,7 +43,7 @@ class PopUpMenu extends StatelessWidget {
                             ));
                       },
                       child: Text(
-                        'Customer Profile',
+                        LocaleKeys.CustomerProfile.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ))
                 ],
@@ -64,7 +66,7 @@ class PopUpMenu extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    'Edit Details',
+                    LocaleKeys.EditDetails.tr(),
                     style: Theme.of(context).textTheme.labelLarge,
                   )
                 ],
@@ -75,29 +77,29 @@ class PopUpMenu extends StatelessWidget {
             ],
           ),
         ),
-        PopupMenuItem(
-          value: 1,
-          // row has two child icon and text.
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Image.asset('images/editSize.png'),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    'Edit Size',
-                    style: Theme.of(context).textTheme.labelLarge,
-                  )
-                ],
-              ),
-              const Divider(
-                color: borderColor,
-              )
-            ],
-          ),
-        ),
+        // PopupMenuItem(
+        //   value: 1,
+        //   // row has two child icon and text.
+        //   child: Column(
+        //     children: [
+        //       Row(
+        //         children: [
+        //           Image.asset('images/editSize.png'),
+        //           const SizedBox(
+        //             width: 8,
+        //           ),
+        //           Text(
+        //            LocaleKeys.EditSize.tr(),
+        //             style: Theme.of(context).textTheme.labelLarge,
+        //           )
+        //         ],
+        //       ),
+        //       const Divider(
+        //         color: borderColor,
+        //       )
+        //     ],
+        //   ),
+        // ),
         PopupMenuItem(
           value: 1,
           // row has two child icon and text.
@@ -116,12 +118,12 @@ class PopUpMenu extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => AddSize(
-                                customerId: customer.id,
+                                customerId: customer.id, phoneNo: customer.phoneNumber,
                               ),
                             ));
                       },
                       child: Text(
-                        'Add Size',
+                       LocaleKeys.EditSize.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ))
                 ],
@@ -155,7 +157,7 @@ class PopUpMenu extends StatelessWidget {
                             ));
                       },
                       child: Text(
-                        'Add Order',
+                        LocaleKeys.AddOrder.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ))
                 ],
@@ -183,7 +185,7 @@ class PopUpMenu extends StatelessWidget {
                         .deleteCustomer(customer.phoneNumber);
                   },
                   child: Text(
-                    'Delete Customer',
+                  LocaleKeys.DeleteCustomer.tr(),
                     style: Theme.of(context).textTheme.labelLarge,
                   ))
             ],

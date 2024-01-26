@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
             const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
           ],
         ),
-        home: SaveOrderPage(customerId: "65a140138528e97c4521362a",)
+        home: CustomerForm(),
       ),
     );
   }

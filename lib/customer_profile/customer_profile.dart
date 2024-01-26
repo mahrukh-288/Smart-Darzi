@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -13,6 +14,7 @@ import 'package:smart_darzi/view_customers/view_customers.dart';
 
 import '../Common Widgets/app_drawer.dart';
 import '../app_theme/constants.dart';
+import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 
 class CustomerProfile extends StatefulWidget {
@@ -120,7 +122,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                                 widget.customer.phoneNumber);
                                       },
                                       child: Text(
-                                        'Delete Customer',
+                                       LocaleKeys.DeleteCustomer.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineSmall,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_darzi/add_size/add_size.dart';
@@ -5,6 +6,7 @@ import 'package:smart_darzi/models/size.dart';
 
 import '../../add_customer/cubit/customer_cubit.dart';
 import '../../app_theme/constants.dart';
+import '../../generated/locale_keys.g.dart';
 
 class SizeTable extends StatelessWidget {
   const SizeTable({super.key, required this.size, required this.customerId});
@@ -22,14 +24,14 @@ class SizeTable extends StatelessWidget {
           height: 50,
           color: primaryColor,
           child: Text(
-            'Size',
+            LocaleKeys.Sizing.tr(),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         Padding(
           
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: size == null ? Text('Size not found', style: Theme.of(context).textTheme.headlineSmall,) : Column(
+          child: size == null ? Text(LocaleKeys.noSizeFound.tr(), style: Theme.of(context).textTheme.headlineSmall,) : Column(
                 children: [
                   IntrinsicHeight(
                     child: Row(
@@ -39,26 +41,26 @@ class SizeTable extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Shirt length : ${size?.length}',
+                                '${LocaleKeys.LengthofShirt.tr()} : ${size?.length}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(height: 5),
                             Text(
-                              'Neck : ${size?.neck}',
+                              '${LocaleKeys.Neck.tr()} : ${size?.neck}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Shoulder : ${size?.shoulder}',
+                              '${LocaleKeys.Shoulder.tr()} : ${size?.shoulder}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Waist : ${size?.waist}',
+                              '${LocaleKeys.Waist.tr()} : ${size?.waist}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -69,28 +71,28 @@ class SizeTable extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Chest : ${size?.chest}',
+                              '${LocaleKeys.Chest.tr()} : ${size?.chest}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Daman : ${size?.lap}',
+                              '${LocaleKeys.Daman.tr()} : ${size?.lap}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Arm Length : ${size?.armLength}',
+                              '${LocaleKeys.ArmLength.tr()} : ${size?.armLength}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Arm Round : ${size?.armRound}',
+                              '${LocaleKeys.ArmRound.tr()} : ${size?.armRound}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -103,21 +105,21 @@ class SizeTable extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Pent Length : ${size?.lengthOfTrouser}',
+                              '${LocaleKeys.LengthofPant.tr()} : ${size?.lengthOfTrouser}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Ankle Width : ${size?.ankleWidth}',
+                              '${LocaleKeys.AnkleWidth.tr()} : ${size?.ankleWidth}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Hips : ${size?.hips}',
+                              '${LocaleKeys.Hips.tr()} : ${size?.hips}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],
@@ -136,7 +138,7 @@ class SizeTable extends StatelessWidget {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customerId: customerId),));
                       },
                       child: Text(
-                        'Edit Size',
+                        LocaleKeys.EditSize.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       )),
                       SizedBox(height: 30,),
