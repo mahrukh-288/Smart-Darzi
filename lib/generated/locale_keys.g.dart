@@ -98,5 +98,6 @@ abstract class  LocaleKeys {
   static const noSizeFound = 'noSizeFound';
   static const loginSuccessful = 'loginSuccessful';
   static const noDataFound = 'noDataFound';
+  static const userExists = 'userExists';
 
 }

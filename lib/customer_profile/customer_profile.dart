@@ -46,6 +46,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
               ));
         }
         else if(state is FailureInDeletingCustomer){
+          print('failure in deleting customer');
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -100,7 +101,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                     height: 30,
                                   ),
                                   SizeTable(
-                                    size: profile.size, customerId: widget.customer.id,
+                                    size: profile.size, customerId: widget.customer.id, phoneNumber: widget.customer.phoneNumber,
                                   ),
                                   const SizedBox(
                                     height: 30,

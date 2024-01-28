@@ -311,7 +311,7 @@ class CustomerForm extends StatelessWidget {
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-        LocaleKeys.savedSuccessfully.tr(),
+        available? LocaleKeys.userExists.tr(): LocaleKeys.savedSuccessfully.tr(),
         style: Theme.of(context)
             .textTheme
             .labelLarge

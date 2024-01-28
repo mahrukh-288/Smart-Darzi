@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import 'package:smart_darzi/models/api_response.dart';
 import 'package:smart_darzi/models/size.dart';
 
 import '../app_service/app_service.dart';
+import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 import '../models/customer_profile.dart';
 import '../models/order.dart';
@@ -130,11 +132,15 @@ print(customers);
       
         Customer customer = Customer.fromJson(response.data);
         apiResponse.data = customer;
+        apiResponse.successMessage = LocaleKeys.userExists.tr();
       
     } on DioException catch (e) {
       
-        apiResponse.isSuccess = false;
-        apiResponse.error = e.response?.statusMessage;
+      if(e.response?.statusCode == 404){
+        apiResponse.isSuccess = true;
+        
+      }
+        
       
     } catch (e) {
       apiResponse.isSuccess = false;

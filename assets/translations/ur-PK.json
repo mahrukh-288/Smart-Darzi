@@ -95,5 +95,6 @@
 "Picture": "تصویر",
 "noSizeFound": "کوئی سائز محفوظ نہیں ہے",
 "loginSuccessful": "آپ کامیابی سے لاگ ان ہو گئے ہیں۔",
-"noDataFound": "ڈیٹا موجود نہیں"
+"noDataFound": "ڈیٹا موجود نہیں",
+"userExists": "صارف پہلے سے موجود ہے"
 }

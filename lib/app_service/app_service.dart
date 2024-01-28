@@ -55,7 +55,7 @@ print(response);
 
   Future<Response> getCustomerByPhone(int phoneNo) async {
     Response response = await dio.get('$customerBaseUrl/oneCustomer',
-        queryParameters: {'phoneNumber': phoneNo});
+        queryParameters: {'queryText': phoneNo, 'type': 'phoneNumber'});
 
     return response;
   }
@@ -75,13 +75,17 @@ print(response);
   }
 
   Future<Response> deleteCustomer(int phoneNo) async {
+
+    print(phoneNo);
     Response response = await dio.delete('$customerBaseUrl/deleteCustomer',
-        data: {'phoneNumber': phoneNo});
+        data: {'phoneNumber': phoneNo.toString()});
 
     return response;
   }
 
    Future<Response> getCustomerProfile(String customerId) async {
+
+
     Response response = await dio.get('$customerBaseUrl/customerProfile',
         queryParameters: {'customerId': customerId});
 

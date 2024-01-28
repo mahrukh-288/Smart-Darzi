@@ -95,5 +95,6 @@
 "Picture": "Picture",
 "noSizeFound":"No Size Found",
 "loginSuccessful": "Logged in Successfully",
-"noDataFound": "Data not found!"
+"noDataFound": "Data not found!",
+"userExists": "User already exists!"
 }

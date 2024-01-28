@@ -9,9 +9,10 @@ import '../../app_theme/constants.dart';
 import '../../generated/locale_keys.g.dart';
 
 class SizeTable extends StatelessWidget {
-  const SizeTable({super.key, required this.size, required this.customerId});
+  const SizeTable({super.key, required this.size, required this.customerId, required this.phoneNumber});
   final String customerId;
  final  SizeModel?  size ;
+ final int phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +136,7 @@ class SizeTable extends StatelessWidget {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(fixedSize: Size(150, 30)),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customerId: customerId),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customerId: customerId, phoneNo: phoneNumber,),));
                       },
                       child: Text(
                         LocaleKeys.EditSize.tr(),
