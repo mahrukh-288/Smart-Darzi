@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smart_darzi/add_customer/cubit/customer_cubit.dart';
+import 'package:smart_darzi/add_order/SaveOrderPage.dart';
 import 'package:smart_darzi/add_order/cubit/order_cubit.dart';
 import 'package:smart_darzi/customer_profile/componants/order_history.dart';
 import 'package:smart_darzi/customer_profile/componants/size_table.dart';
@@ -112,18 +113,31 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                   const SizedBox(
                                     height: 30,
                                   ),
+                                  // ElevatedButton(
+                                  //     style: ElevatedButton.styleFrom(
+                                  //         fixedSize: const Size(350, 50),
+                                  //         backgroundColor: Colors.red[900]),
+                                  //     onPressed: () {
+                                  //       context
+                                  //           .read<CustomerCubit>()
+                                  //           .deleteCustomer(
+                                  //               widget.customer.phoneNumber);
+                                  //     },
+                                  //     child: Text(
+                                  //      LocaleKeys.DeleteCustomer.tr(),
+                                  //       style: Theme.of(context)
+                                  //           .textTheme
+                                  //           .headlineSmall,
+                                  //     ))
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           fixedSize: const Size(350, 50),
                                           backgroundColor: Colors.red[900]),
                                       onPressed: () {
-                                        context
-                                            .read<CustomerCubit>()
-                                            .deleteCustomer(
-                                                widget.customer.phoneNumber);
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SaveOrderPage(customerId: widget.customer.id),));
                                       },
                                       child: Text(
-                                       LocaleKeys.DeleteCustomer.tr(),
+                                       LocaleKeys.AddOrder.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineSmall,
