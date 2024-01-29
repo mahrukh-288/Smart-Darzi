@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smart_darzi/Common%20Widgets/app_drawer.dart';
@@ -128,8 +129,20 @@ class CustomerForm extends StatelessWidget {
                                               height: 40,
                                               width: 500,
                                               child: TextFormField(
-                                                validator: (value) =>
-                                                    _validate(value),
+                                                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                                validator: (value){
+
+                                                  if(value == null || value.isEmpty){
+                                                    return LocaleKeys.fieldRequired.tr();
+
+                                                  }
+                                                  if(value.length != 11){
+                                                    return LocaleKeys.phoneDigitsLength.tr();
+                                                  }
+                                                  return null;
+                                                }
+                                        ,
                                                 cursorColor: borderColor,
                                                 style: Theme.of(context)
                                                     .textTheme
@@ -141,10 +154,12 @@ class CustomerForm extends StatelessWidget {
                                         ),
                                         TextButton(
                                             onPressed: () {
+                                              
                                               context
                                                   .read<CustomerCubit>()
                                                   .getCustomerByPhone(int.parse(
                                                       _phoneController.text));
+                                             
                                             },
                                             child: Text(
                                               LocaleKeys.CheckAvailability,
@@ -179,6 +194,7 @@ class CustomerForm extends StatelessWidget {
                                                 height: 40,
                                                 width: 500,
                                                 child: TextFormField(
+                                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                                   validator: (value) =>
                                                       _validate(value),
                                                   cursorColor: borderColor,
@@ -210,6 +226,8 @@ class CustomerForm extends StatelessWidget {
                                                 height: 40,
                                                 width: 500,
                                                 child: TextFormField(
+                                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                                   validator: (value) =>
                                                       _validate(value),
                                                   cursorColor: borderColor,
@@ -229,6 +247,7 @@ class CustomerForm extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
+                                                
                                                 LocaleKeys.FamilyName.tr(),
                                                 style: Theme.of(context)
                                                     .textTheme
@@ -241,6 +260,7 @@ class CustomerForm extends StatelessWidget {
                                                 height: 40,
                                                 width: 500,
                                                 child: TextFormField(
+                                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                                   cursorColor: borderColor,
                                                   style: Theme.of(context)
                                                       .textTheme

@@ -96,5 +96,7 @@
 "noSizeFound":"No Size Found",
 "loginSuccessful": "Logged in Successfully",
 "noDataFound": "Data not found!",
-"userExists": "User already exists!"
+"userExists": "User already exists!",
+"shoulderLength" : "Shoulder Length",
+"phoneDigitsLength": "Only 11 digits are allowed!"
 }

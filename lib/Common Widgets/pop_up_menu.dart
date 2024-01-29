@@ -118,7 +118,7 @@ class PopUpMenu extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => AddSize(
-                                customerId: customer.id, phoneNo: customer.phoneNumber,
+                                customer: customer
                               ),
                             ));
                       },

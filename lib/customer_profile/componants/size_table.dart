@@ -7,12 +7,13 @@ import 'package:smart_darzi/models/size.dart';
 import '../../add_customer/cubit/customer_cubit.dart';
 import '../../app_theme/constants.dart';
 import '../../generated/locale_keys.g.dart';
+import '../../models/customer.dart';
 
 class SizeTable extends StatelessWidget {
-  const SizeTable({super.key, required this.size, required this.customerId, required this.phoneNumber});
-  final String customerId;
+  const SizeTable({super.key, required this.size, required this.customer});
+final Customer customer;
  final  SizeModel?  size ;
- final int phoneNumber;
+
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +137,7 @@ class SizeTable extends StatelessWidget {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(fixedSize: Size(150, 30)),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customerId: customerId, phoneNo: phoneNumber,),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customer: customer),));
                       },
                       child: Text(
                         LocaleKeys.EditSize.tr(),

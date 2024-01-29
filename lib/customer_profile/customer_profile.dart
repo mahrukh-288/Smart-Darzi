@@ -101,8 +101,8 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                   const SizedBox(
                                     height: 30,
                                   ),
-                                  SizeTable(
-                                    size: profile.size, customerId: widget.customer.id, phoneNumber: widget.customer.phoneNumber,
+                                  SizeTable(size: size, customer: widget.customer,
+                                   
                                   ),
                                   const SizedBox(
                                     height: 30,

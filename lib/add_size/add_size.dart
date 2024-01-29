@@ -10,14 +10,14 @@ import '../add_customer/addCustomerPage.dart';
 import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
 import '../generated/locale_keys.g.dart';
+import '../models/customer.dart';
 import '../view_customers/view_customers.dart';
 import 'sizing.dart';
 import 'sizing_dropdown.dart';
 
 class AddSize extends StatefulWidget {
-   AddSize({super.key, required this.customerId, required this.phoneNo});
-final String customerId;
-final int phoneNo;
+   AddSize({super.key, required this.customer});
+final Customer customer;
 
   @override
   State<AddSize> createState() => _AddSizeState();
@@ -29,10 +29,9 @@ class _AddSizeState extends State<AddSize> {
   SizeModel sizeModel = SizeModel();
   @override
   void initState() {
-    // TODO: implement initState
-    print(widget.customerId);
-    sizeModel.customerId = widget.customerId;
-    context.read<CustomerCubit>().getCustomerByPhone(widget.phoneNo);
+    
+    sizeModel.customerId = widget.customer.id;
+    
   }
 
   @override
@@ -58,8 +57,43 @@ class _AddSizeState extends State<AddSize> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(
+                    
                     children: [
                       CustomAppBar(),
+                      SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: borderColor),
+                ),
+                child: const Icon(
+                  Icons.person,
+                  color: iconColor,
+                  size: 30,
+                ),
+              ),
+                              Text('${widget.customer.cid}', style: Theme.of(context).textTheme.labelLarge,),
+
+                            ],
+                          ),
+                          SizedBox(width: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(widget.customer.name, style: Theme.of(context).textTheme.labelLarge,),
+                              Text('${widget.customer.phoneNumber}', style: Theme.of(context).textTheme.labelLarge,),
+
+                            ],
+                          ),
+                        ],
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -100,6 +134,26 @@ class _AddSizeState extends State<AddSize> {
         )
       ],
     ),
+ Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+         LocaleKeys.shoulderLength.tr(),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        SizedBox(
+          height: 40,
+          width: 250,
+          child: SizingDropdown(startValue: 5, lastValue: 20, onTapped: (value ) {
+          sizeModel.length = value;
+            },)
+        )
+      ],
+    ),
+    
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
