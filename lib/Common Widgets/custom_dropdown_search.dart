@@ -31,14 +31,7 @@ class CustomDropdownSearch extends StatelessWidget {
       enabled: !isDefault,
       selectedItem: _selectedItem,
       dropdownBuilder: (context, selectedItem) {
-        if (isDefault) {
-          return Center(
-              child: Text(
-            'Default',
-            style: Theme.of(context).textTheme.labelLarge,
-          ));
-        }
-        ;
+     
         return Text(
           _selectedItem,
           style: Theme.of(context).textTheme.labelLarge,

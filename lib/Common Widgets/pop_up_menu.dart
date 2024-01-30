@@ -152,7 +152,7 @@ class PopUpMenu extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => SaveOrderPage(
-                                customerId: customer.id,
+                                customer: customer,
                               ),
                             ));
                       },

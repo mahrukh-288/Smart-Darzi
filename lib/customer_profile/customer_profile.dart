@@ -134,7 +134,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                           fixedSize: const Size(350, 50),
                                           backgroundColor: Colors.red[900]),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SaveOrderPage(customerId: widget.customer.id),));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SaveOrderPage(customer: widget.customer),));
                                       },
                                       child: Text(
                                        LocaleKeys.AddOrder.tr(),

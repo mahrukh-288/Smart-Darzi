@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,9 @@ import '../Common Widgets/notification_btn.dart';
 import '../add_customer/addCustomerPage.dart';
 import '../add_customer/cubit/customer_cubit.dart';
 import '../app_theme/constants.dart';
+import '../customer_profile/customer_profile.dart';
 import '../generated/locale_keys.g.dart';
+import '../models/customer.dart';
 import '../view_customers/view_customers.dart';
 import 'componants/embroidoryForm.dart';
 import 'componants/order_details_form.dart';
@@ -20,8 +23,8 @@ import 'componants/stylingForm.dart';
 import 'cubit/order_cubit.dart';
 
 class SaveOrderPage extends StatefulWidget {
-  SaveOrderPage({super.key, required this.customerId});
-final String customerId;
+  SaveOrderPage({super.key, required this.customer});
+  final Customer customer;
   @override
   State<SaveOrderPage> createState() => _SaveOrderPageState();
 }
@@ -33,17 +36,18 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
   XFile? image;
 
   final TextEditingController _bookDesignController = TextEditingController();
-@override
+  @override
   void initState() {
     // TODO: implement initState
-    order.customerId = widget.customerId;
+    order.customerId = widget.customer.id;
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<OrderCubit, OrderState>(
       listener: (context, state) {
         if (state is OrderAdded) {
-          orderSavedDialog(context);
+          orderSavedDialog(context, widget.customer);
         }
       },
       child: Scaffold(
@@ -67,7 +71,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
                       Text(
-                      LocaleKeys.OrderDetails,
+                        LocaleKeys.OrderDetails,
                         style: Theme.of(context).textTheme.headlineLarge,
                       ).tr(),
                       const SizedBox(
@@ -89,7 +93,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                 LocaleKeys.CustomerName,
+                                  LocaleKeys.CustomerName,
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ).tr(),
                                 const SizedBox(
@@ -98,11 +102,25 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                 SizedBox(
                                     height: 40,
                                     width: 500,
-                                    child: CustomDropdownSearch(
-                                      dropdownItems: [],
-                                      isDefault: true,
-                                      onValueChanged: (String) {},
-                                    ))
+                                    child: DropdownSearch(
+                                        popupProps: PopupProps.menu(
+                                            fit: FlexFit.loose,
+                                            menuProps: MenuProps(
+                                              backgroundColor: primaryColor,
+                                            )),
+                                        enabled: false,
+                                         dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
+                                        dropdownBuilder:
+                                            (context, selectedItem) {
+                                          return Center(
+                                              child: Text(
+                                            widget.customer.name,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge,
+                                          ));
+                                        })
+                                        )
                               ],
                             ),
                             Column(
@@ -118,18 +136,31 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                 SizedBox(
                                     height: 40,
                                     width: 500,
-                                    child: CustomDropdownSearch(
-                                      dropdownItems: [],
-                                      isDefault: true,
-                                      onValueChanged: (val) {},
-                                    ))
+                                    child: DropdownSearch(
+                                        popupProps: PopupProps.menu(
+                                            fit: FlexFit.loose,
+                                            menuProps: MenuProps(
+                                              backgroundColor: primaryColor,
+                                            )),
+                                        enabled: false,
+                                         dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
+                                        dropdownBuilder:
+                                            (context, selectedItem) {
+                                          return Center(
+                                              child: Text(
+                                            '${widget.customer.cid}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge,
+                                          ));
+                                        }))
                               ],
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                     LocaleKeys.OrderCategory.tr(),
+                                  LocaleKeys.OrderCategory.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -140,8 +171,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 500,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                           LocaleKeys.Male.tr(),
-                                           LocaleKeys.Female.tr()
+                                        LocaleKeys.Male.tr(),
+                                        LocaleKeys.Female.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (Value) {
@@ -154,7 +185,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                     LocaleKeys.OrderType.tr(),
+                                  LocaleKeys.OrderType.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -164,12 +195,12 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     height: 40,
                                     width: 500,
                                     child: CustomDropdownSearch(
-                                      dropdownItems:  [
-                                          LocaleKeys.ShalwarQamees.tr(),
-                                           LocaleKeys.Shirt.tr(),
-                                         LocaleKeys.KurtaShalwar.tr(),
-                                          LocaleKeys.WaistCoat.tr(),
-                                          LocaleKeys.Trouser.tr()
+                                      dropdownItems: [
+                                        LocaleKeys.ShalwarQamees.tr(),
+                                        LocaleKeys.Shirt.tr(),
+                                        LocaleKeys.KurtaShalwar.tr(),
+                                        LocaleKeys.WaistCoat.tr(),
+                                        LocaleKeys.Trouser.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (Value) {
@@ -185,7 +216,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
                       Text(
-                          LocaleKeys.DressStyling.tr(),
+                        LocaleKeys.DressStyling.tr(),
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
@@ -207,7 +238,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    LocaleKeys.CuffStyling.tr(),
+                                  LocaleKeys.CuffStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -218,8 +249,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                           LocaleKeys.Cuff.tr(),
-                                          LocaleKeys.Simple.tr()
+                                        LocaleKeys.Cuff.tr(),
+                                        LocaleKeys.Simple.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -232,7 +263,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    LocaleKeys.NeckStyling.tr(),
+                                  LocaleKeys.NeckStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -243,8 +274,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                           LocaleKeys.Collar.tr(),
-                                              LocaleKeys.Ban.tr()
+                                        LocaleKeys.Collar.tr(),
+                                        LocaleKeys.Ban.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -257,7 +288,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                 LocaleKeys.ButtonStyling.tr(),
+                                  LocaleKeys.ButtonStyling.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -268,9 +299,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                          LocaleKeys.Fancy.tr(),
-                                             LocaleKeys.Simple.tr(),
-                                                LocaleKeys.Metallic.tr()
+                                        LocaleKeys.Fancy.tr(),
+                                        LocaleKeys.Simple.tr(),
+                                        LocaleKeys.Metallic.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -326,8 +357,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                           LocaleKeys.Elastic.tr(),
-                                              LocaleKeys.Simple.tr()
+                                        LocaleKeys.Elastic.tr(),
+                                        LocaleKeys.Simple.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -340,7 +371,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    LocaleKeys.Embroidery.tr(),
+                                  LocaleKeys.Embroidery.tr(),
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 const SizedBox(
@@ -351,8 +382,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     width: 250,
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
-                                          LocaleKeys.Yes.tr(),
-                                             LocaleKeys.No.tr()
+                                        LocaleKeys.Yes.tr(),
+                                        LocaleKeys.No.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -368,7 +399,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
                       Text(
-                           LocaleKeys.EmbroidaryDetails.tr(),
+                        LocaleKeys.EmbroidaryDetails.tr(),
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(
@@ -395,7 +426,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                           LocaleKeys.EmbroidaryStyle.tr(),
+                                        LocaleKeys.EmbroidaryStyle.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -408,12 +439,10 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                           width: 430,
                                           child: CustomDropdownSearch(
                                             dropdownItems: [
-                                              
-                                                 LocaleKeys.SingleSalai.tr(),
-                                                    LocaleKeys.DoubleSalai.tr()
-                                                    ,
-                                                       LocaleKeys.RaishmiSingle.tr(),
-                                                          LocaleKeys.RaishmiDouble.tr()
+                                              LocaleKeys.SingleSalai.tr(),
+                                              LocaleKeys.DoubleSalai.tr(),
+                                              LocaleKeys.RaishmiSingle.tr(),
+                                              LocaleKeys.RaishmiDouble.tr()
                                             ],
                                             isDefault: false,
                                             onValueChanged: (val) {
@@ -430,7 +459,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                         LocaleKeys.BookNumber.tr(),
+                                        LocaleKeys.BookNumber.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -458,7 +487,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                          LocaleKeys.DesignNumber.tr(),
+                                        LocaleKeys.DesignNumber.tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -527,19 +556,20 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                       ),
                       BlocBuilder<OrderCubit, OrderState>(
                         builder: (context, state) {
-                          if(state is LoadingOrder){
-                            return CircularProgressIndicator(color: primaryColor,);
-
+                          if (state is LoadingOrder) {
+                            return CircularProgressIndicator(
+                              color: primaryColor,
+                            );
                           }
                           return ElevatedButton(
                               onPressed: () {
                                 order.designNumber =
                                     int.parse(_bookDesignController.text);
-                               
+
                                 context.read<OrderCubit>().addOrder(order);
                               },
                               child: Text(
-                                   LocaleKeys.saveOrder.tr(),
+                                LocaleKeys.saveOrder.tr(),
                                 style:
                                     Theme.of(context).textTheme.headlineSmall,
                               ));
@@ -556,12 +586,12 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
     );
   }
 
-  orderSavedDialog(BuildContext context) {
+  orderSavedDialog(BuildContext context, Customer customer) {
     AlertDialog alert = AlertDialog(
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-           LocaleKeys.savedSuccessfully.tr(),
+        LocaleKeys.savedSuccessfully.tr(),
         style: Theme.of(context)
             .textTheme
             .labelLarge
@@ -575,15 +605,15 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                     borderRadius: BorderRadius.circular(5)),
                 side: const BorderSide(color: primaryColor)),
             onPressed: () {
-              Navigator.pop(context);
-              Navigator.push(
+              // Navigator.pop(context);
+              Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CustomerForm(),
+                    builder: (context) => ViewCustomers(),
                   ));
             },
             child: Text(
-                 LocaleKeys.goToHome.tr(),
+              LocaleKeys.CustomerView.tr(),
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -594,11 +624,13 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ViewCustomers(),
+                  builder: (context) => CustomerProfile(
+                    customer: customer,
+                  ),
                 ));
           },
           style: ElevatedButton.styleFrom(
@@ -607,10 +639,31 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ),
           child: Text(
-               LocaleKeys.CustomerView.tr(),
+            LocaleKeys.CustomerProfile.tr(),
             style: Theme.of(context).textTheme.labelLarge,
           ),
-        )
+        ),
+        OutlinedButton(
+            style: OutlinedButton.styleFrom(
+                fixedSize: const Size(150, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                side: const BorderSide(color: primaryColor)),
+            onPressed: () {
+              // Navigator.pop(context);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CustomerForm(),
+                  ));
+            },
+            child: Text(
+              LocaleKeys.goToHome.tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: primaryColor),
+            )),
       ],
     );
 

@@ -50,13 +50,7 @@ final Customer customer;
                       '${customer.phoneNumber}',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      customer.familyName == null ? 'family name not found' : customer.familyName!,
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
+                  
                   ],
                 ),
                 Row(

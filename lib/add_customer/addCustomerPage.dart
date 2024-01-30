@@ -382,7 +382,28 @@ class CustomerForm extends StatelessWidget {
             LocaleKeys.CustomerProfile.tr(),
             style: Theme.of(context).textTheme.labelLarge,
           ),
-        )
+        ),
+        OutlinedButton(
+            style: OutlinedButton.styleFrom(
+                fixedSize: const Size(150, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                side: const BorderSide(color: primaryColor)),
+            onPressed: () {
+              // Navigator.pop(context);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CustomerForm(),
+                  ));
+            },
+            child: Text(
+              LocaleKeys.goToHome.tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: primaryColor),
+            )),
       ],
     );
 
