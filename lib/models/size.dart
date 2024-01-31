@@ -11,6 +11,7 @@ String lap = '1';
 String lengthOfTrouser = '1';
 String ankleWidth = '1';
 String hips = '1';
+String shoulderLength = '1';
 
 SizeModel();
 

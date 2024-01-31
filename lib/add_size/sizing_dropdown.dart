@@ -5,19 +5,19 @@ import '../app_theme/constants.dart';
 
 class SizingDropdown extends StatelessWidget {
   SizingDropdown(
-      {super.key, required this.startValue, required this.lastValue, required this.onTapped});
+      {super.key, required this.startValue, required this.lastValue, required this.onTapped, required this.selectedValue});
       final Function(String) onTapped;
   final int startValue;
+  final String selectedValue;
   final int lastValue;
-  String _selectedItem = '';
+  late String _selectedItem;
+
   @override
   Widget build(BuildContext context) {
+    _selectedItem = selectedValue;
     return DropdownSearch(
       popupProps: PopupProps.menu(
-          title: Text(
-            'Please Select',
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
+        
           fit: FlexFit.loose,
           itemBuilder: (context, item, isSelected) {
             return Padding(
@@ -29,12 +29,22 @@ class SizingDropdown extends StatelessWidget {
           },
           menuProps: MenuProps(backgroundColor: primaryColor)),
 
-      selectedItem: _selectedItem,
-
+      selectedItem: selectedValue,
+dropdownBuilder:
+                                            (context, selectedItem) {
+                                          return Center(
+                                              child: Text(
+                                            _selectedItem,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge,
+                                          ));
+                                        },
       dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
       items: itemList(),
       onChanged: (value) {
         _selectedItem = value!;
+        
         onTapped(_selectedItem);
       },
 

@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_darzi/add_size/sizing.dart';
 import 'package:smart_darzi/app_theme/constants.dart';
-
 import '../generated/locale_keys.g.dart';
 
 class CustomerFormField extends StatelessWidget {

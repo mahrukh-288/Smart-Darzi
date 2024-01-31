@@ -14,7 +14,6 @@ import 'package:smart_darzi/customer_profile/customer_profile.dart';
 import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 import '../view_customers/view_customers.dart';
-import '../add_size/sizing.dart';
 import 'cubit/customer_cubit.dart';
 import 'data_form.dart';
 

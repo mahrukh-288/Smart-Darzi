@@ -13,7 +13,6 @@ import '../customer_profile/customer_profile.dart';
 import '../generated/locale_keys.g.dart';
 import '../models/customer.dart';
 import '../view_customers/view_customers.dart';
-import 'sizing.dart';
 import 'sizing_dropdown.dart';
 
 class AddSize extends StatefulWidget {
@@ -31,6 +30,7 @@ class _AddSizeState extends State<AddSize> {
   @override
   void initState() {
     sizeModel.customerId = widget.customer.id;
+    context.read<CustomerCubit>().getCustomerSize(widget.customer.id);
   }
 
   @override
@@ -121,288 +121,322 @@ class _AddSizeState extends State<AddSize> {
                             border: Border.all(color: borderColor),
                             borderRadius: BorderRadius.circular(5),
                             color: primaryColor.withOpacity(0.6)),
-                        child: Wrap(
-                          runSpacing: 20,
-                          spacing: 20,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        child: BlocBuilder<CustomerCubit, CustomerState>(
+                          builder: (context, state) {
+                            if(state is CustomerSizeFetched) {
+                              sizeModel = state.size;
+                              return Wrap(
+                              runSpacing: 20,
+                              spacing: 20,
                               children: [
-                                Text(
-                                  LocaleKeys.LengthofShirt.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.LengthofShirt.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 10,
+                                          lastValue: 50,
+                                          onTapped: (value) {
+                                            sizeModel.length = value;
+                                          }, selectedValue: sizeModel.length,
+                                        ))
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 5,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.shoulderLength.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 5,
+                                          lastValue: 20,
+                                          onTapped: (value) {
+                                            sizeModel.length = value;
+                                          }, selectedValue: sizeModel.shoulderLength,
+                                        ))
+                                  ],
                                 ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 10,
-                                      lastValue: 50,
-                                      onTapped: (value) {
-                                        sizeModel.length = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.shoulderLength.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 5,
-                                      lastValue: 20,
-                                      onTapped: (value) {
-                                        sizeModel.length = value;
-                                      },
-                                    ))
-                              ],
-                            ),
 
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.Shoulder.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.Shoulder.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 10,
+                                          lastValue: 23,
+                                          onTapped: (value) {
+                                            sizeModel.shoulder = value;
+                                          }, selectedValue: sizeModel.shoulder,
+                                        ))
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 5,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.Chest.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 20,
+                                          lastValue: 60,
+                                          onTapped: (value) {
+                                            sizeModel.chest = value;
+                                          }, selectedValue: sizeModel.chest,
+                                        ))
+                                  ],
                                 ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 10,
-                                      lastValue: 23,
-                                      onTapped: (value) {
-                                        sizeModel.shoulder = value;
-                                      },
-                                    ))
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.Neck.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 10,
+                                          lastValue: 20,
+                                          onTapped: (value) {
+                                            sizeModel.neck = value;
+                                          }, selectedValue: sizeModel.neck,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.ArmLength.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 10,
+                                          lastValue: 30,
+                                          onTapped: (value) {
+                                            sizeModel.armLength = value;
+                                          }, selectedValue: sizeModel.armLength,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.ArmRound.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 4,
+                                          lastValue: 10,
+                                          onTapped: (value) {
+                                            sizeModel.armRound = value;
+                                          }, selectedValue: sizeModel.armRound,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.Waist.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 15,
+                                          lastValue: 60,
+                                          onTapped: (value) {
+                                            sizeModel.waist = value;
+                                          }, selectedValue: sizeModel.waist,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.Daman.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 20,
+                                          lastValue: 60,
+                                          onTapped: (value) {
+                                            sizeModel.lap = value;
+                                          }, selectedValue: sizeModel.lap,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.LengthofPant.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 20,
+                                          lastValue: 60,
+                                          onTapped: (value) {
+                                            sizeModel.lengthOfTrouser = value;
+                                          }, selectedValue: sizeModel.lengthOfTrouser,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.AnkleWidth.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 4,
+                                          lastValue: 20,
+                                          onTapped: (value) {
+                                            sizeModel.ankleWidth = value;
+                                          }, selectedValue: sizeModel.ankleWidth,
+                                        ))
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.Hips.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    SizedBox(
+                                        height: 40,
+                                        width: 250,
+                                        child: SizingDropdown(
+                                          startValue: 20,
+                                          lastValue: 60,
+                                          onTapped: (value) {
+                                            sizeModel.hips = value;
+                                          }, selectedValue: sizeModel.hips,
+                                        ))
+                                  ],
+                                ),
+                                // sizeTextField(context,'Length of Shirt /قمیص کی لمبائی',10,50, sizeModel.length),
+                                // sizeTextField(context,'Shoulder /کندھے/تیرا',10,23, sizeModel.shoulder),
+                                // sizeTextField(context,'Chest /چھاتی',20,60, sizeModel.chest),
+                                // sizeTextField(context,'Neck / گلا',10,20, sizeModel.neck ),
+                                // sizeTextField(context,'Arm Length /بازو کی لمبائی',10,30 , sizeModel.armLength),
+                                // sizeTextField(context,'Arm Round/بازو کی گولائی',4,10,sizeModel.armRound ),
+                                // sizeTextField(context,'Waist/Fitting/کمر', 15,60,sizeModel.waist),
+                                // sizeTextField(context,'Lap/Daman/دامن/ گھیرا',20,60,sizeModel.lap ),
+                                // sizeTextField(
+                                //    context, 'Length of Pant /پتلون یا شلوار کی لمبائی', 20,60,sizeModel.lengthOfTrouser),
+                                // sizeTextField(context,'Ankle Width/ پانچہ',4,20,sizeModel.ankleWidth ),
+                                // sizeTextField(context,'Hips/ کولہے',20,60,sizeModel.hips ),
                               ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.Chest.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 20,
-                                      lastValue: 60,
-                                      onTapped: (value) {
-                                        sizeModel.chest = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.Neck.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 10,
-                                      lastValue: 20,
-                                      onTapped: (value) {
-                                        sizeModel.neck = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.ArmLength.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 10,
-                                      lastValue: 30,
-                                      onTapped: (value) {
-                                        sizeModel.armLength = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.ArmRound.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 4,
-                                      lastValue: 10,
-                                      onTapped: (value) {
-                                        sizeModel.armRound = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.Waist.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 15,
-                                      lastValue: 60,
-                                      onTapped: (value) {
-                                        sizeModel.waist = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.Daman.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 20,
-                                      lastValue: 60,
-                                      onTapped: (value) {
-                                        sizeModel.lap = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.LengthofPant.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 20,
-                                      lastValue: 60,
-                                      onTapped: (value) {
-                                        sizeModel.lengthOfTrouser = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.AnkleWidth.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 4,
-                                      lastValue: 20,
-                                      onTapped: (value) {
-                                        sizeModel.ankleWidth = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.Hips.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                    height: 40,
-                                    width: 250,
-                                    child: SizingDropdown(
-                                      startValue: 20,
-                                      lastValue: 60,
-                                      onTapped: (value) {
-                                        sizeModel.hips = value;
-                                      },
-                                    ))
-                              ],
-                            ),
-                            // sizeTextField(context,'Length of Shirt /قمیص کی لمبائی',10,50, sizeModel.length),
-                            // sizeTextField(context,'Shoulder /کندھے/تیرا',10,23, sizeModel.shoulder),
-                            // sizeTextField(context,'Chest /چھاتی',20,60, sizeModel.chest),
-                            // sizeTextField(context,'Neck / گلا',10,20, sizeModel.neck ),
-                            // sizeTextField(context,'Arm Length /بازو کی لمبائی',10,30 , sizeModel.armLength),
-                            // sizeTextField(context,'Arm Round/بازو کی گولائی',4,10,sizeModel.armRound ),
-                            // sizeTextField(context,'Waist/Fitting/کمر', 15,60,sizeModel.waist),
-                            // sizeTextField(context,'Lap/Daman/دامن/ گھیرا',20,60,sizeModel.lap ),
-                            // sizeTextField(
-                            //    context, 'Length of Pant /پتلون یا شلوار کی لمبائی', 20,60,sizeModel.lengthOfTrouser),
-                            // sizeTextField(context,'Ankle Width/ پانچہ',4,20,sizeModel.ankleWidth ),
-                            // sizeTextField(context,'Hips/ کولہے',20,60,sizeModel.hips ),
-                          ],
+                            );
+                            
+                         
+                            }
+                               return SizedBox.shrink();
+                          },
                         ),
                       ),
                       const SizedBox(

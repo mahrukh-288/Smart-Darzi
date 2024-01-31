@@ -153,7 +153,8 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                                 .textTheme
                                                 .labelLarge,
                                           ));
-                                        }))
+                                        }
+                                        ))
                               ],
                             ),
                             Column(
