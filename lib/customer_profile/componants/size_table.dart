@@ -51,6 +51,11 @@ final Customer customer;
                               '${LocaleKeys.Neck.tr()} : ${size?.neck}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
+                             SizedBox(height: 5),
+                            Text(
+                              '${LocaleKeys.armscye.tr()} : ${size?.armscye}',
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
                             SizedBox(
                               height: 5,
                             ),

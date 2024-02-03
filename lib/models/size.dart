@@ -1,17 +1,18 @@
 class SizeModel{
-String customerId = '';
-String length = '1';
-String shoulder = '1';
-String chest = '1';
-String neck = '1';
-String armLength = '1';
-String armRound = '1';
-String waist = '1';
-String lap = '1';
-String lengthOfTrouser = '1';
-String ankleWidth = '1';
-String hips = '1';
-String shoulderLength = '1';
+String customerId = '0';
+String length = '0';
+String shoulder = '0';
+String chest = '0';
+String neck = '0';
+String armLength = '0';
+String armRound = '0';
+String waist = '0';
+String lap = '0';
+String lengthOfTrouser = '0';
+String ankleWidth = '0';
+String hips = '0';
+String shoulderLength = '0';
+String armscye = '0';
 
 SizeModel();
 
@@ -27,13 +28,14 @@ SizeModel.fromJson(Map<String, dynamic> json)
         lap = json['lap'] as String,
          lengthOfTrouser = json['lengthOfTrouser'] as String,
         ankleWidth = json['ankleWidth'] as String,
-        hips = json['hips'] as String;
+        hips = json['hips'] as String,
+        armscye = json['armscye'] as String;
 
   Map<String, dynamic> toJson() {
     return {'customerId': customerId, 'length': length, 'shoulder': shoulder, 'chest' : chest
       , 'neck': neck, 'armLength': armLength, 'armRound' : armRound
       , 'waist': waist, 'lap': lap, 'lengthOfTrouser' : lengthOfTrouser
-      , 'ankleWidth': ankleWidth, 'hips': hips};
+      , 'ankleWidth': ankleWidth, 'hips': hips, 'armscye':armscye};
   }
 
 

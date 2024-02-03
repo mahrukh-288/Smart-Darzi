@@ -78,6 +78,7 @@
 "SaveSize" : "Save Size",
 "EditDetails":"Edit Details",
 "EditSize" : "Edit Size",
+"addSize" : "Add Size",
 "AddOrder": "Add Order",
 "DeleteCustomer" : "Delete Customer",
 "search" : "Search Customer here...",
@@ -97,6 +98,6 @@
 "loginSuccessful": "Logged in Successfully",
 "noDataFound": "Data not found!",
 "userExists": "User already exists!",
-"shoulderLength" : "Shoulder Length",
+"armscye" : "Armscye",
 "phoneDigitsLength": "Only 11 digits are allowed!"
 }

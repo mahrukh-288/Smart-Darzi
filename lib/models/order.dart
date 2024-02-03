@@ -12,6 +12,7 @@ int designNumber = 0;
 String orderCategory = '';
 String orderType = '';
 String id = '';
+String orderStatus = 'inactive';
 
 Order();
 
@@ -28,7 +29,8 @@ Order.fromJson(Map<String, dynamic> json)
         embroidery = json['embroidery'] as String,
         embroidaryStyle = json['style'] as String,
         bookNumber = json['bookNumber'] as int,
-        designNumber = json['designNumber'] as int;
+        designNumber = json['designNumber'] as int,
+        orderStatus = json['orderStatus'] as String;
 
         
 
@@ -45,6 +47,7 @@ Order.fromJson(Map<String, dynamic> json)
         'style' : embroidaryStyle,
         'bookNumber' : bookNumber,
         'designNumber' : designNumber,
+        'orderStatus' :orderStatus
       };
 
 }

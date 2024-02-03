@@ -51,6 +51,13 @@ class AllCustomersFetched extends CustomerState {
 }
 
 class SizeSaved extends CustomerState {
+  final String message;
+  const SizeSaved({required this.message});
+  @override
+  List<Object> get props => [message];
+}
+
+class SizeNotAvailable extends CustomerState {
   @override
   List<Object> get props => [];
 }

@@ -99,7 +99,7 @@ abstract class  LocaleKeys {
   static const loginSuccessful = 'loginSuccessful';
   static const noDataFound = 'noDataFound';
   static const userExists = 'userExists';
-  static const shoulderLength = 'shoulderLength';
+  static const armscye = 'armscye';
   static const phoneDigitsLength = 'phoneDigitsLength';
 
 }

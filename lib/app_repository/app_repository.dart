@@ -123,6 +123,23 @@ print(customers);
     return apiResponse;
   }
 
+    Future<ApiResponse> updateSize(SizeModel size) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.updateSize(size);
+
+      apiResponse.isSuccess = true;
+      apiResponse.successMessage = response.data['message'];
+    } on DioException catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = e.response?.statusMessage;
+    } catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Client error!';
+    }
+    return apiResponse;
+  }
+
   Future<ApiResponse> getCustomerByPhone(int phoneNo) async {
     ApiResponse apiResponse = ApiResponse();
     try {
@@ -180,6 +197,7 @@ print(customers);
       apiResponse.isSuccess = true;
       apiResponse.data = size;
     } on DioException catch (e) {
+      
       apiResponse.error = e.response?.statusMessage;
       apiResponse.isSuccess = false;
     } catch (e) {

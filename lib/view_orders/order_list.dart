@@ -99,7 +99,7 @@ class OrderList extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Text('Status'),
+                  child: Text(orders[i].orderStatus),
                 ),
               )),
               DataCell(IconButton(

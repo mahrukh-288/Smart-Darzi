@@ -53,6 +53,13 @@ print(response);
     return response;
   }
 
+Future<Response> updateSize(SizeModel size) async {
+    Response response =
+        await dio.patch('$customerBaseUrl/updateSize', data: size.toJson());
+
+    return response;
+  }
+
   Future<Response> getCustomerByPhone(int phoneNo) async {
     Response response = await dio.get('$customerBaseUrl/oneCustomer',
         queryParameters: {'queryText': phoneNo, 'type': 'phoneNumber'});

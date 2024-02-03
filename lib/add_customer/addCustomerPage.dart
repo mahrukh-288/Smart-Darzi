@@ -44,23 +44,24 @@ class CustomerForm extends StatelessWidget {
               
         } else if (state is CustomerFetchedByPhone) {
           customerSavedDialog(context, state.customer);
-        } else if (state is Failure) {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                actionsPadding:
-                    EdgeInsets.only(bottom: 30, left: 20, right: 20),
-                backgroundColor: Colors.white.withOpacity(0.8),
-                content: Text(
-                  state.error,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: primaryColor, fontWeight: FontWeight.w600),
-                ),
-              );
-            },
-          );
-        }
+        } 
+        // else if (state is Failure) {
+        //   showDialog(
+        //     context: context,
+        //     builder: (BuildContext context) {
+        //       return AlertDialog(
+        //         actionsPadding:
+        //             EdgeInsets.only(bottom: 30, left: 20, right: 20),
+        //         backgroundColor: Colors.white.withOpacity(0.8),
+        //         content: Text(
+        //           state.error,
+        //           style: Theme.of(context).textTheme.labelLarge?.copyWith(
+        //               color: primaryColor, fontWeight: FontWeight.w600),
+        //         ),
+        //       );
+        //     },
+        //   );
+        // }
       },
       child: Scaffold(
         backgroundColor: primaryColor.withOpacity(0.3),

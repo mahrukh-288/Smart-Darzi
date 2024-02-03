@@ -24,12 +24,13 @@ class AddSize extends StatefulWidget {
 }
 
 class _AddSizeState extends State<AddSize> {
-  bool sizeSaved = false;
+  bool sizeSaved = true;
 
   SizeModel sizeModel = SizeModel();
   @override
   void initState() {
     sizeModel.customerId = widget.customer.id;
+    
     context.read<CustomerCubit>().getCustomerSize(widget.customer.id);
   }
 
@@ -38,7 +39,7 @@ class _AddSizeState extends State<AddSize> {
     return BlocListener<CustomerCubit, CustomerState>(
       listener: (context, state) {
         if (state is SizeSaved) {
-          sizeSavedDialog(context, widget.customer);
+          sizeSavedDialog(context, widget.customer, state.message);
         }
       },
       child: Scaffold(
@@ -125,7 +126,15 @@ class _AddSizeState extends State<AddSize> {
                           builder: (context, state) {
                             if(state is CustomerSizeFetched) {
                               sizeModel = state.size;
-                              return Wrap(
+                              
+                         
+                            }
+                            else if(state is SizeNotAvailable){
+sizeSaved = false;
+                            }
+                            
+                              return 
+                              Wrap(
                               runSpacing: 20,
                               spacing: 20,
                               children: [
@@ -157,7 +166,7 @@ class _AddSizeState extends State<AddSize> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      LocaleKeys.shoulderLength.tr(),
+                                      LocaleKeys.armscye.tr(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelLarge,
@@ -173,7 +182,7 @@ class _AddSizeState extends State<AddSize> {
                                           lastValue: 20,
                                           onTapped: (value) {
                                             sizeModel.length = value;
-                                          }, selectedValue: sizeModel.shoulderLength,
+                                          }, selectedValue: sizeModel.armscye,
                                         ))
                                   ],
                                 ),
@@ -433,9 +442,6 @@ class _AddSizeState extends State<AddSize> {
                               ],
                             );
                             
-                         
-                            }
-                               return SizedBox.shrink();
                           },
                         ),
                       ),
@@ -455,9 +461,17 @@ class _AddSizeState extends State<AddSize> {
                                       ? primaryColor
                                       : Colors.white.withOpacity(0.5)),
                               onPressed: () {
-                                context
+                                if(sizeSaved) {
+                                  context
+                                    .read<CustomerCubit>()
+                                    .updateSize(sizeModel);
+                                }
+                                else{
+                                  context
                                     .read<CustomerCubit>()
                                     .saveSize(sizeModel);
+
+                                }
                               },
                               child:
                                   //  sizeSaved
@@ -492,7 +506,7 @@ class _AddSizeState extends State<AddSize> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
-                                    ?.copyWith(color: primaryColor),
+                                    ?.copyWith(color: textColor),
                               ));
                         },
                       ),
@@ -507,12 +521,12 @@ class _AddSizeState extends State<AddSize> {
     );
   }
 
-  sizeSavedDialog(BuildContext context, Customer customer) {
+  sizeSavedDialog(BuildContext context, Customer customer, String message) {
     AlertDialog alert = AlertDialog(
       actionsPadding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
       backgroundColor: Colors.white.withOpacity(0.8),
       content: Text(
-        LocaleKeys.savedSuccessfully.tr(),
+        message,
         style: Theme.of(context)
             .textTheme
             .labelLarge

@@ -22,9 +22,10 @@ class CustomerCubit extends Cubit<CustomerState> {
     if (response.isSuccess) {
       getCustomerByPhone(customer.phoneNumber);
      // emit(CustomerRegistered());
-    } else {
-      emit(Failure(error: response.error!));
-    }
+    } 
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
   }
 
   getAllCustomers() async {
@@ -32,9 +33,10 @@ class CustomerCubit extends Cubit<CustomerState> {
     ApiResponse response = await _appRepository.getAllCustomers();
     if (response.isSuccess) {
       emit(AllCustomersFetched(customers: response.data));
-    } else {
-      emit(Failure(error: response.error!));
-    }
+    } 
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
   }
 
   login(String name, String password) async {
@@ -42,19 +44,28 @@ class CustomerCubit extends Cubit<CustomerState> {
     ApiResponse response = await _appRepository.login(name, password);
     if (response.isSuccess) {
       emit(LoggedIn());
-    } else {
-      emit(Failure(error: response.error!));
-    }
+    } 
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
   }
 
   saveSize(SizeModel size) async {
     emit(LoadingCustomer());
     ApiResponse response = await _appRepository.saveSize(size);
     if (response.isSuccess) {
-      emit(SizeSaved());
-    } else {
-      emit(Failure(error: response.error!));
-    }
+      emit(SizeSaved(message: response.successMessage!));
+    } 
+   
+  }
+   updateSize(SizeModel size) async {
+    print('updating');
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.updateSize(size);
+    if (response.isSuccess) {
+      emit(SizeSaved(message: response.successMessage!));
+    } 
+   
   }
 
   getCustomerByPhone(int phoneNo) async {
@@ -66,9 +77,10 @@ class CustomerCubit extends Cubit<CustomerState> {
       } else {
         emit(const CustomerNotAvailable(available: false));
       }
-    } else {
-      emit(Failure(error: response.error!));
-    }
+    } 
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
   }
 
   getCustomerSize(String customerId) async {
@@ -78,7 +90,7 @@ class CustomerCubit extends Cubit<CustomerState> {
       emit(CustomerSizeFetched(size: response.data));
     }
     else {
-      emit(Failure(error: response.error!));
+      emit(SizeNotAvailable());
     }
   }
 
@@ -100,8 +112,8 @@ class CustomerCubit extends Cubit<CustomerState> {
     if (response.isSuccess) {
       emit(CustomerProfileFetched(profile: response.data));
     }
-    else {
-      emit(Failure(error: response.error!));
-    }
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
   }
 }
