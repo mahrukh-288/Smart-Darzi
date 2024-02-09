@@ -80,6 +80,7 @@ abstract class  LocaleKeys {
   static const SaveSize = 'SaveSize';
   static const EditDetails = 'EditDetails';
   static const EditSize = 'EditSize';
+  static const addSize = 'addSize';
   static const AddOrder = 'AddOrder';
   static const DeleteCustomer = 'DeleteCustomer';
   static const search = 'search';
@@ -101,5 +102,16 @@ abstract class  LocaleKeys {
   static const userExists = 'userExists';
   static const armscye = 'armscye';
   static const phoneDigitsLength = 'phoneDigitsLength';
+  static const nala = 'nala';
+  static const labStyle = 'labStyle';
+  static const pantStyle = 'pantStyle';
+  static const round = 'round';
+  static const choras = 'choras';
+  static const shalwar = 'shalwar';
+  static const trouser = 'trouser';
+  static const byName = 'byName';
+  static const byId = 'byId';
+  static const byPhone = 'byPhone';
+  static const all = 'all';
 
 }

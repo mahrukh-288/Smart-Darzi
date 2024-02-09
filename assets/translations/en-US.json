@@ -99,5 +99,16 @@
 "noDataFound": "Data not found!",
 "userExists": "User already exists!",
 "armscye" : "Armscye",
-"phoneDigitsLength": "Only 11 digits are allowed!"
+"phoneDigitsLength": "Only 11 digits are allowed!",
+"nala" : "Nala",
+"labStyle": "Lap Style",
+"pantStyle" : "Pant Style",
+"round": "Round",
+"choras" : "Choras",
+"shalwar" : "Shalwar",
+"trouser": "Trouser",
+"byName": "By Name",
+"byId": "By Id",
+"byPhone" : "By Phone",
+"all" : "All"
 }

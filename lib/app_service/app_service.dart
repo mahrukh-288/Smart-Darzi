@@ -20,6 +20,7 @@ class AppService {
   }
 
   Future<Response> addOrder(Order order) async {
+    print(order.toJson());
     Response response =
         await dio.post('$orderBaseUrl/addOrder', data: order.toJson());
 
@@ -63,6 +64,18 @@ Future<Response> updateSize(SizeModel size) async {
   Future<Response> getCustomerByPhone(int phoneNo) async {
     Response response = await dio.get('$customerBaseUrl/oneCustomer',
         queryParameters: {'queryText': phoneNo, 'type': 'phoneNumber'});
+
+    return response;
+  }
+   Future<Response> getCustomerById(int id) async {
+    Response response = await dio.get('$customerBaseUrl/oneCustomer',
+        queryParameters: {'queryText': id, 'type': 'id'});
+
+    return response;
+  }
+   Future<Response> getCustomerByName(String name) async {
+    Response response = await dio.get('$customerBaseUrl/oneCustomer',
+        queryParameters: {'queryText': name, 'type': 'name'});
 
     return response;
   }

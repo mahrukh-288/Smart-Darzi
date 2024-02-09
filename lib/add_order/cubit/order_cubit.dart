@@ -21,6 +21,9 @@ class OrderCubit extends Cubit<OrderState> {
     
       emit(OrderAdded());
     }
+    else{
+      emit(OrderRegistrationFailed(error: response.error!));
+    }
     
   }
 
@@ -43,6 +46,15 @@ if(response.isSuccess){
     }
     else{
       emit(OrderFailure());
+    }
+  }
+
+  addEmbroidary(bool embroidary){
+    if(embroidary) {
+      emit(AddEmbroidaryState());
+    }
+    else{
+      emit(NoEmbroidaryState());
     }
   }
 }

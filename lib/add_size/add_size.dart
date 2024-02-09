@@ -181,7 +181,7 @@ sizeSaved = false;
                                           startValue: 5,
                                           lastValue: 20,
                                           onTapped: (value) {
-                                            sizeModel.length = value;
+                                            sizeModel.armscye = value;
                                           }, selectedValue: sizeModel.armscye,
                                         ))
                                   ],

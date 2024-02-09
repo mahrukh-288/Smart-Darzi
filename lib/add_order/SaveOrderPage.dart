@@ -30,8 +30,8 @@ class SaveOrderPage extends StatefulWidget {
 }
 
 class _SaveOrderPageState extends State<SaveOrderPage> {
-  Order order = Order();
-
+  late Order order = Order();
+  bool embroidery = false;
   ImagePicker picker = ImagePicker();
   XFile? image;
 
@@ -48,6 +48,17 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
       listener: (context, state) {
         if (state is OrderAdded) {
           orderSavedDialog(context, widget.customer);
+        } else if (state is OrderRegistrationFailed) {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(state.error),
+                actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('Ok'))],
+              );
+            },
+          );
         }
       },
       child: Scaffold(
@@ -109,7 +120,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                               backgroundColor: primaryColor,
                                             )),
                                         enabled: false,
-                                         dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
+                                        dropdownButtonProps:
+                                            DropdownButtonProps(
+                                                color: Colors.transparent),
                                         dropdownBuilder:
                                             (context, selectedItem) {
                                           return Center(
@@ -119,8 +132,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                                 .textTheme
                                                 .labelLarge,
                                           ));
-                                        })
-                                        )
+                                        }))
                               ],
                             ),
                             Column(
@@ -143,7 +155,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                               backgroundColor: primaryColor,
                                             )),
                                         enabled: false,
-                                         dropdownButtonProps: DropdownButtonProps(color: Colors.transparent),
+                                        dropdownButtonProps:
+                                            DropdownButtonProps(
+                                                color: Colors.transparent),
                                         dropdownBuilder:
                                             (context, selectedItem) {
                                           return Center(
@@ -153,8 +167,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                                 .textTheme
                                                 .labelLarge,
                                           ));
-                                        }
-                                        ))
+                                        }))
                               ],
                             ),
                             Column(
@@ -359,7 +372,57 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                     child: CustomDropdownSearch(
                                       dropdownItems: [
                                         LocaleKeys.Elastic.tr(),
-                                        LocaleKeys.Simple.tr()
+                                        LocaleKeys.nala.tr()
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.elastic = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  LocaleKeys.labStyle.tr(),
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        LocaleKeys.round.tr(),
+                                        LocaleKeys.choras.tr()
+                                      ],
+                                      isDefault: false,
+                                      onValueChanged: (val) {
+                                        order.elastic = val;
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  LocaleKeys.pantStyle.tr(),
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                    height: 40,
+                                    width: 250,
+                                    child: CustomDropdownSearch(
+                                      dropdownItems: [
+                                        LocaleKeys.shalwar.tr(),
+                                        LocaleKeys.trouser.tr()
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
@@ -389,6 +452,15 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                       isDefault: false,
                                       onValueChanged: (val) {
                                         order.embroidery = val;
+                                        if (val == LocaleKeys.Yes.tr()) {
+                                          context
+                                              .read<OrderCubit>()
+                                              .addEmbroidary(true);
+                                        } else {
+                                          context
+                                              .read<OrderCubit>()
+                                              .addEmbroidary(false);
+                                        }
                                       },
                                     ))
                               ],
@@ -399,158 +471,191 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        LocaleKeys.EmbroidaryDetails.tr(),
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 40),
-                          margin: const EdgeInsets.symmetric(horizontal: 60),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: borderColor),
-                              borderRadius: BorderRadius.circular(5),
-                              color: primaryColor.withOpacity(0.6)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        LocaleKeys.EmbroidaryStyle.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      SizedBox(
-                                          height: 40,
-                                          width: 430,
-                                          child: CustomDropdownSearch(
-                                            dropdownItems: [
-                                              LocaleKeys.SingleSalai.tr(),
-                                              LocaleKeys.DoubleSalai.tr(),
-                                              LocaleKeys.RaishmiSingle.tr(),
-                                              LocaleKeys.RaishmiDouble.tr()
-                                            ],
-                                            isDefault: false,
-                                            onValueChanged: (val) {
-                                              order.embroidaryStyle = val;
-                                            },
-                                          ))
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        LocaleKeys.BookNumber.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      SizedBox(
-                                          height: 40,
-                                          width: 430,
-                                          child: CustomDropdownSearch(
-                                            dropdownItems: ['1', '2', '3'],
-                                            isDefault: false,
-                                            onValueChanged: (val) {
-                                              order.bookNumber = int.parse(val);
-                                            },
-                                          ))
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        LocaleKeys.DesignNumber.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                        width: 430,
-                                        child: TextField(
-                                          cursorColor: borderColor,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge,
-                                          controller: _bookDesignController,
-                                          decoration: InputDecoration(
-                                              suffixIcon: Icon(
-                                            Icons.edit,
-                                            color: iconColor,
-                                          )),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              InkWell(
-                                  onTap: () async {
-                                    image = await picker.pickImage(
-                                        source: ImageSource.gallery);
 
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    width: 500,
-                                    height: 275,
-                                    child: image == null
-                                        ? Image.asset('images/pickImage.png')
-                                        : Stack(
-                                            alignment: Alignment.topRight,
-                                            children: [
-                                                Image.network(
-                                                  image!.path,
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.fill,
+                      BlocBuilder<OrderCubit, OrderState>(
+                        builder: (context, state) {
+                          if (state is AddEmbroidaryState) {
+                            return Column(
+                              children: [
+                                Text(
+                                  LocaleKeys.EmbroidaryDetails.tr(),
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 40),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 60),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: borderColor),
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: primaryColor.withOpacity(0.6)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  LocaleKeys.EmbroidaryStyle
+                                                      .tr(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
                                                 ),
-                                                IconButton(
-                                                  icon: Icon(Icons.delete,
-                                                      color: iconColor),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      image = null;
-                                                    });
-                                                  },
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                SizedBox(
+                                                    height: 40,
+                                                    width: 430,
+                                                    child: CustomDropdownSearch(
+                                                      dropdownItems: [
+                                                        LocaleKeys.SingleSalai
+                                                            .tr(),
+                                                        LocaleKeys.DoubleSalai
+                                                            .tr(),
+                                                        LocaleKeys.RaishmiSingle
+                                                            .tr(),
+                                                        LocaleKeys.RaishmiDouble
+                                                            .tr()
+                                                      ],
+                                                      isDefault: false,
+                                                      onValueChanged: (val) {
+                                                        order.embroidaryStyle =
+                                                            val;
+                                                      },
+                                                    ))
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  LocaleKeys.BookNumber.tr(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                SizedBox(
+                                                    height: 40,
+                                                    width: 430,
+                                                    child: CustomDropdownSearch(
+                                                      dropdownItems: [
+                                                        '1',
+                                                        '2',
+                                                        '3'
+                                                      ],
+                                                      isDefault: false,
+                                                      onValueChanged: (val) {
+                                                        order.bookNumber =
+                                                            int.parse(val);
+                                                      },
+                                                    ))
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  LocaleKeys.DesignNumber.tr(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                SizedBox(
+                                                  height: 40,
+                                                  width: 430,
+                                                  child: TextField(
+                                                    cursorColor: borderColor,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge,
+                                                    controller:
+                                                        _bookDesignController,
+                                                    decoration: InputDecoration(
+                                                        suffixIcon: Icon(
+                                                      Icons.edit,
+                                                      color: iconColor,
+                                                    )),
+                                                  ),
                                                 )
-                                              ]),
-                                  ))
-                            ],
-                          )),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        InkWell(
+                                            onTap: () async {
+                                              image = await picker.pickImage(
+                                                  source: ImageSource.gallery);
 
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: 500,
+                                              height: 275,
+                                              child: image == null
+                                                  ? Image.asset(
+                                                      'images/pickImage.png')
+                                                  : Stack(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      children: [
+                                                          Image.network(
+                                                            image!.path,
+                                                            width:
+                                                                double.infinity,
+                                                            height:
+                                                                double.infinity,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                          IconButton(
+                                                            icon: Icon(
+                                                                Icons.delete,
+                                                                color:
+                                                                    iconColor),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                image = null;
+                                                              });
+                                                            },
+                                                          )
+                                                        ]),
+                                            ))
+                                      ],
+                                    )),
+                              ],
+                            );
+                          }
+                          return SizedBox.shrink();
+                        },
+                      ),
                       //
                       const SizedBox(
                         height: 20,
@@ -564,8 +669,10 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                           }
                           return ElevatedButton(
                               onPressed: () {
-                                order.designNumber =
+                                if(_bookDesignController.text.isNotEmpty) {
+                                  order.designNumber =
                                     int.parse(_bookDesignController.text);
+                                }
 
                                 context.read<OrderCubit>().addOrder(order);
                               },

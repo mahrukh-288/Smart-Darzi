@@ -46,30 +46,34 @@ final Customer customer;
                                 '${LocaleKeys.LengthofShirt.tr()} : ${size?.length}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(height: 5),
+                             const SizedBox(
+                              height: 5,
+                            ),
                             Text(
-                              '${LocaleKeys.Neck.tr()} : ${size?.neck}',
+                              '${LocaleKeys.ArmLength.tr()} : ${size?.armLength}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                             SizedBox(height: 5),
+                           
+                             const SizedBox(height: 5),
                             Text(
                               '${LocaleKeys.armscye.tr()} : ${size?.armscye}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
                               '${LocaleKeys.Shoulder.tr()} : ${size?.shoulder}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(
+                             const SizedBox(
                               height: 5,
                             ),
                             Text(
-                              '${LocaleKeys.Waist.tr()} : ${size?.waist}',
+                              '${LocaleKeys.ArmRound.tr()} : ${size?.armRound}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
+                           
                           ],
                         ),
                         VerticalDivider(
@@ -81,27 +85,28 @@ final Customer customer;
                               '${LocaleKeys.Chest.tr()} : ${size?.chest}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(
+                             const SizedBox(
                               height: 5,
                             ),
+                            Text(
+                              '${LocaleKeys.Waist.tr()} : ${size?.waist}',
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                             const SizedBox(height: 5),
+                            Text(
+                              '${LocaleKeys.Neck.tr()} : ${size?.neck}',
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+
                             Text(
                               '${LocaleKeys.Daman.tr()} : ${size?.lap}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              '${LocaleKeys.ArmLength.tr()} : ${size?.armLength}',
-                              style: Theme.of(context).textTheme.labelLarge,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              '${LocaleKeys.ArmRound.tr()} : ${size?.armRound}',
-                              style: Theme.of(context).textTheme.labelLarge,
-                            ),
+                           
+                           
                           ],
                         ),
                         VerticalDivider(
@@ -115,14 +120,14 @@ final Customer customer;
                               '${LocaleKeys.LengthofPant.tr()} : ${size?.lengthOfTrouser}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
                               '${LocaleKeys.AnkleWidth.tr()} : ${size?.ankleWidth}',
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
@@ -138,9 +143,9 @@ final Customer customer;
                 ],
               )
         ),
-        SizedBox(height: 30,),
+        const SizedBox(height: 30,),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(fixedSize: Size(150, 30)),
+                      style: ElevatedButton.styleFrom(fixedSize: const Size(150, 30)),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => AddSize(customer: customer),));
                       },
@@ -148,7 +153,7 @@ final Customer customer;
                         LocaleKeys.EditSize.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       )),
-                      SizedBox(height: 30,),
+                      const SizedBox(height: 30,),
       ]),
     );
   }

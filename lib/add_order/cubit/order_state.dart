@@ -36,3 +36,19 @@ class OrdersByCustomerIdFetched extends OrderState {
   @override
   List<Object> get props => [orders];
 }
+
+class AddEmbroidaryState extends OrderState {
+  @override
+  List<Object> get props => [];
+}
+class NoEmbroidaryState extends OrderState {
+  @override
+  List<Object> get props => [];
+}
+
+class OrderRegistrationFailed extends OrderState {
+  final String error;
+  const OrderRegistrationFailed({required this.error});
+  @override
+  List<Object> get props => [error];
+}

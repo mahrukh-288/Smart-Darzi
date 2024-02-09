@@ -10,7 +10,7 @@ final ThemeData appTheme = ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            backgroundColor: primaryColor, fixedSize: const Size(540, 50))),
+            backgroundColor: primaryColor, fixedSize: const Size(540, 70))),
     inputDecorationTheme: const InputDecorationTheme(
       isDense: true,
       enabledBorder:

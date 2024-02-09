@@ -99,5 +99,16 @@
 "userExists": "صارف پہلے سے موجود ہے",
 "armscye" : "موڈا",
 "phoneDigitsLength": "صرف 11 ہندسوں کی اجازت ہے۔",
-"addSize" : "ماپ درج کریں۔"
+"addSize" : "ماپ درج کریں۔",
+"nala": "نالا",
+"labStyle": "گھیرا",
+"pantStyle" : "پينٹ کا سٹائل",
+"round": "گول",
+"choras" : "چورس",
+"shalwar" : "شلوار",
+"trouser": "ٹراؤزر",
+"byName": "نام",
+"byId": "آئی ڈی",
+"byPhone" : "فون نمبر",
+"all": "تمام"
 }

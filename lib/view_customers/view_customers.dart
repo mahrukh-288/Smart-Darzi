@@ -76,7 +76,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
                             color: primaryColor,
                           ),
                         ),
-                        const Row(
+                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [SearchCustomerBar(), NotificationBtn()],
                         ),
@@ -100,6 +100,9 @@ class _ViewCustomersState extends State<ViewCustomers> {
                               customers = state.customers;
                               print('cubit ');
                               print(customers);
+                            } else if (state is CustomerFetchedByPhone){
+                            customers = [];
+                              customers.add(state.customer);
                             }
                             return   CustomerList(
                               customers: customers,

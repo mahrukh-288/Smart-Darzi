@@ -36,8 +36,9 @@ class AppRepository {
 
       apiResponse.isSuccess = true;
     } on DioException catch (e) {
+      print(e.response?.data['error']);
       apiResponse.isSuccess = false;
-      apiResponse.error = e.response?.statusMessage;
+      apiResponse.error = e.response?.data['error'];
     } catch (e) {
       apiResponse.isSuccess = false;
       apiResponse.error = 'Client error!';
@@ -144,6 +145,58 @@ print(customers);
     ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _appService.getCustomerByPhone(phoneNo);
+
+      apiResponse.isSuccess = true;
+      
+        Customer customer = Customer.fromJson(response.data);
+        apiResponse.data = customer;
+        apiResponse.successMessage = LocaleKeys.userExists.tr();
+      
+    } on DioException catch (e) {
+      
+      if(e.response?.statusCode == 404){
+        apiResponse.isSuccess = true;
+        
+      }
+        
+      
+    } catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Client Error while getting customer by phone!';
+    }
+    return apiResponse;
+  }
+
+  Future<ApiResponse> getCustomerById(int id) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.getCustomerById(id);
+
+      apiResponse.isSuccess = true;
+      
+        Customer customer = Customer.fromJson(response.data);
+        apiResponse.data = customer;
+        apiResponse.successMessage = LocaleKeys.userExists.tr();
+      
+    } on DioException catch (e) {
+      
+      if(e.response?.statusCode == 404){
+        apiResponse.isSuccess = true;
+        
+      }
+        
+      
+    } catch (e) {
+      apiResponse.isSuccess = false;
+      apiResponse.error = 'Client Error while getting customer by phone!';
+    }
+    return apiResponse;
+  }
+
+  Future<ApiResponse> getCustomerByName(String name) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _appService.getCustomerByName(name);
 
       apiResponse.isSuccess = true;
       

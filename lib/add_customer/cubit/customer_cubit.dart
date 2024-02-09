@@ -82,6 +82,34 @@ class CustomerCubit extends Cubit<CustomerState> {
     //   emit(Failure(error: response.error!));
     // }
   }
+  getCustomerById(int id) async {
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getCustomerById(id);
+    if (response.isSuccess) {
+      if (response.data != null) {
+        emit(CustomerFetchedByPhone(customer: response.data));
+      } else {
+        emit(const CustomerNotAvailable(available: false));
+      }
+    } 
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
+  }
+  getCustomerByName(String name) async {
+    emit(LoadingCustomer());
+    ApiResponse response = await _appRepository.getCustomerByName(name);
+    if (response.isSuccess) {
+      if (response.data != null) {
+        emit(CustomerFetchedByPhone(customer: response.data));
+      } else {
+        emit(const CustomerNotAvailable(available: false));
+      }
+    } 
+    // else {
+    //   emit(Failure(error: response.error!));
+    // }
+  }
 
   getCustomerSize(String customerId) async {
     //emit(LoadingCustomer());

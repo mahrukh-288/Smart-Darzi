@@ -47,7 +47,7 @@ Order.fromJson(Map<String, dynamic> json)
         'style' : embroidaryStyle,
         'bookNumber' : bookNumber,
         'designNumber' : designNumber,
-        'orderStatus' :orderStatus
+      
       };
 
 }
