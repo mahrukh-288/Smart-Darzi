@@ -7,15 +7,18 @@ import '../models/order.dart';
 class AppService {
   final dio = Dio();
 
-  static const customerBaseUrl = 'https://tech.shahbaznawaz.com/v1/user';
-  static const orderBaseUrl = 'https://tech.shahbaznawaz.com/v1/order';
-  static const adminBaseUrl = 'https://tech.shahbaznawaz.com/v1/admin';
+static const baseUrl = 'http://35.153.55.88:3000/v1';
+  static const customerBaseUrl = '$baseUrl/user';
+  static const orderBaseUrl = '$baseUrl/order';
+  static const adminBaseUrl = '$baseUrl/admin';
   static const String getAllCustomersUrl = '/allCustomers';
 
   Future<Response> registerCustomer(Customer customer) async {
+    print(customer.toJson());
     Response response =
         await dio.post('$customerBaseUrl/addCustomer', data: customer.toJson());
 
+print(response.data);
     return response;
   }
 
@@ -43,7 +46,7 @@ print(response);
    
     Response response = await dio.post('$adminBaseUrl/login', 
         data: {'email': name, 'password': password}, );
-
+print(response.data);
     return response;
   }
 
@@ -64,7 +67,7 @@ Future<Response> updateSize(SizeModel size) async {
   Future<Response> getCustomerByPhone(int phoneNo) async {
     Response response = await dio.get('$customerBaseUrl/oneCustomer',
         queryParameters: {'queryText': phoneNo, 'type': 'phoneNumber'});
-
+print(response.data);
     return response;
   }
    Future<Response> getCustomerById(int id) async {

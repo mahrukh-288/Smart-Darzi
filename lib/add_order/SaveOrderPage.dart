@@ -32,9 +32,7 @@ class SaveOrderPage extends StatefulWidget {
 class _SaveOrderPageState extends State<SaveOrderPage> {
   late Order order = Order();
   bool embroidery = false;
-  ImagePicker picker = ImagePicker();
-  XFile? image;
-
+XFile? image;
   final TextEditingController _bookDesignController = TextEditingController();
   @override
   void initState() {
@@ -55,7 +53,11 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text(state.error),
-                actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('Ok'))],
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('Ok'))
+                ],
               );
             },
           );
@@ -401,7 +403,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
-                                        order.elastic = val;
+                                        order.lapStyle = val;
                                       },
                                     ))
                               ],
@@ -426,7 +428,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                       ],
                                       isDefault: false,
                                       onValueChanged: (val) {
-                                        order.elastic = val;
+                                        order.pantStyle = val;
                                       },
                                     ))
                               ],
@@ -472,10 +474,7 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                         height: 20,
                       ),
 
-                      BlocBuilder<OrderCubit, OrderState>(
-                        builder: (context, state) {
-                          if (state is AddEmbroidaryState) {
-                            return Column(
+                            Column(
                               children: [
                                 Text(
                                   LocaleKeys.EmbroidaryDetails.tr(),
@@ -610,52 +609,56 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                                             )
                                           ],
                                         ),
-                                        InkWell(
-                                            onTap: () async {
-                                              image = await picker.pickImage(
-                                                  source: ImageSource.gallery);
-
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                              width: 500,
-                                              height: 275,
-                                              child: image == null
-                                                  ? Image.asset(
-                                                      'images/pickImage.png')
-                                                  : Stack(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      children: [
-                                                          Image.network(
-                                                            image!.path,
-                                                            width:
-                                                                double.infinity,
-                                                            height:
-                                                                double.infinity,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                          IconButton(
-                                                            icon: Icon(
-                                                                Icons.delete,
-                                                                color:
-                                                                    iconColor),
-                                                            onPressed: () {
-                                                              setState(() {
-                                                                image = null;
-                                                              });
-                                                            },
-                                                          )
-                                                        ]),
-                                            ))
+                                        BlocBuilder<OrderCubit, OrderState>(
+                                          builder: (context, state) {
+                                            if (state is ImageUploaded){
+image = state.image;
+                                            }else if(state is ImageDeleted){
+                                              image = null;
+                                            }
+                                            return InkWell(
+                                                onTap: () async {
+                                                  context
+                                                      .read<OrderCubit>()
+                                                      .uploadImage();
+                                                },
+                                                child: Container(
+                                                  width: 500,
+                                                  height: 275,
+                                                  child:
+                                                      image == null
+                                                          ? Image.asset(
+                                                              'images/pickImage.png')
+                                                          :
+                                                      Stack(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          children: [
+                                                        Image.network(
+                                                          image!.path,
+                                                          width:
+                                                              double.infinity,
+                                                          height:
+                                                              double.infinity,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                        IconButton(
+                                                          icon: Icon(
+                                                              Icons.delete,
+                                                              color: iconColor),
+                                                          onPressed: () {
+                                                            context.read<OrderCubit>().deleteImage();
+                                                          },
+                                                        )
+                                                      ]),
+                                                ));
+                                          },
+                                        )
                                       ],
                                     )),
                               ],
-                            );
-                          }
-                          return SizedBox.shrink();
-                        },
-                      ),
+                            ),
+                      
                       //
                       const SizedBox(
                         height: 20,
@@ -669,9 +672,9 @@ class _SaveOrderPageState extends State<SaveOrderPage> {
                           }
                           return ElevatedButton(
                               onPressed: () {
-                                if(_bookDesignController.text.isNotEmpty) {
+                                if (_bookDesignController.text.isNotEmpty) {
                                   order.designNumber =
-                                    int.parse(_bookDesignController.text);
+                                      int.parse(_bookDesignController.text);
                                 }
 
                                 context.read<OrderCubit>().addOrder(order);

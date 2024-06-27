@@ -13,6 +13,8 @@ String orderCategory = '';
 String orderType = '';
 String id = '';
 String orderStatus = 'inactive';
+String lapStyle = '';
+String pantStyle = '';
 
 Order();
 
@@ -30,6 +32,8 @@ Order.fromJson(Map<String, dynamic> json)
         embroidaryStyle = json['style'] as String,
         bookNumber = json['bookNumber'] as int,
         designNumber = json['designNumber'] as int,
+        lapStyle = json['lapStyle'] as String,
+        pantStyle = json['pantStyle'] as String,
         orderStatus = json['orderStatus'] as String;
 
         
@@ -47,6 +51,8 @@ Order.fromJson(Map<String, dynamic> json)
         'style' : embroidaryStyle,
         'bookNumber' : bookNumber,
         'designNumber' : designNumber,
+        'lapStyle' : lapStyle,
+        'pantStyle' : pantStyle,
       
       };
 

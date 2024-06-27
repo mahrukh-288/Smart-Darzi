@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:smart_darzi/add_customer/cubit/customer_cubit.dart';
 import 'package:smart_darzi/app_repository/app_repository.dart';
@@ -10,6 +11,8 @@ import '../../models/order.dart';
 part 'order_state.dart';
 
 class OrderCubit extends Cubit<OrderState> {
+    ImagePicker picker = ImagePicker();
+  XFile? image;
   AppRepository _appRepository = AppRepository();
   OrderCubit() : super(OrderInitial());
 
@@ -54,7 +57,16 @@ if(response.isSuccess){
       emit(AddEmbroidaryState());
     }
     else{
-      emit(NoEmbroidaryState());
+      
     }
+  }
+
+  uploadImage() async{
+    image = await picker.pickImage(source: ImageSource.gallery);
+  emit(ImageUploaded(image: image!));
+  }
+
+  deleteImage(){
+emit(ImageDeleted());
   }
 }

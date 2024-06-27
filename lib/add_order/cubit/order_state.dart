@@ -37,11 +37,19 @@ class OrdersByCustomerIdFetched extends OrderState {
   List<Object> get props => [orders];
 }
 
+class ImageUploaded extends OrderState {
+ final  XFile image;
+  
+  const ImageUploaded({required this.image});
+  @override
+  List<Object> get props => [image];
+}
+
 class AddEmbroidaryState extends OrderState {
   @override
   List<Object> get props => [];
 }
-class NoEmbroidaryState extends OrderState {
+class ImageDeleted extends OrderState {
   @override
   List<Object> get props => [];
 }
